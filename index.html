@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVMAXX GROUP | Elite Automotive Brokerage</title>
+    <style>
+        :root {
+            --bg-main: #0a0a0c;
+            --bg-card: #121216;
+            --accent: #0070f3; 
+            --text-main: #ffffff;
+            --text-muted: #8a8f98;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            color: var(--text-main);
+        }
+
+        .logo span { color: var(--accent); }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover { color: var(--text-main); }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            background: radial-gradient(circle at center, #1a1b23 0%, var(--bg-main) 70%);
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            max-width: 800px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        section {
+            padding: 8rem 10% 4rem 10%;
+            border-bottom: var(--border);
+        }
+
+        section h2 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: var(--border);
+            padding: 2.5rem;
+            border-radius: 12px;
+            transition: border-color 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .logo-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            opacity: 0.6;
+        }
+
+        .logo-placeholder {
+            width: 140px;
+            height: 50px;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-radius: 6px;
+            border: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .founder-card {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+            border: var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .founder-avatar {
+            width: 90px;
+            height: 90px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: var(--border);
+        }
+
+        .founder-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .founder-card p {
+            color: var(--accent);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.4rem; }
+            nav { padding: 1.5rem 5%; }
+            .nav-links { display: none; } 
+            section { padding: 6rem 5% 3rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">REVMAXX<span>.</span></div>
+        <div class="nav-links">
+            <a href="#ecosystem">Ecosystem</a>
+            <a href="#partners">Partners</a>
+            <a href="#leadership">Leadership</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1>Redefining Automotive Excellence</h1>
+        <p>The premier gateway between global elite vehicle inventories and local automotive enthusiasts.</p>
+        <a href="#contact" class="btn">Initiate Acquisition</a>
+    </header>
+
+    <section id="ecosystem">
+        <h2>Our Core Ecosystem</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Strategic Acquisition</h3>
+                <p>Exclusive access to premium global luxury and performance vehicle inventories through a highly vetted brokerage network, ensuring optimal acquisition values.</p>
+            </div>
+            <div class="card">
+                <h3>Global Seamless Delivery</h3>
+                <p>Complete door-to-door import management. From secure marine freight logistics to customs compliance clearance, we manage the entire asset pipeline.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="partners">
+        <h2>Logistics & Operational Presence</h2>
+        <div class="logo-flex">
+            <div class="logo-placeholder">WTC Colombo Office</div>
+            <div class="logo-placeholder">Logistics Partner 1</div>
+            <div class="logo-placeholder">Logistics Partner 2</div>
+            <div class="logo-placeholder">Shipping Line</div>
+        </div>
+    </section>
+
+    <section id="leadership">
+        <h2>Executive Leadership</h2>
+        <div class="grid-3">
+            <div class="founder-card">
+                <div class="founder-avatar">⚡</div>
+                <h3>Senul Thiranagama</h3>
+                <p>Director & Co-Founder</p>
+            </div>
+            <div class="founder-card">
+                <div class="founder-avatar">⚡</div>
+                <h3>Sadun Jayasooriya</h3>
+                <p>Director & Co-Founder</p>
+            </div>
+            <div class="founder-card">
+                <div class="founder-avatar">⚡</div>
+                <h3>Shehan Mendis</h3>
+                <p>Director & Co-Founder</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background-color: #0d0d11; text-align: center;">
+        <h2>Connect With Our Brokerage</h2>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">World Trade Center, West Tower, Colombo, Sri Lanka</p>
+        <p style="font-weight: 700; color: var(--text-main);">Official Email: revmaxx.vehicle.brokerage@gmail.com</p>
+    </section>
+
+</body>
+</html>
