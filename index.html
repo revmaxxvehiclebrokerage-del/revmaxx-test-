@@ -1,275 +1,269 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REVMAXX GROUP PVT LTD | Elite Automotive Partner</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        .hero-bg {
-            background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.95)), url('1000152077.png');
-            background-size: cover;
-            background-position: center;
+        body { font-family: 'Inter', sans-serif; background-color: #050506; }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(5, 5, 6, 0.4) 0%, rgba(5, 5, 6, 0.95) 80%, #050506 100%);
         }
     </style>
 </head>
-<body class="bg-neutral-950 text-neutral-100 font-sans antialiased selection:bg-red-600 selection:text-white">
+<body class="text-zinc-100 antialiased selection:bg-red-600 selection:text-white">
 
-    <!-- Sticky Navigation -->
-    <nav class="sticky top-0 z-50 bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800/50 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="#" class="flex items-center">
-                <img src="1000152045.png" alt="REVMAXX Logo" class="h-10 w-auto object-contain">
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-zinc-900/80 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="revmaxx group main logo.png" alt="REVMAXX Logo" class="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]">
             </a>
-            <div class="hidden md:flex items-center space-between space-x-8 text-sm font-medium tracking-wide uppercase text-neutral-400">
-                <a href="#services" class="hover:text-red-500 transition-colors">Our Subdivisions</a>
-                <a href="#presence" class="hover:text-red-500 transition-colors">HQ Presence</a>
-                <a href="#sourcing" class="hover:text-red-500 transition-colors">Vehicle Sourcing</a>
-                <a href="#partners" class="hover:text-red-500 transition-colors">Global Network</a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
+                <a href="#subdivisions" class="hover:text-white transition-colors">Divisions</a>
+                <a href="#sourcing" class="hover:text-white transition-colors">Sourcing Engine</a>
+                <a href="#hq" class="hover:text-white transition-colors">Corporate HQ</a>
+                <a href="#location" class="hover:text-white transition-colors">Location</a>
             </div>
-            <a href="https://wa.me/message/YMREXJJOOLGQG1" target="_blank" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-md text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2">
-                <i class="fab fa-whatsapp text-sm"></i> Direct Broker Desk
-            </a>
+            <div>
+                <a href="https://wa.me/your-number" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs tracking-wider uppercase px-5 py-3 rounded-md transition-all duration-300 shadow-lg shadow-red-900/20 inline-flex items-center gap-2">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.93 0c3.165.001 6.14 1.233 8.377 3.469 2.237 2.236 3.467 5.21 3.466 8.379-.003 6.58-5.339 11.928-11.873 11.928-2.01-.001-3.987-.512-5.735-1.486L0 24zm6.079-3.535c1.606.953 3.429 1.455 5.289 1.456 5.483 0 9.943-4.456 9.946-9.938.001-2.656-1.03-5.153-2.902-7.025C16.519 3.086 14.025 2.054 11.93 2.054c-5.489 0-9.95 4.456-9.953 9.939-.001 1.94.505 3.834 1.465 5.513L2.404 21.1l3.732-.98c1.554.848 3.3.111 4.022-.155z"/></svg>
+                    Direct Broker Desk
+                </a>
+            </div>
         </div>
     </nav>
 
-    <!-- Premium Hero Section -->
-    <header class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-6 relative border-b border-neutral-900">
-        <div class="max-w-4xl mx-auto space-y-6">
-            <div class="inline-flex items-center gap-2 bg-neutral-900/80 border border-neutral-800 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest text-red-500 uppercase mx-auto">
-                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Institutional Operations Established
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white uppercase">
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="revmaxx group carbon fiber texture.png" alt="REVMAXX Texture" class="w-full h-full object-cover opacity-35 scale-105 motion-safe:animate-[pulse_8s_infinite]" onerror="this.src='revmaxx group main logo.png'; this.style.opacity='0.1';">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center mt-12">
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-zinc-800/80 text-xs font-semibold tracking-widest text-red-500 uppercase mb-8">
+                <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span> Floor 35 Sovereign Operations Established
+            </span>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white mb-8 uppercase">
                 Your Elite Automotive Partner
             </h1>
-            <p class="text-neutral-400 text-lg md:text-xl font-light tracking-wide max-w-2xl mx-auto">
+            <p class="text-lg sm:text-xl text-zinc-400 font-light max-w-3xl mx-auto mb-12 leading-relaxed">
                 Redefining the luxury vehicle landscape through precision global logistics and asset-class brokerage.
             </p>
-            <div class="pt-4 flex flex-wrap justify-center gap-4">
-                <a href="#sourcing" class="bg-white hover:bg-neutral-200 text-black px-8 py-3 rounded-md text-sm font-bold uppercase tracking-wider transition-all">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#sourcing" class="w-full sm:w-auto bg-white hover:bg-zinc-200 text-black font-bold text-sm tracking-wide uppercase px-8 py-4 rounded-md transition-all duration-300">
                     Initiate Sourcing Contract
                 </a>
-                <a href="#presence" class="bg-neutral-900/80 hover:bg-neutral-800 border border-neutral-800 text-white px-8 py-3 rounded-md text-sm font-bold uppercase tracking-wider transition-all">
+                <a href="#hq" class="w-full sm:w-auto bg-zinc-900/80 hover:bg-zinc-800/80 border border-zinc-800 text-white font-bold text-sm tracking-wide uppercase px-8 py-4 rounded-md backdrop-blur transition-all duration-300">
                     Explore Corporate HQ
                 </a>
             </div>
         </div>
-    </header>
+    </section>
 
-    <!-- Corporate Subdivisions Section -->
-    <section id="services" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 class="text-xs font-bold tracking-widest text-red-500 uppercase">Organizational Architecture</h2>
-            <p class="text-3xl font-bold text-white uppercase">Core Corporate Subdivisions</p>
-            <div class="h-0.5 w-16 bg-red-600 mx-auto mt-2"></div>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-12 items-stretch">
-            <!-- Brokerage Subdivision -->
-            <div class="bg-neutral-900/40 border border-neutral-900 rounded-xl p-8 flex flex-col justify-between hover:border-neutral-800 transition-all group">
-                <div class="space-y-6">
-                    <div class="h-24 flex items-center justify-start border-b border-neutral-800/60 pb-4">
-                        <img src="1000152438.png" alt="REVMAXX Vehicle Brokerage" class="max-h-16 w-auto object-contain">
-                    </div>
-                    <p class="text-neutral-400 leading-relaxed text-sm">
-                        Operating as private portfolio managers for high-net-worth clients. We engineer bespoke procurement structures, manage local physical vehicle testing portfolios, execute concierge detailing specifications, and manage high-end secondary market asset placement.
-                    </p>
-                    <ul class="space-y-2.5 text-xs text-neutral-300 font-medium">
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> High-Net-Worth Advisory & Vehicle Sourcing</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Multi-Point Engineering & Inspection Reports</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Elite Secondary Asset Trade Positioning</li>
-                    </ul>
-                </div>
-                <div class="pt-8">
-                    <a href="#sourcing" class="text-xs font-bold text-white group-hover:text-red-500 uppercase tracking-widest flex items-center gap-2 transition-colors">
-                        Access Broker Desk <i class="fas fa-arrow-right text-xs"></i>
-                    </a>
-                </div>
+    <!-- CORPORATE SUBDIVISIONS -->
+    <section id="subdivisions" class="py-32 border-t border-zinc-950 bg-gradient-to-b from-[#050506] to-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-24">
+                <h2 class="text-xs font-bold tracking-widest text-red-600 uppercase mb-3">Group Architecture</h2>
+                <p class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Bespoke Structural Ecosystems</p>
             </div>
 
-            <!-- Imports Subdivision -->
-            <div class="bg-neutral-900/40 border border-neutral-900 rounded-xl p-8 flex flex-col justify-between hover:border-neutral-800 transition-all group">
-                <div class="space-y-6">
-                    <div class="h-24 flex items-center justify-start border-b border-neutral-800/60 pb-4">
-                        <img src="1000152439.png" alt="REVMAXX Vehicle Imports and Logistics" class="max-h-16 w-auto object-contain">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Division 1: Brokerage -->
+                <div class="bg-gradient-to-br from-zinc-900/40 to-zinc-950/40 border border-zinc-900/80 rounded-xl p-8 sm:p-12 flex flex-col justify-between group hover:border-zinc-800 transition-all duration-500">
+                    <div>
+                        <img src="revmaxx brokerage.png" alt="REVMAXX Vehicle Brokerage" class="h-16 w-auto object-contain mb-10 opacity-90">
+                        <p class="text-zinc-400 font-light leading-relaxed mb-8">
+                            Operating as private portfolio managers for high-net-worth clients. We engineer bespoke procurement structures, manage local physical vehicle testing portfolios, execute concierge detailing specifications, and manage high-end secondary market asset placement.
+                        </p>
+                        <ul class="space-y-4 text-sm font-medium text-zinc-300 mb-12">
+                            <li class="flex items-center gap-3"><span class="text-red-500">✓</span> High-Net-Worth Advisory &amp; Vehicle Sourcing</li>
+                            <li class="flex items-center gap-3"><span class="text-red-500">✓</span> Multi-Point Engineering &amp; Inspection Reports</li>
+                            <li class="flex items-center gap-3"><span class="text-red-500">✓</span> Elite Secondary Asset Trade Positioning</li>
+                        </ul>
                     </div>
-                    <p class="text-neutral-400 leading-relaxed text-sm">
-                        Commanding end-to-end containerized and Roll-on/Roll-off shipping channels directly connecting global auction blocks to South Asia. We manage direct sovereign customs routing, comprehensive marine cargo coverage, and secure luxury asset distribution.
-                    </p>
-                    <ul class="space-y-2.5 text-xs text-neutral-300 font-medium">
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Direct Global Auction Block Integration</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Full-Scale Customs Clearence & Duty Management</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Intercontinental Marine Cargo Insurance Assured</li>
-                    </ul>
+                    <a href="#sourcing" class="text-xs font-bold tracking-wider uppercase text-white group-hover:text-red-500 transition-colors inline-flex items-center gap-2">
+                        Access Broker Desk <span class="transition-transform group-hover:translate-x-1">→</span>
+                    </a>
                 </div>
-                <div class="pt-8">
-                    <a href="#sourcing" class="text-xs font-bold text-white group-hover:text-red-500 uppercase tracking-widest flex items-center gap-2 transition-colors">
-                        Review Logistics Pipelines <i class="fas fa-arrow-right text-xs"></i>
+
+                <!-- Division 2: Logistics -->
+                <div class="bg-gradient-to-br from-zinc-900/40 to-zinc-950/40 border border-zinc-900/80 rounded-xl p-8 sm:p-12 flex flex-col justify-between group hover:border-zinc-800 transition-all duration-500">
+                    <div>
+                        <img src="revmaxx imports and logistics.png" alt="REVMAXX Vehicle Imports and Logistics" class="h-16 w-auto object-contain mb-10 opacity-90" onerror="this.src='revmaxx group main logo.png';">
+                        <p class="text-zinc-400 font-light leading-relaxed mb-8">
+                            Commanding end-to-end containerized and Roll-on/Roll-off shipping channels directly connecting global auction blocks to South Asia. We manage direct sovereign customs routing, comprehensive marine cargo coverage, and secure luxury asset distribution.
+                        </p>
+                        <ul class="space-y-4 text-sm font-medium text-zinc-300 mb-12">
+                            <li class="flex items-center gap-3"><span class="text-red-500">✓</span> Direct Global Auction Block Integration</li>
+                            <li class="flex items-center gap-3"><span class="text-red-500">✓</span> Full-Scale Customs Clearance &amp; Duty Management</li>
+                            <li class="flex items-center gap-3"><span class="text-red-500">✓</span> Intercontinental Marine Cargo Insurance Assured</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/your-number" target="_blank" class="text-xs font-bold tracking-wider uppercase text-white group-hover:text-red-500 transition-colors inline-flex items-center gap-2">
+                        Review Logistics Pipelines <span class="transition-transform group-hover:translate-x-1">→</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Headquarters Presence & Gallery Section -->
-    <section id="presence" class="py-24 bg-neutral-900/20 border-t border-b border-neutral-900 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-3 gap-12 items-center mb-16">
-                <div class="lg:col-span-1 space-y-4">
-                    <h2 class="text-xs font-bold tracking-widest text-red-500 uppercase">Operational Footprint</h2>
-                    <p class="text-3xl font-bold text-white uppercase tracking-tight">Corporate Headquarters</p>
-                    <p class="text-neutral-400 text-sm leading-relaxed">
-                        Centrally stationed inside the financial heart of Colombo at the World Trade Center towers. Our executive infrastructure is designed to facilitate high-level institutional contract validation and absolute security.
+    <!-- DIRECT SOURCING ENGINE FORM -->
+    <section id="sourcing" class="py-32 border-y border-zinc-900 bg-black">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-xs font-bold tracking-widest text-red-600 uppercase block mb-3">Sourcing Engine</span>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-4">Command Asset Procurement</h2>
+                <p class="text-zinc-400 font-light max-w-xl mx-auto">Enter precise engineering specifications. Our global brokerage network will handle authentication and sovereign logistics.</p>
+            </div>
+
+            <form class="bg-gradient-to-b from-zinc-900/50 to-zinc-950/50 border border-zinc-900 rounded-xl p-8 sm:p-12 space-y-8 shadow-2xl">
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Vehicle Make &amp; Model</label>
+                        <input type="text" placeholder="e.g. Porsche 911 GT3 RS" class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-white transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Year of Production</label>
+                        <input type="text" placeholder="e.g. 2025 / 2026" class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-white transition-colors">
+                    </div>
+                </div>
+
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Target Budget Range ($ / LKR)</label>
+                        <input type="text" placeholder="Specify maximum allocation" class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-white transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Preferred Sourcing Region</label>
+                        <select class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-zinc-300 transition-colors">
+                            <option>United Kingdom (UK)</option>
+                            <option>Japan (JDM Block)</option>
+                            <option>Europe / Germany</option>
+                            <option>United Arab Emirates (Dubai)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Bespoke Detailing or Performance Specs</label>
+                    <textarea rows="4" placeholder="List desired custom aerodynamic kits, exhaust modifications, or interior configurations..." class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-white transition-colors"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs tracking-widest uppercase py-4 rounded transition-all duration-300 shadow-lg shadow-red-950/40">
+                    Submit Secure Sourcing Request
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- PREMIUM CORPORATE GALLERY -->
+    <section id="hq" class="py-32 bg-[#050506]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+                <div>
+                    <span class="text-xs font-bold tracking-widest text-red-600 uppercase block mb-3">Physical Presence</span>
+                    <h2 class="text-3xl font-bold tracking-tight text-white">The Corporate Headquarters</h2>
+                </div>
+                <p class="text-zinc-400 font-light max-w-md">Our institutional administrative operations are optimized within private luxury commercial workspaces located on Floor 35.</p>
+            </div>
+
+            <!-- 4-Image Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
+                    <img src="Office reception.jpg" alt="REVMAXX Corporate Reception Desk" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
+                    <img src="office 1.jpg" alt="Executive Meeting Rooms" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
+                    <img src="office 2.jpg" alt="Executive Workspace Skyline View" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
+                    <img src="office 3.jpg" alt="Private Desk Configurations" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GEOGRAPHIC LOCATION ENGINE (GOOGLE MAPS) -->
+    <section id="location" class="py-32 border-t border-zinc-900 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-3 gap-12 items-center">
+                <div class="lg:col-span-1 space-y-6">
+                    <span class="text-xs font-bold tracking-widest text-red-600 uppercase block">Global Node</span>
+                    <h2 class="text-3xl font-bold tracking-tight text-white uppercase">Corporate HQ Location</h2>
+                    <p class="text-zinc-400 font-light leading-relaxed">
+                        Our administrative office coordinates transit networks spanning South Asia. Client consultations are hosted strictly by scheduled corporate clearance.
                     </p>
-                    <div class="pt-2 text-xs font-mono text-neutral-500 space-y-1">
-                        <p><span class="text-neutral-400 font-sans font-bold">Suite Location:</span> West Tower, Level 34</p>
-                        <p><span class="text-neutral-400 font-sans font-bold">Facility Index:</span> Secure Boardrooms & Secure Storage</p>
+                    <div class="pt-4 space-y-4">
+                        <div class="border-l-2 border-red-600 pl-4">
+                            <p class="text-xs font-bold tracking-wider text-zinc-500 uppercase">Primary Workspace Address</p>
+                            <p class="text-sm font-medium text-zinc-200 mt-1">Floor 35, Corporate HQ, Colombo, Sri Lanka</p>
+                        </div>
                     </div>
+                    <!-- Direct Google Place Search Anchor Point -->
+                    <a href="https://maps.google.com/?q=REVMAXX+GROUP+PVT+LTD" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-red-500 hover:text-red-400 uppercase transition-colors pt-2 group">
+                        Open Directly in Google Maps App
+                        <span class="transition-transform group-hover:translate-x-1">→</span>
+                    </a>
                 </div>
-
-                <!-- Architectural Layout Grid -->
-                <div class="lg:col-span-2 grid grid-cols-12 gap-4">
-                    <div class="col-span-12 md:col-span-8 rounded-lg overflow-hidden border border-neutral-800 shadow-xl group">
-                        <img src="1000152400.jpg" alt="REVMAXX Reception Suite" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="col-span-6 md:col-span-4 rounded-lg overflow-hidden border border-neutral-800 shadow-xl group">
-                        <img src="1000152405.jpg" alt="Executive Office Suite" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="col-span-6 md:col-span-4 rounded-lg overflow-hidden border border-neutral-800 shadow-xl group">
-                        <img src="1000152424.jpg" alt="Institutional Trading Desks" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="col-span-12 md:col-span-8 rounded-lg overflow-hidden border border-neutral-800 shadow-xl group">
-                        <img src="1000152422.jpg" alt="Port Operations Strategy View" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                    </div>
+                
+                <!-- Normal Colored Blue Map Embed Canvas -->
+                <div class="lg:col-span-2 w-full h-[450px] rounded-xl overflow-hidden border border-zinc-900 shadow-2xl relative bg-zinc-950">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=Colombo%20Sri%20Lanka&t=&z=14&ie=UTF-8&iwloc=&output=embed" 
+                        class="w-full h-full border-0 relative z-10" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
-            </div>
-
-            <!-- Integrated Live Google Maps Infrastructure -->
-            <div class="w-full h-80 rounded-xl overflow-hidden border border-neutral-800 shadow-2xl">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.551221774218!2d79.84157127589332!3d6.932230018136367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2592473587b1b%3A0xb3cf5e74d75d6540!2sWorld%20Trade%20Center%20Colombo!5e0!3m2!1sen!2slk!4v1720281600000!5m2!1sen!2slk" 
-                    class="w-full h-full border-0 grayscale invert opacity-75" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
             </div>
         </div>
     </section>
 
-    <!-- Global Sourcing Engine & Form -->
-    <section id="sourcing" class="py-24 px-6 max-w-4xl mx-auto">
-        <div class="text-center space-y-3 mb-12">
-            <h2 class="text-xs font-bold tracking-widest text-red-500 uppercase">Institutional Sourcing</h2>
-            <p class="text-3xl font-bold text-white uppercase">Vehicle Procurement Request</p>
-            <p class="text-neutral-400 text-sm max-w-xl mx-auto">Submit your precise specifications below. A dedicated asset manager from our Colombo trading room will evaluate market availability and contact you within 24 hours.</p>
-        </div>
-
-        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="bg-neutral-900/30 border border-neutral-900 rounded-xl p-8 space-y-6">
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Full Name / Legal Entity</label>
-                    <input type="text" name="name" required class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-red-600 transition-colors">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Direct Contact Number</label>
-                    <input type="tel" name="phone" required class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-red-600 transition-colors">
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <div>
-                    <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Primary Email Address</label>
-                    <input type="email" name="email" required class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-red-600 transition-colors">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Required Corporate Service</label>
-                    <select name="service_type" class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-neutral-400 focus:outline-none focus:border-red-600 transition-colors">
-                        <option value="brokerage">Asset-Class Vehicle Sourcing & Brokerage</option>
-                        <option value="logistics">Global Freight, Shipping & Customs Clearing</option>
-                        <option value="dual">Combined End-to-End Procurement Structure</option>
-                    </select>
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Vehicle Profile & Asset Specifications</label>
-                <textarea name="specifications" rows="4" placeholder="List Target Make, Model, Year, Target Mileage, and Specific Factory Options Required..." required class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-red-600 transition-colors"></textarea>
-            </div>
-
-            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded text-sm uppercase tracking-widest transition-all">
-                Transmit Sourcing Dossier
-            </button>
-        </form>
-    </section>
-
-    <!-- Global Cargo & Logistics Network Section -->
-    <section id="partners" class="py-16 bg-neutral-900/10 border-t border-neutral-900 px-6">
-        <div class="max-w-7xl mx-auto text-center space-y-8">
-            <p class="text-xs font-bold tracking-widest text-neutral-500 uppercase">Interconnected Freight & Logistics Partners</p>
-            <div class="flex flex-wrap items-center justify-center gap-12 opacity-60 grayscale hover:opacity-100 transition-opacity duration-300">
-                <img src="1000177184.png" alt="Wallenius Wilhelmsen" class="h-10 w-auto object-contain">
-                <img src="1000177185.png" alt="DHL Aviation" class="h-10 w-auto object-contain">
-                <img src="1000177186.png" alt="Atlas Air" class="h-10 w-auto object-contain">
+    <!-- INTERCONTINENTAL SHIPPING PARTNERS -->
+    <section class="py-20 border-t border-zinc-900 bg-black/40">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-center text-xs font-bold tracking-widest text-zinc-500 uppercase mb-12">Global Supply Chain Freight Matrix</p>
+            <div class="flex flex-wrap items-center justify-center gap-12 md:gap-24 opacity-80">
+                <img src="partner 1.png" alt="Logistics Partner 1" class="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300">
+                <img src="partner 2.png" alt="Logistics Partner 2" class="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300">
+                <img src="Partner 3.png" alt="Logistics Partner 3" class="h-8 md:h-10 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300">
             </div>
         </div>
     </section>
 
-    <!-- Corporate Information & Communications Block -->
-    <footer class="bg-neutral-950 border-t border-neutral-900 pt-20 pb-8 px-6 text-xs text-neutral-500">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 border-b border-neutral-900 pb-12 mb-12">
+    <!-- FOOTER / CONTACT -->
+    <footer id="contact" class="bg-black text-zinc-500 text-xs py-16 border-t border-zinc-950">
+        <div class="max-w-7xl mx-auto px-6 space-y-12">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="revmaxx group main logo.png" alt="REVMAXX Logo Footer" class="h-8 w-auto object-contain mb-6 opacity-40">
+                    <p class="max-w-sm font-light leading-relaxed mb-4">
+                        REVMAXX GROUP PVT LTD. Sovereign procurement frameworks engineered for high-net-worth vehicle asset management.
+                    </p>
+                    <p class="text-zinc-600">&copy; 2026 REVMAXX GROUP PVT LTD. All Institutional Rights Reserved.</p>
+                </div>
+                <div class="md:text-right space-y-2">
+                    <p class="text-zinc-400 font-medium uppercase tracking-wider text-[10px]">Administrative Contact Desk</p>
+                    <p class="text-white font-medium text-sm">Floor 35, Corporate HQ, Colombo, Sri Lanka</p>
+                    <p class="text-zinc-400">Desk Operations: support@revmaxx.lk</p>
+                </div>
+            </div>
+
+            <!-- MANDATORY LEGAL TRADEMARK DISCLAIMER PORTAL -->
+            <div class="border-t border-zinc-900 pt-8 text-[11px] text-zinc-600 font-light leading-relaxed max-w-5xl">
+                All third-party corporate, logos, brands, and trademarks displayed on this website—including but not limited to Wallenius Wilhelmsen, DHL Aviation, and Atlas Air—remain the sole intellectual property of their respective registered owners.
+            </div>
+        </div>
+    </footer>
+
+</body>
+    </html>
             
-            <div class="space-y-4">
-                <img src="1000152045.png" alt="REVMAXX" class="h-8 w-auto object-contain mb-2">
-                <p class="leading-relaxed">
-                    REVMAXX GROUP PVT LTD is an institutional multi-tier enterprise commanding boutique asset brokerage and comprehensive international automotive supply chains.
-                </p>
-            </div>
-
-            <div class="space-y-3">
-                <p class="text-white font-bold uppercase tracking-wider text-[11px]">Corporate Office</p>
-                <p class="leading-relaxed font-medium text-neutral-400">
-                    Registered Office: World Trade Center, West Tower,<br>
-                    1 Bank of Ceylon Mawatha, Colombo 00100, Sri Lanka
-                </p>
-                <p class="text-neutral-400">Direct Contact: <span class="text-white font-semibold">0722114115</span></p>
-                <p class="text-neutral-400">Inquiries: <span class="text-white font-semibold">revmaxx.vehicle.brokerage@gmail.com</span></p>
-            </div>
-
-            <div class="space-y-4">
-                <p class="text-white font-bold uppercase tracking-wider text-[11px]">Secure Communications Ecosystem</p>
-                <div class="flex gap-4 text-base">
-                    <a href="https://wa.me/message/YMREXJJOOLGQG1" target="_blank" class="text-neutral-400 hover:text-green-500 transition-colors"><i class="fab fa-whatsapp"></i></a>
-                    <a href="https://www.facebook.com/profile.php?id=61590320872247&mibextid=ZbWKw" target="_blank" class="text-neutral-400 hover:text-blue-500 transition-colors"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/revmaxx_group?igsh=ZzhqaHJrNmJtcHdj" target="_blank" class="text-neutral-400 hover:text-pink-500 transition-colors"><i class="fab fa-instagram"></i></a>
-                </div>
-                <p class="text-[10px] leading-relaxed text-neutral-600">
-                    Encrypted lines are continuously open for sovereign corporate transfers and secure international private portfolio verification.
-                </p>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto space-y-6">
-            <!-- Company Founders Block -->
-            <div class="bg-neutral-900/20 border border-neutral-900 rounded p-6 flex flex-wrap justify-between items-center gap-6 text-neutral-400 font-medium">
-                <div>
-                    <span class="text-neutral-600 text-[10px] uppercase block tracking-wider mb-0.5">Chief Executive</span>
-                    <span class="text-white font-semibold">Senul Thiranagama</span> — CEO & Co-Founder
-                </div>
-                <div class="hidden sm:block h-6 w-px bg-neutral-900"></div>
-                <div>
-                    <span class="text-neutral-600 text-[10px] uppercase block tracking-wider mb-0.5">Board of Directors</span>
-                    <span class="text-white font-semibold">Sadun Jayasooriya</span> — Director & Co-Founder
-                </div>
-                <div class="hidden sm:block h-6 w-px bg-neutral-900"></div>
-                <div>
-                    <span class="text-neutral-600 text-[10px] uppercase block tracking-wider mb-0.5">Board of Directors</span>
-                    <span class="text-white font-semibold">Shehan Mendis</span> — Director & Co-Founder
-                </div>
-            </div>
-
-            <!-- Absolute Base Disclaimer & Intellectual Property Protection Details -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-4 border-t border-neutral-900/40 text-[10px] text-neutral-600 leading-relaxed">
-                <p class="max-w-2xl">
-                    All third-party corporate, logos, brands, and trademarks displayed on this website—including but no
