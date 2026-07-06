@@ -1,288 +1,275 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REVMAXX GROUP | Elite Automotive Brokerage</title>
+    <title>REVMAXX GROUP PVT LTD | Elite Automotive Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --bg-main: #0a0a0c;
-            --bg-card: #121216;
-            --accent: #0070f3; 
-            --text-main: #ffffff;
-            --text-muted: #8a8f98;
-            --border: rgba(255, 255, 255, 0.08);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 10%;
-            background: rgba(10, 10, 12, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: 1.4rem;
-            letter-spacing: 2px;
-            color: var(--text-main);
-        }
-
-        .logo span { color: var(--accent); }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 2rem;
-            transition: color 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .nav-links a:hover { color: var(--text-main); }
-
-        header {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1rem;
-            background: radial-gradient(circle at center, #1a1b23 0%, var(--bg-main) 70%);
-        }
-
-        header h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 1rem;
-            max-width: 800px;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            background-color: var(--accent);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-
-        section {
-            padding: 8rem 10% 4rem 10%;
-            border-bottom: var(--border);
-        }
-
-        section h2 {
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            letter-spacing: -0.5px;
-        }
-
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .card {
-            background-color: var(--bg-card);
-            border: var(--border);
-            padding: 2.5rem;
-            border-radius: 12px;
-            transition: border-color 0.3s;
-        }
-
-        .card:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .logo-flex {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 4rem;
-            opacity: 0.6;
-        }
-
-        .logo-placeholder {
-            width: 140px;
-            height: 50px;
-            background: rgba(255,255,255,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            border-radius: 6px;
-            border: 1px dashed rgba(255,255,255,0.1);
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .founder-card {
-            background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
-            border: var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .founder-avatar {
-            width: 90px;
-            height: 90px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50%;
-            margin: 0 auto 1.5rem auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: var(--border);
-        }
-
-        .founder-card h3 {
-            font-size: 1.15rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .founder-card p {
-            color: var(--accent);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.4rem; }
-            nav { padding: 1.5rem 5%; }
-            .nav-links { display: none; } 
-            section { padding: 6rem 5% 3rem 5%; }
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.95)), url('1000152077.png');
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
-<body>
+<body class="bg-neutral-950 text-neutral-100 font-sans antialiased selection:bg-red-600 selection:text-white">
 
-    <nav>
-        <div class="logo">REVMAXX<span>.</span></div>
-        <div class="nav-links">
-            <a href="#ecosystem">Ecosystem</a>
-            <a href="#partners">Partners</a>
-            <a href="#leadership">Leadership</a>
-            <a href="#contact">Contact</a>
+    <!-- Sticky Navigation -->
+    <nav class="sticky top-0 z-50 bg-neutral-950/90 backdrop-blur-md border-b border-neutral-800/50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center">
+                <img src="1000152045.png" alt="REVMAXX Logo" class="h-10 w-auto object-contain">
+            </a>
+            <div class="hidden md:flex items-center space-between space-x-8 text-sm font-medium tracking-wide uppercase text-neutral-400">
+                <a href="#services" class="hover:text-red-500 transition-colors">Our Subdivisions</a>
+                <a href="#presence" class="hover:text-red-500 transition-colors">HQ Presence</a>
+                <a href="#sourcing" class="hover:text-red-500 transition-colors">Vehicle Sourcing</a>
+                <a href="#partners" class="hover:text-red-500 transition-colors">Global Network</a>
+            </div>
+            <a href="https://wa.me/message/YMREXJJOOLGQG1" target="_blank" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-md text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2">
+                <i class="fab fa-whatsapp text-sm"></i> Direct Broker Desk
+            </a>
         </div>
     </nav>
 
-    <header>
-        <h1>Redefining Automotive Excellence</h1>
-        <p>The premier gateway between global elite vehicle inventories and local automotive enthusiasts.</p>
-        <a href="#contact" class="btn">Initiate Acquisition</a>
+    <!-- Premium Hero Section -->
+    <header class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-6 relative border-b border-neutral-900">
+        <div class="max-w-4xl mx-auto space-y-6">
+            <div class="inline-flex items-center gap-2 bg-neutral-900/80 border border-neutral-800 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest text-red-500 uppercase mx-auto">
+                <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Institutional Operations Established
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-white uppercase">
+                Your Elite Automotive Partner
+            </h1>
+            <p class="text-neutral-400 text-lg md:text-xl font-light tracking-wide max-w-2xl mx-auto">
+                Redefining the luxury vehicle landscape through precision global logistics and asset-class brokerage.
+            </p>
+            <div class="pt-4 flex flex-wrap justify-center gap-4">
+                <a href="#sourcing" class="bg-white hover:bg-neutral-200 text-black px-8 py-3 rounded-md text-sm font-bold uppercase tracking-wider transition-all">
+                    Initiate Sourcing Contract
+                </a>
+                <a href="#presence" class="bg-neutral-900/80 hover:bg-neutral-800 border border-neutral-800 text-white px-8 py-3 rounded-md text-sm font-bold uppercase tracking-wider transition-all">
+                    Explore Corporate HQ
+                </a>
+            </div>
+        </div>
     </header>
 
-    <section id="ecosystem">
-        <h2>Our Core Ecosystem</h2>
-        <div class="grid-2">
-            <div class="card">
-                <h3>Strategic Acquisition</h3>
-                <p>Exclusive access to premium global luxury and performance vehicle inventories through a highly vetted brokerage network, ensuring optimal acquisition values.</p>
+    <!-- Corporate Subdivisions Section -->
+    <section id="services" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+            <h2 class="text-xs font-bold tracking-widest text-red-500 uppercase">Organizational Architecture</h2>
+            <p class="text-3xl font-bold text-white uppercase">Core Corporate Subdivisions</p>
+            <div class="h-0.5 w-16 bg-red-600 mx-auto mt-2"></div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-stretch">
+            <!-- Brokerage Subdivision -->
+            <div class="bg-neutral-900/40 border border-neutral-900 rounded-xl p-8 flex flex-col justify-between hover:border-neutral-800 transition-all group">
+                <div class="space-y-6">
+                    <div class="h-24 flex items-center justify-start border-b border-neutral-800/60 pb-4">
+                        <img src="1000152438.png" alt="REVMAXX Vehicle Brokerage" class="max-h-16 w-auto object-contain">
+                    </div>
+                    <p class="text-neutral-400 leading-relaxed text-sm">
+                        Operating as private portfolio managers for high-net-worth clients. We engineer bespoke procurement structures, manage local physical vehicle testing portfolios, execute concierge detailing specifications, and manage high-end secondary market asset placement.
+                    </p>
+                    <ul class="space-y-2.5 text-xs text-neutral-300 font-medium">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> High-Net-Worth Advisory & Vehicle Sourcing</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Multi-Point Engineering & Inspection Reports</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Elite Secondary Asset Trade Positioning</li>
+                    </ul>
+                </div>
+                <div class="pt-8">
+                    <a href="#sourcing" class="text-xs font-bold text-white group-hover:text-red-500 uppercase tracking-widest flex items-center gap-2 transition-colors">
+                        Access Broker Desk <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
             </div>
-            <div class="card">
-                <h3>Global Seamless Delivery</h3>
-                <p>Complete door-to-door import management. From secure marine freight logistics to customs compliance clearance, we manage the entire asset pipeline.</p>
+
+            <!-- Imports Subdivision -->
+            <div class="bg-neutral-900/40 border border-neutral-900 rounded-xl p-8 flex flex-col justify-between hover:border-neutral-800 transition-all group">
+                <div class="space-y-6">
+                    <div class="h-24 flex items-center justify-start border-b border-neutral-800/60 pb-4">
+                        <img src="1000152439.png" alt="REVMAXX Vehicle Imports and Logistics" class="max-h-16 w-auto object-contain">
+                    </div>
+                    <p class="text-neutral-400 leading-relaxed text-sm">
+                        Commanding end-to-end containerized and Roll-on/Roll-off shipping channels directly connecting global auction blocks to South Asia. We manage direct sovereign customs routing, comprehensive marine cargo coverage, and secure luxury asset distribution.
+                    </p>
+                    <ul class="space-y-2.5 text-xs text-neutral-300 font-medium">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Direct Global Auction Block Integration</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Full-Scale Customs Clearence & Duty Management</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-red-500"></i> Intercontinental Marine Cargo Insurance Assured</li>
+                    </ul>
+                </div>
+                <div class="pt-8">
+                    <a href="#sourcing" class="text-xs font-bold text-white group-hover:text-red-500 uppercase tracking-widest flex items-center gap-2 transition-colors">
+                        Review Logistics Pipelines <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="partners">
-        <h2>Logistics & Operational Presence</h2>
-        <div class="logo-flex">
-            <div class="logo-placeholder">WTC Colombo Office</div>
-            <div class="logo-placeholder">Logistics Partner 1</div>
-            <div class="logo-placeholder">Logistics Partner 2</div>
-            <div class="logo-placeholder">Shipping Line</div>
+    <!-- Headquarters Presence & Gallery Section -->
+    <section id="presence" class="py-24 bg-neutral-900/20 border-t border-b border-neutral-900 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-3 gap-12 items-center mb-16">
+                <div class="lg:col-span-1 space-y-4">
+                    <h2 class="text-xs font-bold tracking-widest text-red-500 uppercase">Operational Footprint</h2>
+                    <p class="text-3xl font-bold text-white uppercase tracking-tight">Corporate Headquarters</p>
+                    <p class="text-neutral-400 text-sm leading-relaxed">
+                        Centrally stationed inside the financial heart of Colombo at the World Trade Center towers. Our executive infrastructure is designed to facilitate high-level institutional contract validation and absolute security.
+                    </p>
+                    <div class="pt-2 text-xs font-mono text-neutral-500 space-y-1">
+                        <p><span class="text-neutral-400 font-sans font-bold">Suite Location:</span> West Tower, Level 34</p>
+                        <p><span class="text-neutral-400 font-sans font-bold">Facility Index:</span> Secure Boardrooms & Secure Storage</p>
+                    </div>
+                </div>
+
+                <!-- Architectural Layout Grid -->
+                <div class="lg:col-span-2 grid grid-cols-12 gap-4">
+                    <div class="col-span-12 md:col-span-8 rounded-lg overflow-hidden border border-neutral-800 shadow-xl group">
+                        <img src="1000152400.jpg" alt="REVMAXX Reception Suite" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="col-span-6 md:col-span-4 rounded-lg overflow-hidden border border-neutral-800 shadow-xl group">
+                        <img src="1000152405.jpg" alt="Executive Office Suite" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="col-span-6 md:col-span-4 rounded-lg overflow-hidden border border-neutral-800 shadow-xl group">
+                        <img src="1000152424.jpg" alt="Institutional Trading Desks" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="col-span-12 md:col-span-8 rounded-lg overflow-hidden border border-neutral-800 shadow-xl group">
+                        <img src="1000152422.jpg" alt="Port Operations Strategy View" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integrated Live Google Maps Infrastructure -->
+            <div class="w-full h-80 rounded-xl overflow-hidden border border-neutral-800 shadow-2xl">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.551221774218!2d79.84157127589332!3d6.932230018136367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae2592473587b1b%3A0xb3cf5e74d75d6540!2sWorld%20Trade%20Center%20Colombo!5e0!3m2!1sen!2slk!4v1720281600000!5m2!1sen!2slk" 
+                    class="w-full h-full border-0 grayscale invert opacity-75" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         </div>
     </section>
 
-    <section id="leadership">
-        <h2>Executive Leadership</h2>
-        <div class="grid-3">
-            <div class="founder-card">
-                <div class="founder-avatar">⚡</div>
-                <h3>Senul Thiranagama</h3>
-                <p>Director & Co-Founder</p>
+    <!-- Global Sourcing Engine & Form -->
+    <section id="sourcing" class="py-24 px-6 max-w-4xl mx-auto">
+        <div class="text-center space-y-3 mb-12">
+            <h2 class="text-xs font-bold tracking-widest text-red-500 uppercase">Institutional Sourcing</h2>
+            <p class="text-3xl font-bold text-white uppercase">Vehicle Procurement Request</p>
+            <p class="text-neutral-400 text-sm max-w-xl mx-auto">Submit your precise specifications below. A dedicated asset manager from our Colombo trading room will evaluate market availability and contact you within 24 hours.</p>
+        </div>
+
+        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="bg-neutral-900/30 border border-neutral-900 rounded-xl p-8 space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Full Name / Legal Entity</label>
+                    <input type="text" name="name" required class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-red-600 transition-colors">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Direct Contact Number</label>
+                    <input type="tel" name="phone" required class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-red-600 transition-colors">
+                </div>
             </div>
-            <div class="founder-card">
-                <div class="founder-avatar">⚡</div>
-                <h3>Sadun Jayasooriya</h3>
-                <p>Director & Co-Founder</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Primary Email Address</label>
+                    <input type="email" name="email" required class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-red-600 transition-colors">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Required Corporate Service</label>
+                    <select name="service_type" class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-neutral-400 focus:outline-none focus:border-red-600 transition-colors">
+                        <option value="brokerage">Asset-Class Vehicle Sourcing & Brokerage</option>
+                        <option value="logistics">Global Freight, Shipping & Customs Clearing</option>
+                        <option value="dual">Combined End-to-End Procurement Structure</option>
+                    </select>
+                </div>
             </div>
-            <div class="founder-card">
-                <div class="founder-avatar">⚡</div>
-                <h3>Shehan Mendis</h3>
-                <p>Director & Co-Founder</p>
+
+            <div>
+                <label class="block text-xs font-bold tracking-wider uppercase text-neutral-400 mb-2">Vehicle Profile & Asset Specifications</label>
+                <textarea name="specifications" rows="4" placeholder="List Target Make, Model, Year, Target Mileage, and Specific Factory Options Required..." required class="w-full bg-neutral-950 border border-neutral-800 rounded px-4 py-3 text-sm text-white placeholder-neutral-600 focus:outline-none focus:border-red-600 transition-colors"></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded text-sm uppercase tracking-widest transition-all">
+                Transmit Sourcing Dossier
+            </button>
+        </form>
+    </section>
+
+    <!-- Global Cargo & Logistics Network Section -->
+    <section id="partners" class="py-16 bg-neutral-900/10 border-t border-neutral-900 px-6">
+        <div class="max-w-7xl mx-auto text-center space-y-8">
+            <p class="text-xs font-bold tracking-widest text-neutral-500 uppercase">Interconnected Freight & Logistics Partners</p>
+            <div class="flex flex-wrap items-center justify-center gap-12 opacity-60 grayscale hover:opacity-100 transition-opacity duration-300">
+                <img src="1000177184.png" alt="Wallenius Wilhelmsen" class="h-10 w-auto object-contain">
+                <img src="1000177185.png" alt="DHL Aviation" class="h-10 w-auto object-contain">
+                <img src="1000177186.png" alt="Atlas Air" class="h-10 w-auto object-contain">
             </div>
         </div>
     </section>
 
-    <section id="contact" style="background-color: #0d0d11; text-align: center;">
-        <h2>Connect With Our Brokerage</h2>
-        <p style="color: var(--text-muted); margin-bottom: 2rem;">World Trade Center, West Tower, Colombo, Sri Lanka</p>
-        <p style="font-weight: 700; color: var(--text-main);">Official Email: revmaxx.vehicle.brokerage@gmail.com</p>
-    </section>
+    <!-- Corporate Information & Communications Block -->
+    <footer class="bg-neutral-950 border-t border-neutral-900 pt-20 pb-8 px-6 text-xs text-neutral-500">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 border-b border-neutral-900 pb-12 mb-12">
+            
+            <div class="space-y-4">
+                <img src="1000152045.png" alt="REVMAXX" class="h-8 w-auto object-contain mb-2">
+                <p class="leading-relaxed">
+                    REVMAXX GROUP PVT LTD is an institutional multi-tier enterprise commanding boutique asset brokerage and comprehensive international automotive supply chains.
+                </p>
+            </div>
 
-</body>
-</html>
+            <div class="space-y-3">
+                <p class="text-white font-bold uppercase tracking-wider text-[11px]">Corporate Office</p>
+                <p class="leading-relaxed font-medium text-neutral-400">
+                    Registered Office: World Trade Center, West Tower,<br>
+                    1 Bank of Ceylon Mawatha, Colombo 00100, Sri Lanka
+                </p>
+                <p class="text-neutral-400">Direct Contact: <span class="text-white font-semibold">0722114115</span></p>
+                <p class="text-neutral-400">Inquiries: <span class="text-white font-semibold">revmaxx.vehicle.brokerage@gmail.com</span></p>
+            </div>
+
+            <div class="space-y-4">
+                <p class="text-white font-bold uppercase tracking-wider text-[11px]">Secure Communications Ecosystem</p>
+                <div class="flex gap-4 text-base">
+                    <a href="https://wa.me/message/YMREXJJOOLGQG1" target="_blank" class="text-neutral-400 hover:text-green-500 transition-colors"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61590320872247&mibextid=ZbWKw" target="_blank" class="text-neutral-400 hover:text-blue-500 transition-colors"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/revmaxx_group?igsh=ZzhqaHJrNmJtcHdj" target="_blank" class="text-neutral-400 hover:text-pink-500 transition-colors"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="text-[10px] leading-relaxed text-neutral-600">
+                    Encrypted lines are continuously open for sovereign corporate transfers and secure international private portfolio verification.
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto space-y-6">
+            <!-- Company Founders Block -->
+            <div class="bg-neutral-900/20 border border-neutral-900 rounded p-6 flex flex-wrap justify-between items-center gap-6 text-neutral-400 font-medium">
+                <div>
+                    <span class="text-neutral-600 text-[10px] uppercase block tracking-wider mb-0.5">Chief Executive</span>
+                    <span class="text-white font-semibold">Senul Thiranagama</span> — CEO & Co-Founder
+                </div>
+                <div class="hidden sm:block h-6 w-px bg-neutral-900"></div>
+                <div>
+                    <span class="text-neutral-600 text-[10px] uppercase block tracking-wider mb-0.5">Board of Directors</span>
+                    <span class="text-white font-semibold">Sadun Jayasooriya</span> — Director & Co-Founder
+                </div>
+                <div class="hidden sm:block h-6 w-px bg-neutral-900"></div>
+                <div>
+                    <span class="text-neutral-600 text-[10px] uppercase block tracking-wider mb-0.5">Board of Directors</span>
+                    <span class="text-white font-semibold">Shehan Mendis</span> — Director & Co-Founder
+                </div>
+            </div>
+
+            <!-- Absolute Base Disclaimer & Intellectual Property Protection Details -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-4 border-t border-neutral-900/40 text-[10px] text-neutral-600 leading-relaxed">
+                <p class="max-w-2xl">
+                    All third-party corporate, logos, brands, and trademarks displayed on this website—including but no
