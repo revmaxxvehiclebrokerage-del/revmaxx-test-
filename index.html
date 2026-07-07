@@ -20,26 +20,38 @@
 </head>
 <body class="text-zinc-100 antialiased selection:bg-red-600 selection:text-white">
 
-    <!-- NAVIGATION BAR -->
-    <nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-zinc-900/80 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+        <!-- NAVIGATION BAR -->
+    <nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-zinc-900/80 transition-all">
+        <div class="max-w-7xl mx-auto px-6 h-32 flex items-center justify-between">
+            
+            <!-- LEFT SIDE: GROUP LOGO (WIDENED PAST 96PX) -->
             <a href="#" class="flex items-center group">
-             <img src="revmaxx group main logo.png" alt="REVMAXX Logo" class="h-[96px] w-auto object-contain">
-            
-                    
+                <img src="revmaxx group main logo.png" alt="REVMAXX Logo" class="h-[104px] w-auto object-contain">
             </a>
-            <div class="hidden sm:flex items-center gap-3 md:gap-8 text-[11px] md:text-sm font-medium text-zinc-400 whitespace-nowrap">
-               <a href="#subdivisions" class="hover:text-white transition-colors">Divisions</a>
-               <a href="#sourcing" class="hover:text-white transition-colors">Sourcing<span class="hidden md:inline"> Engine</span></a>
-               <a href="#hq" class="hover:text-white transition-colors">Corporate<span class="hidden md:inline"> HQ</span></a>
-               <a href="#location" class="hover:text-white transition-colors">Location<span class="hidden md:inline"> Matrix</span></a>
+
+            <!-- RIGHT SIDE: STACKED MENU & BUTTON -->
+            <div class="flex flex-col items-end gap-2.5">
+                
+                <!-- Row 1: The 4 Words Menu -->
+                <div class="hidden sm:flex items-center gap-3 md:gap-8 text-[11px] md:text-sm font-medium text-zinc-400 whitespace-nowrap">
+                    <a href="#subdivisions" class="hover:text-white transition-colors">Divisions</a>
+                    <a href="#sourcing" class="hover:text-white transition-colors">Sourcing<span class="hidden md:inline"> Engine</span></a>
+                    <a href="#hq" class="hover:text-white transition-colors">Corporate<span class="hidden md:inline"> HQ</span></a>
+                    <a href="#location" class="hover:text-white transition-colors">Location<span class="hidden md:inline"> Matrix</span></a>
                 </div>
-            
-            </div>
-            <div>
-                <a href="https://wa.me/94722114115" target="_blank" class="bg-red-600 hover:bg-red-700 text-white font-semibold text-xs tracking-wider uppercase px-5 py-3 rounded-md transition-all duration-300 shadow-lg shadow-red-900/20 inline-flex items-center gap-2">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.93 0c3.165.001 6.14 1.233 8.377 3.469 2.237 2.236 3.467 5.21 3.466 8.379-.003 6.58-5.339 11.928-11.873 11.928-2.01-.001-3.987-.512-5.735-1.486L0 24zm6.079-3.535c1.606.953 3.429 1.455 5.289 1.456 5.483 0 9.943-4.456 9.946-9.938.001-2.656-1.03-5.153-2.902-7.025C16.519 3.086 14.025 2.054 11.93 2.054c-5.489 0-9.95 4.456-9.953 9.939-.001 1.94.505 3.834 1.465 5.513L2.404 21.1l3.732-.98c1.554.848 3.3.111 4.022-.155z"/></svg>
+                
+                <!-- Row 2: Direct Broker Desk Button -->
+                <a href="https://wa.me/9472211415" target="_blank" class="bg-red-600 hover:bg-red-700 text-white text-[11px] md:text-xs font-bold px-4 py-2 rounded flex items-center gap-2 transition-colors uppercase tracking-wider whitespace-nowrap shadow-md">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397 0 11.973 0c3.184.001 6.177 1.242 8.426 3.496 2.249 2.254 3.487 5.251 3.486 8.44-.003 6.623-5.34 11.971-11.914 11.971-2.007-.002-3.98-.51-5.731-1.474L0 24zm6.58-4.058c1.644.975 3.478 1.489 5.349 1.49 5.427 0 9.845-4.386 9.848-9.774.001-2.611-1.015-5.064-2.862-6.919C17.065 2.883 14.616 1.866 12 1.865c-5.434 0-9.851 4.388-9.854 9.777-.001 1.944.505 3.842 1.466 5.514L2.646 20.84l4.032-.9-.041.002z"/>
+                    </svg>
                     Direct Broker Desk
+                </a>
+
+            </div>
+        </div>
+    </nav>
+    
                 </a>
             </div>
         </div>
