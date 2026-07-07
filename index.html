@@ -20,30 +20,36 @@
 </head>
 <body class="text-zinc-100 antialiased selection:bg-red-600 selection:text-white">
 
-                <!-- NAVIGATION BAR -->
+    <!-- NAVIGATION BAR -->
     <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-zinc-900/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 md:h-28 flex items-center justify-between">
-
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between">
+            
             <!-- LEFT SIDE: SIGNIFICANTLY ENLARGED LOGO -->
             <a href="#" class="flex items-center">
-                <img src="revmaxx group main logo.png" alt="REVMAXX Logo" class="h-10 sm:h-12 md:h-16 w-auto object-contain">
+                <img src="revmaxx group main logo.png" alt="REVMAXX Logo" style="height: 75px; width: auto; object-fit: contain;">
             </a>
 
             <!-- RIGHT SIDE: CONDITIONAL MENU & BUTTON -->
-            <div class="flex flex-col items-end justify-center gap-1.5">
-                
-                <!-- The 5 Words Menu: Forced HIDDEN on Mobile, flexes on desktop/tablet (md:) -->
-                <div class="hidden md:flex items-center gap-6 text-zinc-400 font-medium tracking-widest uppercase text-xs">
+            <div class="flex flex-col items-end justify-center gap-2">
+                <!-- The 5 Words Menu: Fully operational with all targets linked -->
+                <div class="hidden md:flex items-center gap-6 text-zinc-400 font-medium tracking-widest uppercase text-[11px]">
                     <a href="#subdivisions" class="hover:text-white transition-colors">Divisions</a>
                     <a href="#sourcing" class="hover:text-white transition-colors">Sourcing Engine</a>
                     <a href="#corporate" class="hover:text-white transition-colors">Corporate HQ</a>
                     <a href="#location" class="hover:text-white transition-colors">Location Matrix</a>
                     <a href="#socials-matrix" class="hover:text-white transition-colors">Socials</a>
                 </div>
+                
+                <!-- Direct Broker Desk Action Button -->
+                <a href="#sourcing" class="bg-red-600 hover:bg-red-700 text-white text-[10px] font-bold tracking-wider uppercase px-4 py-2 rounded flex items-center gap-1.5 transition-colors">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    Direct Broker Desk
+                </a>
+            </div>
 
-                <!-- Action Button: Scales naturally down for mobile screen space -->
-                <a href="#socials-matrix" class="bg-red-600 hover:bg-red-700 text-white text-[10px] sm:text-xs font-bold tracking-wider uppercase px-3 py-2 sm:px-5 sm:py-2.5 rounded-sm transition-all duration-300 flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+        </div>
+    </nav>
+    
                     DIRECT BROKER DESK
                 </a>
 
