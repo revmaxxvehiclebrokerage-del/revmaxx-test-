@@ -381,7 +381,7 @@
                 </p>
             <!-- SOURCING ENGINE BACKGROUND WIRE -->
 <script>
-  function triggerWhatsAppSourcing() {
+function triggerWhatsAppSourcing() {
     const makeModel = document.getElementById('makeModel').value;
     const year = document.getElementById('year').value;
     const condition = document.getElementById('condition').value;
@@ -390,41 +390,54 @@
     const specs = document.getElementById('specs').value;
     const contactNumber = document.getElementById('contactNumber').value;
     const clientName = document.getElementById('clientName').value;
-      
 
-    const cleanDigitsOnly = contactNumber.replace(/\D/g, ''); 
+    // Basic Validation
+    const cleanDigitsOnly = contactNumber.replace(/\D/g, '');
     if (cleanDigitsOnly.length < 10) {
-      alert("Please enter proper details of phone number.");
-      return; 
+        alert("Please enter a valid phone number.");
+        return;
+    }
+    if (clientName.trim() === "") {
+        alert("Please enter your name.");
+        return;
     }
 
     const emailPayload = {
-      access_key: "8e827da2-78ca-4c84-a4db-75d3d6f1d611", 
-      subject: `[New Sourcing Lead] - ${makeModel}`,
-      from_name: "REVMAXX Web Broker Desk",
-      "Asset Specification": makeModel,
-      "Production Year": year,
-      "Asset Condition": condition,
-      "Target Budget": budget,
-      "Sourcing Region": region,
-      "Bespoke Details": specs,
-      "Client Contact Phone": contactNumber
-      "Client Name": clientName,
-        
+        access_key: "8e827da2-78ca-4c84-a4db-753d6f1d611",
+        subject: `[New Sourcing Lead] - ${makeModel}`,
+        from_name: "REVMAXX Web Broker Desk",
+        "Asset Specification": makeModel,
+        "Production Year": year,
+        "Asset Condition": condition,
+        "Target Budget": budget,
+        "Sourcing Region": region,
+        "Client Name": clientName,
+        "Client Contact Phone": contactNumber,
+        "Bespoke Details": specs
     };
 
     fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(emailPayload)
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(emailPayload)
     })
     .then(async (response) => {
-      if (response.status === 200) {
-        alert("Sourcing request submitted successfully! Our broker desk will contact you shortly.");
-      } else {
+        if (response.status === 200) {
+            alert("Sourcing request submitted successfully! Our broker desk will contact you shortly.");
+            // Optional: Reset form here
+        } else {
+            alert("Something went wrong. Please try again.");
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        alert("Submission failed. Please check your connection.");
+    });
+    }
+           
         alert("Transmission error. Please try submitting your request again.");
       }
     })
