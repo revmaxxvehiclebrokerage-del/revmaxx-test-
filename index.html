@@ -368,28 +368,57 @@
                 
             
                 </p>
-            </div>
-            
-            </div>
-        </div>
-    </footer>
+            <!-- SOURCING ENGINE BACKGROUND WIRE -->
+<script>
+  function triggerWhatsAppSourcing() {
+    const makeModel = document.getElementById('makeModel').value;
+    const year = document.getElementById('year').value;
+    const condition = document.getElementById('condition').value;
+    const budget = document.getElementById('budget').value;
+    const region = document.getElementById('region').value;
+    const specs = document.getElementById('specs').value;
+    const contactNumber = document.getElementById('contactNumber').value;
 
-    <!-- WHATSAPP WIRE ROUTING ENGINE SCRIPT -->
-    <script>
-        function triggerWhatsAppSourcing() {
-            const makeModel = document.getElementById('makeModel').value;
-            const year = document.getElementById('year').value;
-            const condition = document.getElementById('condition').value;
-            const budget = document.getElementById('budget').value;
-            const region = document.getElementById('region').value;
-            const specs = document.getElementById('specs').value;
+    const cleanDigitsOnly = contactNumber.replace(/\D/g, ''); 
+    if (cleanDigitsOnly.length < 10) {
+      alert("Please enter proper details of phone number.");
+      return; 
+    }
 
-            const textBlock = `*REVMAXX GROUP | SOURCING REQUEST*%0A%0A` +
-                              `*Asset Specification:* ${encodeURIComponent(makeModel)}%0A` +
-                              `*Production Year:* ${encodeURIComponent(year)}%0A` +
-                              `*Asset Condition:* ${encodeURIComponent(condition)}%0A` +
-                              `*Budget Allocation:* ${encodeURIComponent(budget)}%0A` +
-                              `*Target Sourcing Matrix:* ${encodeURIComponent(region)}%0A` +
+    const emailPayload = {
+      access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE", 
+      subject: `[New Sourcing Lead] - ${makeModel}`,
+      from_name: "REVMAXX Web Broker Desk",
+      "Asset Specification": makeModel,
+      "Production Year": year,
+      "Asset Condition": condition,
+      "Target Budget": budget,
+      "Sourcing Region": region,
+      "Bespoke Details": specs,
+      "Client Contact Phone": contactNumber
+    };
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(emailPayload)
+    })
+    .then(async (response) => {
+      if (response.status === 200) {
+        alert("Sourcing request submitted successfully! Our broker desk will contact you shortly.");
+      } else {
+        alert("Transmission error. Please try submitting your request again.");
+      }
+    })
+    .catch(error => {
+      alert("Network timeout. Please review your connection details.");
+    });
+  }
+</script>
+                
                               `*Performance/Bespoke Details:* ${encodeURIComponent(specs)}`;
 
             window.open(`https://wa.me/94722114115?text=${textBlock}`, '_blank');
