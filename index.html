@@ -173,80 +173,99 @@
         </div>
     </section>
 
-    <!-- SOURCING ENGINE FORM -->
-    <section id="sourcing" class="py-32 border-t border-zinc-900 bg-[#050506]">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="text-xs font-bold tracking-widest text-red-600 uppercase block mb-3">Sourcing Engine</span>
-                <h2 class="text-3xl font-bold tracking-tight text-white mb-4">Request a Custom Import</h2>
-                <p class="text-zinc-400 font-light max-w-xl mx-auto">Enter your vehicle preferences below. Our team will look up current global auction availability, calculate the estimated total import and duty costs to Sri Lanka, and contact you directly.</p>
-            </div>
+    <script>
+async function triggerWhatsAppSourcing() {
+  const submitBtn = document.querySelector("#whatsappForm button");
 
-            <form id="whatsappForm" class="bg-gradient-to-b from-zinc-900/50 to-zinc-950/50 border border-zinc-900 rounded-xl p-8 sm:p-12 space-y-8 shadow-2xl">
-                <div class="grid sm:grid-cols-3 gap-6">
-                    <div class="sm:col-span-2">
-                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Vehicle Make &amp; Model</label>
-                        <input type="text" id="makeModel" placeholder="e.g. Porsche 911 GT3 RS" class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-white transition-colors">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Year of Production</label>
-                        <input type="text" id="year" placeholder="e.g. 2026" class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-white transition-colors">
-                    </div>
-                </div>
+  try {
+    // 1. Extract Form Values
+    const makeModel = document.getElementById('makeModel').value.trim();
+    const year = document.getElementById('year').value.trim();
+    const condition = document.getElementById('condition').value;
+    const selectedCurrency = document.getElementById('currency').value;
+    const rawBudget = document.getElementById('budget').value.trim();
+    const budget = rawBudget ? `${selectedCurrency} ${rawBudget}` : 'Open / Unspecified';
+    const region = document.getElementById('region').value;
+    const clientName = document.getElementById('clientName').value.trim();
+    const contactNumber = document.getElementById('contactNumber').value.trim();
+    const specs = document.getElementById('specs').value.trim();
 
-                <div class="grid sm:grid-cols-3 gap-6">
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2 h-8">Vehicle Condition</label>
-                        <select id="condition" class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-zinc-300 transition-colors">
-                            <option>Brand New</option>
-                            <option>Pre-Owned / Used</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2 h-8">Acquisition Budget (USD / LKR)</label>
-                        <input type="text" id="budget" placeholder="Specify limit ($ / LKR)" class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-white transition-colors">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2 h-8">Preferred Sourcing Region</label>
-                        <select id="region" class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-zinc-300 transition-colors">
-                            <option>Japan</option>
-                            <option>South Korea</option>
-                            <option>United States of America (USA)</option>
-                            <option>Europe</option>
-                            <option>United Kingdom (UK)</option>
-                            <option>Sri Lanka</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="col-span-full" style="margin-top: 24px;">
-                <!-- CLIENT NAME FIELD -->
-                <div class="col-span-full" style="margin-bottom: 20px;">
-                <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Client Name</label>
-                <input 
-                type="text" 
-                id="clientName" 
-                name="clientName" 
-                required
-                class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-zinc-700 transition">
-                </div>
-                    
-                <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Client Contact Number</label>
-                 <input type="tel" id="contactNumber" name="contactNumber" placeholder="e.g. 07X-XXX-XXXX" required class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-zinc-700 transition">
-                </div>
-                
+    // 2. Validation
+    if (!makeModel || !clientName || !contactNumber) {
+      alert("Please enter your Full Name, Desired Vehicle, and Contact Number.");
+      return;
+    }
 
-                <div>
-                    <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Bespoke Detailing or Performance Specs</label>
-                    <textarea id="specs" rows="4" placeholder="List desired custom aerodynamic kits, exhaust modifications, or interior configurations..." class="w-full bg-zinc-900 border border-zinc-800 rounded px-4 py-3 text-sm focus:outline-none focus:border-red-600 text-white transition-colors"></textarea>
-                </div>
+    const cleanDigitsOnly = contactNumber.replace(/\D/g, '');
+    if (cleanDigitsOnly.length < 9) {
+      alert("Please enter a valid phone or WhatsApp contact number.");
+      return;
+    }
 
-                <button type="button" onclick="triggerWhatsAppSourcing()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs tracking-widest uppercase py-4 rounded transition-all duration-300 shadow-lg shadow-red-950/40">
-                    Submit Sourcing Request
-                </button>
-            </form>
-        </div>
-    </section>
+    // UI Loading State
+    const originalBtnText = submitBtn.innerText;
+    submitBtn.innerText = "TRANSMITTING TO DESK...";
+    submitBtn.disabled = true;
+
+    // 3. Web3Forms Payload to enquiries@revmaxxgroup.info
+    const emailPayload = {
+      access_key: "8e827da2-78ca-4c84-a4db-75d3d6f1d611",
+      subject: `[REVMAXX SOURCING REQUEST] ${makeModel} - ${clientName}`,
+      from_name: "REVMAXX Web Broker Desk",
+      client_name: clientName,
+      contact_number: contactNumber,
+      vehicle_requested: makeModel,
+      year_generation: year || "Not specified",
+      condition_target: condition,
+      budget_target: budget,
+      preferred_region: region,
+      custom_specifications: specs || "Standard spec requested"
+    };
+
+    // 4. Async API Post
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(emailPayload)
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      // Success State UI
+      submitBtn.innerText = "REQUEST SUBMITTED";
+      submitBtn.classList.remove("bg-red-600", "hover:bg-red-700");
+      submitBtn.classList.add("bg-emerald-600");
+
+      alert("Your sourcing request has been successfully transmitted to our executive desk. A broker will review your specs and contact you shortly.");
+      
+      // Reset Form & Restore Button State after 3 seconds
+      setTimeout(() => {
+        document.getElementById('whatsappForm').reset();
+        submitBtn.innerText = originalBtnText;
+        submitBtn.classList.remove("bg-emerald-600");
+        submitBtn.classList.add("bg-red-600", "hover:bg-red-700");
+        submitBtn.disabled = false;
+      }, 3000);
+
+    } else {
+      throw new Error(result.message || "Form submission failed");
+    }
+
+  } catch (error) {
+    console.error("Error submitting sourcing request:", error);
+    alert("An error occurred while transmitting your request. Please try again or email enquiries@revmaxxgroup.info directly.");
+    submitBtn.innerText = "SUBMIT SOURCING REQUEST";
+    submitBtn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
+
 
     <!-- PREMIUM CORPORATE GALLERY -->
     <section id="corporate" class="py-32 bg-black">
