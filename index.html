@@ -374,6 +374,108 @@ async function triggerWhatsAppSourcing() {
   }
 }
 </script>
+
+			<!-- ============================================== -->
+<!-- CINEMATIC SHOWCASE VIDEO SECTION               -->
+<!-- ============================================== -->
+<section class="py-8 bg-black">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="relative w-full overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl group">
+      
+      <!-- Video Asset -->
+      <video id="revmaxx-video" autoplay muted loop playsinline class="w-full h-auto object-cover block">
+        <source src="https://github.com/revmaxxvehiclebrokerage-del/revmaxx-test-/releases/download/v1.0.0/lv_0_20260723225929.mp4" type="video/mp4">
+      </video>
+
+      <!-- Interactive Sound Button (Glows & Animates on Click) -->
+      <button id="exhaust-btn" onclick="toggleExhaustSound()" class="absolute bottom-6 left-6 z-10 flex items-center gap-3 bg-zinc-950/85 backdrop-blur-md border border-red-600 text-white px-5 py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all duration-300 hover:bg-red-600 hover:shadow-[0_0_25px_rgba(220,38,38,0.7)] active:scale-95 cursor-pointer">
+        <span id="btn-icon" class="text-base animate-pulse">🔊</span>
+        <span id="btn-text">START ENGINE</span>
+      </button>
+
+      <!-- Hidden Audio Source -->
+      <audio id="exhaust-audio" src="exhaust.mp3" preload="auto"></audio>
+    </div>
+  </div>
+</section>
+
+<script>
+  function toggleExhaustSound() {
+    const audio = document.getElementById('exhaust-audio');
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+    const btn = document.getElementById('exhaust-btn');
+
+    if (audio.paused) {
+      audio.play();
+      btnText.innerText = "MUTE ENGINE";
+      btnIcon.innerText = "⚡";
+      // Switch button glow to electric green when engine sound is active
+      btn.classList.remove('border-red-600');
+      btn.classList.add('border-emerald-500', 'shadow-[0_0_20px_rgba(16,185,129,0.6)]');
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+      btnText.innerText = "START ENGINE";
+      btnIcon.innerText = "🔊";
+      // Reset button back to REVMAXX Red
+      btn.classList.remove('border-emerald-500', 'shadow-[0_0_20px_rgba(16,185,129,0.6)]');
+      btn.classList.add('border-red-600');
+    }
+  }
+</script>
+
+			
+<!-- ============================================== -->
+<!-- CINEMATIC SHOWCASE VIDEO SECTION               -->
+<!-- ============================================== -->
+<section class="py-8 bg-black">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="relative w-full overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl group">
+      
+      <!-- Video Asset -->
+      <video id="revmaxx-video" autoplay muted loop playsinline class="w-full h-auto object-cover block">
+        <source src="https://github.com/revmaxxvehiclebrokerage-del/revmaxx-test-/releases/download/v1.0.0/lv_0_20260723225929.mp4" type="video/mp4">
+      </video>
+
+      <!-- Interactive Sound Button (Glows & Animates on Click) -->
+      <button id="exhaust-btn" onclick="toggleExhaustSound()" class="absolute bottom-6 left-6 z-10 flex items-center gap-3 bg-zinc-950/85 backdrop-blur-md border border-red-600 text-white px-5 py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all duration-300 hover:bg-red-600 hover:shadow-[0_0_25px_rgba(220,38,38,0.7)] active:scale-95 cursor-pointer">
+        <span id="btn-icon" class="text-base animate-pulse">🔊</span>
+        <span id="btn-text">START ENGINE</span>
+      </button>
+
+      <!-- Hidden Audio Source -->
+      <audio id="exhaust-audio" src="exhaust.mp3" preload="auto"></audio>
+    </div>
+  </div>
+</section>
+
+<script>
+  function toggleExhaustSound() {
+    const audio = document.getElementById('exhaust-audio');
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+    const btn = document.getElementById('exhaust-btn');
+
+    if (audio.paused) {
+      audio.play();
+      btnText.innerText = "MUTE ENGINE";
+      btnIcon.innerText = "⚡";
+      // Switch button glow to electric green when engine sound is active
+      btn.classList.remove('border-red-600');
+      btn.classList.add('border-emerald-500', 'shadow-[0_0_20px_rgba(16,185,129,0.6)]');
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+      btnText.innerText = "START ENGINE";
+      btnIcon.innerText = "🔊";
+      // Reset button back to REVMAXX Red
+      btn.classList.remove('border-emerald-500', 'shadow-[0_0_20px_rgba(16,185,129,0.6)]');
+      btn.classList.add('border-red-600');
+    }
+  }
+</script>
+			
 			
 		 <!-- PREMIUM CORPORATE GALLERY -->
        <section id="corporate" class="pt-8 pb-20 bg-black">
