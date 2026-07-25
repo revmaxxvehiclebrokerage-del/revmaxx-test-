@@ -378,11 +378,11 @@ async function triggerWhatsAppSourcing() {
 <!-- ============================================== -->
 <!-- CINEMATIC SHOWCASE VIDEO SECTION               -->
 <!-- ============================================== -->
-<section class="pt-2 pb-16 bg-black">
+<section class="-mt-8 sm:-mt-10 pb-16 bg-black">
   <div class="max-w-7xl mx-auto px-6">
     <div class="relative w-full overflow-hidden rounded-2xl border border-zinc-800/80 shadow-2xl group">
       
-      <!-- Video Asset (Clean, unscaled original video) -->
+      <!-- Video Asset -->
       <video id="revmaxx-video" autoplay muted loop playsinline class="w-full h-auto object-cover block">
         <source src="https://github.com/revmaxxvehiclebrokerage-del/revmaxx-test-/releases/download/v1.0.0/lv_0_20260723225929.mp4" type="video/mp4">
       </video>
@@ -407,7 +407,7 @@ async function triggerWhatsAppSourcing() {
         <span id="btn-text" class="font-semibold">AUDIO FEED: OFF</span>
       </button>
 
-      <!-- Hidden Audio Source -->
+      <!-- Optional Backup Audio Track -->
       <audio id="exhaust-audio" src="exhaust.mp3" preload="auto"></audio>
     </div>
   </div>
@@ -415,40 +415,58 @@ async function triggerWhatsAppSourcing() {
 
 <script>
   function toggleExhaustSound() {
+    const video = document.getElementById('revmaxx-video');
     const audio = document.getElementById('exhaust-audio');
     const btnText = document.getElementById('btn-text');
     const statusDot = document.getElementById('status-dot');
     const eqVisualizer = document.getElementById('eq-visualizer');
     const btn = document.getElementById('exhaust-btn');
 
-    if (audio.paused) {
-      audio.play();
+    // Toggle based on whether video is currently muted or paused
+    if (video.muted) {
+      // Unmute video audio directly
+      video.muted = false;
+      
+      // Also trigger secondary audio file if present
+      if (audio) {
+        audio.play().catch(() => {
+          /* Video unmuting handles sound if MP3 isn't available */
+        });
+      }
+
       btnText.innerText = "AUDIO FEED: ON";
       
-      // Activate Tech Styling (Red HUD Accent)
+      // Activate Tech HUD Styling
       btn.classList.remove('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
       btn.classList.add('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
       
-      // Activate Indicators
+      // Activate Live Dot & Visualizer
       statusDot.classList.remove('bg-zinc-600');
       statusDot.classList.add('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
       eqVisualizer.classList.remove('hidden');
     } else {
-      audio.pause();
-      audio.currentTime = 0;
+      // Mute video audio
+      video.muted = true;
+      
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+
       btnText.innerText = "AUDIO FEED: OFF";
       
-      // Deactivate Styling (Default Clean State)
+      // Reset Styling
       btn.classList.remove('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
       btn.classList.add('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
       
-      // Deactivate Indicators
+      // Deactivate Live Dot & Visualizer
       statusDot.classList.remove('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
       statusDot.classList.add('bg-zinc-600');
       eqVisualizer.classList.add('hidden');
     }
   }
 </script>
+	
 			
 			
              <!-- PREMIUM CORPORATE GALLERY -->
