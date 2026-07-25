@@ -378,20 +378,39 @@ async function triggerWhatsAppSourcing() {
 <!-- ============================================== -->
 <!-- CINEMATIC SHOWCASE VIDEO SECTION               -->
 <!-- ============================================== -->
-<section class="py-8 bg-black">
+<section class="pt-2 pb-16 bg-black">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="relative w-full overflow-hidden rounded-2xl border border-zinc-800 shadow-2xl group">
+    <div class="relative w-full overflow-hidden rounded-2xl border border-zinc-800/80 shadow-2xl group">
       
       <!-- Video Asset -->
       <video id="revmaxx-video" autoplay muted loop playsinline class="w-full h-auto object-cover block">
         <source src="https://github.com/revmaxxvehiclebrokerage-del/revmaxx-test-/releases/download/v1.0.0/lv_0_20260723225929.mp4" type="video/mp4">
       </video>
 
-      <!-- Interactive Sound Button (Glows & Animates on Click) -->
-      <button id="exhaust-btn" onclick="toggleExhaustSound()" class="absolute bottom-6 left-6 z-10 flex items-center gap-3 bg-zinc-950/85 backdrop-blur-md border border-red-600 text-white px-5 py-3 rounded-xl font-bold text-xs tracking-widest uppercase transition-all duration-300 hover:bg-red-600 hover:shadow-[0_0_25px_rgba(220,38,38,0.7)] active:scale-95 cursor-pointer">
-        <span id="btn-icon" class="text-base animate-pulse">🔊</span>
-        <span id="btn-text">START ENGINE</span>
+      <!-- Tech-Forward Audio Toggle Button -->
+      <button 
+        id="exhaust-btn" 
+        onclick="toggleExhaustSound()" 
+        class="absolute bottom-6 left-6 z-10 flex items-center gap-3 bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-zinc-400 px-5 py-3 rounded-xl font-mono text-xs tracking-wider uppercase transition-all duration-300 hover:border-zinc-600 hover:text-white active:scale-95 cursor-pointer select-none">
+        
+        <!-- Live Status Indicator Dot -->
+        <span id="status-dot" class="w-2 h-2 rounded-full bg-zinc-600 transition-all duration-300"></span>
+
+        <!-- Audio Animated Equalizer Bars (Visible when active) -->
+        <div id="eq-visualizer" class="hidden flex items-end gap-[2px] h-3">
+          <span class="w-[2px] bg-red-500 h-full animate-[bounce_1s_infinite_100ms]"></span>
+          <span class="w-[2px] bg-red-500 h-2/3 animate-[bounce_1s_infinite_300ms]"></span>
+          <span class="w-[2px] bg-red-500 h-4/5 animate-[bounce_1s_infinite_200ms]"></span>
+        </div>
+
+        <!-- Dynamic Button Text -->
+        <span id="btn-text" class="font-semibold">AUDIO FEED: OFF</span>
       </button>
+
+      <!-- Location Tag (Right Bottom) -->
+      <div class="absolute bottom-6 right-6 hidden sm:block font-mono text-[10px] tracking-widest text-zinc-500 uppercase">
+        HEADQUARTERED IN THE HEART OF COLOMBO
+      </div>
 
       <!-- Hidden Audio Source -->
       <audio id="exhaust-audio" src="exhaust.mp3" preload="auto"></audio>
@@ -403,30 +422,41 @@ async function triggerWhatsAppSourcing() {
   function toggleExhaustSound() {
     const audio = document.getElementById('exhaust-audio');
     const btnText = document.getElementById('btn-text');
-    const btnIcon = document.getElementById('btn-icon');
+    const statusDot = document.getElementById('status-dot');
+    const eqVisualizer = document.getElementById('eq-visualizer');
     const btn = document.getElementById('exhaust-btn');
 
     if (audio.paused) {
       audio.play();
-      btnText.innerText = "MUTE ENGINE";
-      btnIcon.innerText = "⚡";
-      // Switch button glow to electric green when engine sound is active
-      btn.classList.remove('border-red-600');
-      btn.classList.add('border-emerald-500', 'shadow-[0_0_20px_rgba(16,185,129,0.6)]');
+      btnText.innerText = "AUDIO FEED: ON";
+      
+      // Activate Tech Styling (Red HUD Accent)
+      btn.classList.remove('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
+      btn.classList.add('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
+      
+      // Activate Indicators
+      statusDot.classList.remove('bg-zinc-600');
+      statusDot.classList.add('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
+      eqVisualizer.classList.remove('hidden');
     } else {
       audio.pause();
       audio.currentTime = 0;
-      btnText.innerText = "START ENGINE";
-      btnIcon.innerText = "🔊";
-      // Reset button back to REVMAXX Red
-      btn.classList.remove('border-emerald-500', 'shadow-[0_0_20px_rgba(16,185,129,0.6)]');
-      btn.classList.add('border-red-600');
+      btnText.innerText = "AUDIO FEED: OFF";
+      
+      // Deactivate Styling (Default Clean State)
+      btn.classList.remove('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
+      btn.classList.add('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
+      
+      // Deactivate Indicators
+      statusDot.classList.remove('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
+      statusDot.classList.add('bg-zinc-600');
+      eqVisualizer.classList.add('hidden');
     }
   }
 </script>
 			
-			
-		 <!-- PREMIUM CORPORATE GALLERY -->
+
+			 <!-- PREMIUM CORPORATE GALLERY -->
        <section id="corporate" class="pt-8 pb-20 bg-black">
 		 <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
