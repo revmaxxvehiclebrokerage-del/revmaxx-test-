@@ -378,26 +378,27 @@ async function triggerWhatsAppSourcing() {
 <!-- ============================================== -->
 <!-- CINEMATIC SHOWCASE VIDEO SECTION               -->
 <!-- ============================================== -->
-<section class="-mt-8 sm:-mt-10 pb-16 bg-black">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="relative w-full overflow-hidden rounded-2xl border border-zinc-800/80 shadow-2xl group">
+<section class="-mt-6 sm:-mt-10 pb-12 sm:pb-16 bg-black">
+  <!-- Container with reduced mobile padding to enlarge video on small screens -->
+  <div class="max-w-7xl mx-auto px-2 sm:px-6">
+    <div class="relative w-full overflow-hidden rounded-xl sm:rounded-2xl border border-zinc-800/80 shadow-2xl group">
       
       <!-- Video Asset -->
-      <video id="revmaxx-video" autoplay muted loop playsinline class="w-full h-auto object-cover block">
+      <video id="revmaxx-video" autoplay muted loop playsinline class="w-full h-auto min-h-[200px] object-cover block">
         <source src="https://github.com/revmaxxvehiclebrokerage-del/revmaxx-test-/releases/download/v1.0.0/lv_0_20260723225929.mp4" type="video/mp4">
       </video>
 
-      <!-- Tech-Forward Audio Toggle Button -->
+      <!-- Tech-Forward Audio Toggle Button (Centered on mobile, bottom-left on desktop) -->
       <button 
         id="exhaust-btn" 
         onclick="toggleExhaustSound()" 
-        class="absolute bottom-6 left-6 z-10 flex items-center gap-3 bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-zinc-400 px-5 py-3 rounded-xl font-mono text-xs tracking-wider uppercase transition-all duration-300 hover:border-zinc-600 hover:text-white active:scale-95 cursor-pointer select-none">
+        class="absolute bottom-4 left-1/2 -translate-x-1/2 sm:bottom-6 sm:left-6 sm:translate-x-0 z-10 flex items-center gap-2.5 sm:gap-3 bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-zinc-400 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl font-mono text-[11px] sm:text-xs tracking-wider uppercase transition-all duration-300 hover:border-zinc-600 hover:text-white active:scale-95 cursor-pointer select-none whitespace-nowrap">
         
         <!-- Live Status Indicator Dot -->
-        <span id="status-dot" class="w-2 h-2 rounded-full bg-zinc-600 transition-all duration-300"></span>
+        <span id="status-dot" class="w-2 h-2 rounded-full bg-zinc-600 transition-all duration-300 flex-shrink-0"></span>
 
         <!-- Audio Animated Equalizer Bars (Visible when active) -->
-        <div id="eq-visualizer" class="hidden flex items-end gap-[2px] h-3">
+        <div id="eq-visualizer" class="hidden flex items-end gap-[2px] h-3 flex-shrink-0">
           <span class="w-[2px] bg-red-500 h-full animate-[bounce_1s_infinite_100ms]"></span>
           <span class="w-[2px] bg-red-500 h-2/3 animate-[bounce_1s_infinite_300ms]"></span>
           <span class="w-[2px] bg-red-500 h-4/5 animate-[bounce_1s_infinite_200ms]"></span>
@@ -407,7 +408,7 @@ async function triggerWhatsAppSourcing() {
         <span id="btn-text" class="font-semibold">AUDIO FEED: OFF</span>
       </button>
 
-      <!-- Optional Backup Audio Track -->
+      <!-- Backup Audio Track -->
       <audio id="exhaust-audio" src="exhaust.mp3" preload="auto"></audio>
     </div>
   </div>
@@ -422,12 +423,10 @@ async function triggerWhatsAppSourcing() {
     const eqVisualizer = document.getElementById('eq-visualizer');
     const btn = document.getElementById('exhaust-btn');
 
-    // Toggle based on whether video is currently muted or paused
     if (video.muted) {
       // Unmute video audio directly
       video.muted = false;
       
-      // Also trigger secondary audio file if present
       if (audio) {
         audio.play().catch(() => {
           /* Video unmuting handles sound if MP3 isn't available */
@@ -466,10 +465,9 @@ async function triggerWhatsAppSourcing() {
     }
   }
 </script>
+			
 	
-			
-			
-             <!-- PREMIUM CORPORATE GALLERY -->
+			<!-- PREMIUM CORPORATE GALLERY -->
        <section id="corporate" class="pt-8 pb-20 bg-black">
 		 <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
