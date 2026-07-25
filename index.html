@@ -378,14 +378,14 @@ async function triggerWhatsAppSourcing() {
 <!-- ============================================== -->
 <!-- CINEMATIC SHOWCASE VIDEO SECTION               -->
 <!-- ============================================== -->
-<section class="-mt-6 sm:-mt-10 pb-12 sm:pb-16 bg-black">
+<section class="w-full bg-black pt-2 sm:pt-3 pb-12 sm:pb-16">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     
-    <!-- Outer Wrapper (Vertical Stack) -->
+    <!-- Outer Wrapper -->
     <div class="flex flex-col items-start gap-4">
       
-      <!-- Video Container (Full Aspect Ratio preserved - No cropping) -->
-      <div class="w-full overflow-hidden rounded-lg sm:rounded-xl border border-zinc-800/80 shadow-2xl bg-zinc-950">
+      <!-- Video Container (Tight fit below sourcing form, no overlap) -->
+      <div class="w-full overflow-hidden rounded-lg sm:rounded-xl border border-zinc-800/80 shadow-2xl bg-black">
         <video 
           id="revmaxx-video" 
           autoplay 
@@ -397,7 +397,7 @@ async function triggerWhatsAppSourcing() {
         </video>
       </div>
 
-      <!-- Tech-Forward Audio Toggle Button (Positioned OUTSIDE, bottom-left of video) -->
+      <!-- Tech-Forward Audio Toggle Button (Positioned cleanly outside below video) -->
       <button 
         id="exhaust-btn" 
         onclick="toggleExhaustSound()" 
@@ -406,7 +406,7 @@ async function triggerWhatsAppSourcing() {
         <!-- Live Status Indicator Dot -->
         <span id="status-dot" class="w-2 h-2 rounded-full bg-zinc-600 transition-all duration-300 flex-shrink-0"></span>
 
-        <!-- Audio Animated Equalizer Bars (Visible when active) -->
+        <!-- Audio Animated Equalizer Bars -->
         <div id="eq-visualizer" class="hidden flex items-end gap-[2px] h-3 flex-shrink-0">
           <span class="w-[2px] bg-red-500 h-full animate-[bounce_1s_infinite_100ms]"></span>
           <span class="w-[2px] bg-red-500 h-2/3 animate-[bounce_1s_infinite_300ms]"></span>
@@ -434,27 +434,20 @@ async function triggerWhatsAppSourcing() {
     const btn = document.getElementById('exhaust-btn');
 
     if (video.muted) {
-      // Unmute video audio directly
       video.muted = false;
       
       if (audio) {
-        audio.play().catch(() => {
-          /* Video unmuting handles sound if MP3 isn't available */
-        });
+        audio.play().catch(() => {});
       }
 
       btnText.innerText = "AUDIO FEED: ON";
-      
-      // Activate Tech HUD Styling
       btn.classList.remove('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
       btn.classList.add('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
       
-      // Activate Live Dot & Visualizer
       statusDot.classList.remove('bg-zinc-600');
       statusDot.classList.add('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
       eqVisualizer.classList.remove('hidden');
     } else {
-      // Mute video audio
       video.muted = true;
       
       if (audio) {
@@ -463,12 +456,9 @@ async function triggerWhatsAppSourcing() {
       }
 
       btnText.innerText = "AUDIO FEED: OFF";
-      
-      // Reset Styling
       btn.classList.remove('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
       btn.classList.add('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
       
-      // Deactivate Live Dot & Visualizer
       statusDot.classList.remove('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
       statusDot.classList.add('bg-zinc-600');
       eqVisualizer.classList.add('hidden');
