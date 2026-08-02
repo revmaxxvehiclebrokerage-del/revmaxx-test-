@@ -7,16 +7,58 @@
     <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="favicon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #050506; }
+        :root{
+            --rx-black:#050506;
+            --rx-panel:#0b0b0d;
+            --rx-hairline:rgba(255,255,255,0.09);
+            --rx-red:#dc2626;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--rx-black); }
+        .font-display { font-family: 'Oswald', sans-serif; }
+        .font-mono { font-family: 'IBM Plex Mono', monospace; }
+
         .hero-gradient {
             background: linear-gradient(to bottom, rgba(5, 5, 6, 0.2) 0%, rgba(5, 5, 6, 0.9) 75%, #050506 100%);
         }
+        /* Reserved for a small number of genuinely elevated surfaces (founder cards, wizard shell) */
         .glass-panel {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(16px);
+        }
+        /* Default card surface: solid + hairline, not frosted glass everywhere */
+        .rx-panel {
+            background: var(--rx-panel);
+            border: 1px solid var(--rx-hairline);
+        }
+        .rx-hairline-top { border-top: 1px solid var(--rx-hairline); }
+
+        /* Ledger row: the signature spec-sheet / auction-catalog device used for
+           divisions, the wizard review step, and anywhere a value needs to read
+           like a confirmed line-item rather than a marketing bullet. */
+        .rx-ledger { display:flex; align-items:baseline; gap:0.75rem; }
+        .rx-ledger .rx-label { font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.04em; color:#71717a; white-space:nowrap; }
+        .rx-ledger .rx-fill { flex:1; border-bottom:1px dotted rgba(255,255,255,0.15); transform:translateY(-4px); }
+        .rx-ledger .rx-value { font-size:13px; color:#e4e4e7; font-weight:500; text-align:right; }
+
+        input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
+            outline: 2px solid var(--rx-red);
+            outline-offset: 2px;
+        }
+
+        section[id] { scroll-margin-top: 6.5rem; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 	<script type="application/ld+json">
@@ -30,7 +72,7 @@
     "REVMAXX"
   ],
   "url": "https://revmaxxgroup.online",
-  "logo": "https://revmaxxgroup.online/logo.png", 
+  "logo": "https://revmaxxgroup.online/logo.png",
   "image": "https://revmaxxgroup.online/logo.png",
   "description": "Boutique automotive brokerage specializing in direct procurement and elite logistics of luxury and performance vehicle imports to Sri Lanka.",
   "telephone": "+94722114115",
@@ -53,667 +95,723 @@
   ]
 }
 	</script>
-     </head>
+</head>
 <body class="text-zinc-100 antialiased selection:bg-red-600 selection:text-white">
 
-         <!-- NAVIGATION BAR -->
+    <!-- NAVIGATION BAR -->
     <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-zinc-900/40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between">
-            
-            <!-- LEFT SIDE: ALWAYS CLASSIC LEFT -->
+
             <a href="#" class="flex items-center">
                 <img src="revmaxx group main logo.png" alt="REVMAXX Logo" style="height: 78px; width: auto; object-fit: contain;">
             </a>
-            
 
-            <!-- RIGHT SIDE: CONDITIONAL MENU & BUTTON -->
             <div class="flex flex-col items-end justify-center gap-2">
-                <!-- The 5 Words Menu: Fully operational with all targets linked -->
-                <div class="hidden md:flex items-center gap-6 text-zinc-400 font-medium tracking-widest uppercase text-[11px]">
+                <div class="hidden md:flex items-center gap-6 text-zinc-400 font-mono font-medium tracking-widest uppercase text-[11px]">
                     <a href="#subdivisions" class="hover:text-white transition-colors">Divisions</a>
                     <a href="#sourcing" class="hover:text-white transition-colors">Sourcing Engine</a>
                     <a href="#corporate" class="hover:text-white transition-colors">Corporate HQ</a>
                     <a href="#location" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;" class="hover:text-white transition-colors">Find Us</a>
                     <a href="#socials-matrix" class="hover:text-white transition-colors">Socials</a>
                 </div>
-                
-                <!-- Direct Broker Desk Action Button -->
-                <a href="https://wa.me/94722114115" target="_blank" class="bg-red-600 hover:bg-red-700 text-white text-[10px] font-bold tracking-wider uppercase px-4 py-2 rounded flex items-center gap-1.5 transition-colors">
-                <!-- The white dot now has animate-pulse for a clean, slow blink -->
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Direct Broker Desk
+
+                <a href="https://wa.me/94722114115" target="_blank" class="bg-red-600 hover:bg-red-700 text-white text-[10px] font-mono font-bold tracking-wider uppercase px-4 py-2 rounded flex items-center gap-1.5 transition-colors">
+                    <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Direct Broker Desk
                 </a>
-             </div>
             </div>
-          </nav>
-    
+        </div>
+    </nav>
 
-                <!-- HERO SECTION -->
-        <!-- SPACING NOTE: Changed 'pt-28' to 'pt-20' to pull the entire template image up. Adjust this pt-[value] to move it up or down. -->
-        <section class="relative flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden bg-black">
+    <!-- HERO SECTION -->
+    <section class="relative flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden bg-black">
         <div class="relative z-10 w-full max-w-5xl px-6">
-        
-        <!-- CARBON GRAPHIC TEMPLATE -->
-        <img src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="w-full h-auto object-contain mx-auto mt-2">
-        
-        <!-- UPGRADED INTRODUCTORY GLASS CARD -->
-        <div class="mt-12 bg-gradient-to-b from-zinc-900/40 to-zinc-950/20 backdrop-blur-xl border border-zinc-700/50 rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
-            
-            <!-- Subheading Label: Liquid Red Gradient Effect -->
-           <h3 class="text-[11px] font-black tracking-[0.25em] bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 bg-clip-text text-transparent uppercase mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-           ABOUT REVMAXX
-            </h3>
-            
-            </h3>
-            
-            </h3>
-            
-            <!-- First Paragraph -->
-            <p class="text-zinc-300 text-sm md:text-base leading-relaxed mb-6 font-light">
-                Established in June 2025, <span class="text-white font-medium">REVMAXX</span> was founded to deliver premium automotive importing and brokerage services across Sri Lanka. We bridge the gap between elite global auctions and local car enthusiasts, ensuring a transparent process built on absolute trust.
-                 </p>
-            
-            <!-- Second Paragraph -->
-            <p class="text-zinc-400 text-sm md:text-base leading-relaxed font-light">
-                From sourcing high-performance vehicles to handling secure international shipping and local customs, we provide the expertise needed to import your next car with complete confidence.
-                 </p>
-            
-        </div>
-    
-<!-- ========================================== -->
-<!-- CORPORATE SUBDIVISIONS & AUCTION DESK      -->
-<!-- ========================================== -->
-<section id="subdivisions" class="pt-16 pb-24 border-t border-zinc-900 bg-gradient-to-b from-[#050506] via-zinc-950 to-black">
-  <div class="max-w-7xl mx-auto px-6">
-    
-    <!-- Section Header -->
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-xs font-bold tracking-[0.25em] text-red-600 uppercase">GROUP ARCHITECTURE</h2>
-      <p class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mt-2">Our Core Divisions</p>
-    </div>
 
-    <!-- The Two Cards Grid -->
-    <div class="grid lg:grid-cols-2 gap-8 mb-16">
-      
-      <!-- Card 1: Brokerage -->
-      <div class="glass-panel p-8 sm:p-10 rounded-2xl border border-zinc-800/80 bg-zinc-950/50 hover:border-red-600/40 transition-all duration-300 flex flex-col justify-between">
-        <div>
-          <div class="flex justify-center mb-8">
-            <img src="revmaxx brokerage.png" alt="REVMAXX Vehicle Brokerage" class="h-36 sm:h-48 w-auto max-w-full mx-auto object-contain hover:scale-105 transition-transform duration-300">
-          </div>
-          <p class="text-zinc-400 text-sm font-light leading-relaxed mb-6 text-center sm:text-left">
-            Operating as dedicated vehicle sourcing and brokerage managers, connecting clients with off-market inventory, rare factory allocation build slots, and premier global auction listings.
-          </p>
-          <ul class="space-y-3 text-sm font-medium text-zinc-300 mb-8">
-            <li class="flex items-center gap-3"><span class="text-red-500 font-bold">◆</span> Factory Build Slot Procurement & Allocation Hunting</li>
-            <li class="flex items-center gap-3"><span class="text-red-500 font-bold">◆</span> Direct Representation at Private Collector Sales</li>
-            <li class="flex items-center gap-3"><span class="text-red-500 font-bold">◆</span> Verified Physical Pre-Purchase Condition Reports</li>
-            <li class="flex items-center gap-3"><span class="text-red-500 font-bold">◆</span> Confidential Acquisition & Anonymized Bidding</li>
-          </ul>
-        </div>
-        <a href="https://wa.me/94722114115" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
-          Access Broker Desk <span class="text-base">→</span>
-        </a>
-      </div>
+            <img src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="w-full h-auto object-contain mx-auto mt-2">
 
-      <!-- Card 2: Logistics -->
-      <div class="glass-panel p-8 sm:p-10 rounded-2xl border border-zinc-800/80 bg-zinc-950/50 hover:border-red-600/40 transition-all duration-300 flex flex-col justify-between">
-        <div>
-          <div class="flex justify-center mb-8">
-            <img src="revmaxx imports and logistics.png" alt="REVMAXX Vehicle Imports and Logistics" class="h-36 sm:h-48 w-auto max-w-full mx-auto object-contain hover:scale-105 transition-transform duration-300">
-          </div>
-          <p class="text-zinc-400 text-sm font-light leading-relaxed mb-6 text-center sm:text-left">
-            We handle complete end-to-end international freight, utilizing secure climate-controlled container shipping, customs clearance, and insured door-to-door transit.
-          </p>
-          <ul class="space-y-3 text-sm font-medium text-zinc-300 mb-8">
-            <li class="flex items-center gap-3"><span class="text-red-500 font-bold">◆</span> Fully Insured Enclosed Container Transport</li>
-            <li class="flex items-center gap-3"><span class="text-red-500 font-bold">◆</span> Colombo Port Expedited Customs & Duty Clearance</li>
-            <li class="flex items-center gap-3"><span class="text-red-500 font-bold">◆</span> Intercontinental Air & Sea Freight Protocols</li>
-          </ul>
-        </div>
-        <a href="https://wa.me/94722114115" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
-          Review Logistics Pipelines <span class="text-base">→</span>
-        </a>
-      </div>
+            <div class="mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
 
-    </div>
+                <h3 class="font-mono text-[11px] font-semibold tracking-[0.3em] text-red-600 uppercase mb-4">
+                    About REVMAXX
+                </h3>
 
-    <!-- Global Auction Networks Ribbon -->
-    <div class="glass-panel p-6 sm:p-8 rounded-2xl border border-zinc-800/60 bg-zinc-950/60 text-center">
-      <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-red-500 block mb-6">Global Auction Networks</span>
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-4 gap-x-2 text-xs font-bold tracking-wider text-zinc-300 uppercase items-center">
-        <div class="hover:text-red-500 transition-colors py-1">RM Sotheby's</div>
-        <div class="hover:text-red-500 transition-colors py-1">Bonhams</div>
-        <div class="hover:text-red-500 transition-colors py-1">Gooding & Co.</div>
-        <div class="hover:text-red-500 transition-colors py-1">Christie's</div>
-        <div class="hover:text-red-500 transition-colors py-1">Dorotheum</div>
-        <div class="hover:text-red-500 transition-colors py-1">USS Tokyo Grade-S</div>
-      </div>
-    </div>
-
-  </div>
-</section>
-			
-
-<!-- ========================================== -->
-<!-- 2. SOURCING ENGINE FORM                    -->
-<!-- ========================================== -->
-<section id="sourcing" class="pt-16 sm:pt-24 pb-8 sm:pb-10 border-t border-zinc-900 bg-black">
-  <div class="max-w-4xl mx-auto px-6">
-    
-    <div class="text-center mb-14">
-      <span class="text-xs font-bold tracking-[0.2em] text-red-600 uppercase">SOURCING ENGINE</span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mt-2">Request Vehicle Sourcing</h2>
-      <p class="text-zinc-400 font-light max-w-xl mx-auto mt-3 text-sm">Enter your vehicle requirements below. Our brokerage desk will review global auction feeds and private inventory to match your spec.</p>
-    </div>
-
-    <form id="whatsappForm" class="glass-panel p-8 sm:p-10 rounded-2xl border border-zinc-800/80 space-y-6">
-      
-      <!-- Row 1: Vehicle & Year -->
-      <div class="grid sm:grid-cols-3 gap-6">
-        <div class="sm:col-span-2">
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Desired Make & Model</label>
-          <input type="text" id="makeModel" placeholder="e.g. Porsche 911 GT3 RS / Ferrari 296" required class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600">
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Year / Generation</label>
-          <input type="text" id="year" placeholder="e.g. 2025 / Unregistered" required class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600">
-        </div>
-      </div>
-
-      <!-- Row 2: Condition, Budget (With Currency Selector), Region -->
-      <div class="grid sm:grid-cols-3 gap-6">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Condition Target</label>
-          <select id="condition" class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors">
-            <option>Brand New / Delivery Miles</option>
-            <option>Pre-Owned / Grade 5-S</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Target Budget</label>
-          <div class="relative flex rounded-xl bg-zinc-900/90 border border-zinc-800 focus-within:border-red-600 transition-colors overflow-hidden">
-            <select id="currency" class="bg-zinc-800/90 text-red-500 font-bold text-xs uppercase px-3 py-3.5 outline-none border-r border-zinc-800 cursor-pointer hover:bg-zinc-800 transition-colors">
-              <option value="USD">$ USD</option>
-              <option value="LKR">Rs. LKR</option>
-              <option value="GBP">£ GBP</option>
-              <option value="EUR">€ EUR</option>
-            </select>
-            <input type="text" id="budget" placeholder="e.g. 250,000 or Open" class="w-full bg-transparent px-4 py-3.5 text-white text-sm focus:outline-none placeholder-zinc-600">
-          </div>
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Preferred Region</label>
-          <select id="region" class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors">
-            <option>United Kingdom (UK)</option>
-            <option>Europe</option>
-            <option>Japan</option>
-            <option>United States (USA)</option>
-            <option>South Korea</option>
-            <option>Sri Lanka</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Row 3: Client Name & Contact Number -->
-      <div class="grid sm:grid-cols-2 gap-6 pt-2">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Full Name / Corporate Entity</label>
-          <input type="text" id="clientName" name="clientName" required class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600">
-        </div>
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Contact Number / WhatsApp</label>
-          <input type="tel" id="contactNumber" name="contactNumber" required placeholder="+94 7X XXX XXXX" class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600">
-        </div>
-      </div>
-      
-      <!-- Row 4: Specs & Notes -->
-      <div class="mb-6">
-        <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">Specific Options, Exterior Colors & Special Requests</label>
-        <textarea id="specs" rows="4" placeholder="List desired trim options, PTS colors, carbon package preferences, or delivery timeline..." class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600 resize-none"></textarea>
-      </div>
-
-      <!-- Action Submit Button -->
-      <button type="button" onclick="triggerWhatsAppSourcing()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm tracking-wider uppercase py-4 rounded-xl transition-all duration-200 shadow-lg shadow-red-950/40">
-        Submit Sourcing Request
-      </button>
-
-    </form>
-  </div>
-</section>
-			
-
-<!-- ========================================== -->
-<!-- 3. WEB3FORMS EMAIL SUBMISSION SCRIPT       -->
-<!-- ========================================== -->
-<script>
-async function triggerWhatsAppSourcing() {
-  const submitBtn = document.querySelector("#whatsappForm button");
-
-  try {
-    // Extract Form Values
-    const makeModel = document.getElementById('makeModel').value.trim();
-    const year = document.getElementById('year').value.trim();
-    const condition = document.getElementById('condition').value;
-    const selectedCurrency = document.getElementById('currency').value;
-    const rawBudget = document.getElementById('budget').value.trim();
-    const budget = rawBudget ? `${selectedCurrency} ${rawBudget}` : 'Open / Unspecified';
-    const region = document.getElementById('region').value;
-    const clientName = document.getElementById('clientName').value.trim();
-    const contactNumber = document.getElementById('contactNumber').value.trim();
-    const specs = document.getElementById('specs').value.trim();
-
-    // Validation
-    if (!makeModel || !clientName || !contactNumber) {
-      alert("Please enter your Full Name, Desired Vehicle, and Contact Number.");
-      return;
-    }
-
-    const cleanDigitsOnly = contactNumber.replace(/\D/g, '');
-    if (cleanDigitsOnly.length < 9) {
-      alert("Please enter a valid phone or WhatsApp contact number.");
-      return;
-    }
-
-    // UI Loading State
-    const originalBtnText = submitBtn.innerText;
-    submitBtn.innerText = "TRANSMITTING TO DESK...";
-    submitBtn.disabled = true;
-
-    // Web3Forms Payload to enquiries@revmaxxgroup.info
-    const emailPayload = {
-      access_key: "8e827da2-78ca-4c84-a4db-75d3d6f1d611",
-      subject: `[REVMAXX SOURCING REQUEST] ${makeModel} - ${clientName}`,
-      from_name: "REVMAXX Web Broker Desk",
-      client_name: clientName,
-      contact_number: contactNumber,
-      vehicle_requested: makeModel,
-      year_generation: year || "Not specified",
-      condition_target: condition,
-      budget_target: budget,
-      preferred_region: region,
-      custom_specifications: specs || "Standard spec requested"
-    };
-
-    // Async API Post
-    const response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(emailPayload)
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      // Success State UI
-      submitBtn.innerText = "REQUEST SUBMITTED";
-      submitBtn.classList.remove("bg-red-600", "hover:bg-red-700");
-      submitBtn.classList.add("bg-emerald-600");
-
-      alert("Your sourcing request has been successfully transmitted to our executive desk. A broker will review your specs and contact you shortly.");
-      
-      // Reset Form & Restore Button State after 3 seconds
-      setTimeout(() => {
-        document.getElementById('whatsappForm').reset();
-        submitBtn.innerText = originalBtnText;
-        submitBtn.classList.remove("bg-emerald-600");
-        submitBtn.classList.add("bg-red-600", "hover:bg-red-700");
-        submitBtn.disabled = false;
-      }, 3000);
-
-    } else {
-      throw new Error(result.message || "Form submission failed");
-    }
-
-  } catch (error) {
-    console.error("Error submitting sourcing request:", error);
-    alert("An error occurred while transmitting your request. Please try again or email enquiries@revmaxxgroup.info directly.");
-    submitBtn.innerText = "SUBMIT SOURCING REQUEST";
-    submitBtn.disabled = false;
-  }
-}
-</script>
-
-<!-- ============================================== -->
-<!-- CINEMATIC SHOWCASE VIDEO SECTION               -->
-<!-- ============================================== -->
-<section class="w-full bg-black pt-2 sm:pt-3 pb-12 sm:pb-16">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6">
-    
-    <!-- Outer Wrapper -->
-    <div class="flex flex-col items-start gap-4">
-      
-      <!-- Video Container (Tight fit below sourcing form, no overlap) -->
-      <div class="w-full overflow-hidden rounded-lg sm:rounded-xl border border-zinc-800/80 shadow-2xl bg-black">
-        <video 
-          id="revmaxx-video" 
-          autoplay 
-          muted 
-          loop 
-          playsinline 
-          class="w-full h-auto block">
-          <source src="https://github.com/revmaxxvehiclebrokerage-del/revmaxx-test-/releases/download/v1.0.0/lv_0_20260723225929.mp4" type="video/mp4">
-        </video>
-      </div>
-
-      <!-- Tech-Forward Audio Toggle Button (Positioned cleanly outside below video) -->
-      <button 
-        id="exhaust-btn" 
-        onclick="toggleExhaustSound()" 
-        class="flex items-center gap-2.5 sm:gap-3 bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-zinc-400 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl font-mono text-[11px] sm:text-xs tracking-wider uppercase transition-all duration-300 hover:border-zinc-600 hover:text-white active:scale-95 cursor-pointer select-none whitespace-nowrap">
-        
-        <!-- Live Status Indicator Dot -->
-        <span id="status-dot" class="w-2 h-2 rounded-full bg-zinc-600 transition-all duration-300 flex-shrink-0"></span>
-
-        <!-- Audio Animated Equalizer Bars -->
-        <div id="eq-visualizer" class="hidden flex items-end gap-[2px] h-3 flex-shrink-0">
-          <span class="w-[2px] bg-red-500 h-full animate-[bounce_1s_infinite_100ms]"></span>
-          <span class="w-[2px] bg-red-500 h-2/3 animate-[bounce_1s_infinite_300ms]"></span>
-          <span class="w-[2px] bg-red-500 h-4/5 animate-[bounce_1s_infinite_200ms]"></span>
-        </div>
-
-        <!-- Dynamic Button Text -->
-        <span id="btn-text" class="font-semibold">AUDIO FEED: OFF</span>
-      </button>
-
-      <!-- Backup Audio Track -->
-      <audio id="exhaust-audio" src="exhaust.mp3" preload="auto"></audio>
-
-    </div>
-  </div>
-</section>
-
-<script>
-  function toggleExhaustSound() {
-    const video = document.getElementById('revmaxx-video');
-    const audio = document.getElementById('exhaust-audio');
-    const btnText = document.getElementById('btn-text');
-    const statusDot = document.getElementById('status-dot');
-    const eqVisualizer = document.getElementById('eq-visualizer');
-    const btn = document.getElementById('exhaust-btn');
-
-    if (video.muted) {
-      video.muted = false;
-      
-      if (audio) {
-        audio.play().catch(() => {});
-      }
-
-      btnText.innerText = "AUDIO FEED: ON";
-      btn.classList.remove('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
-      btn.classList.add('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
-      
-      statusDot.classList.remove('bg-zinc-600');
-      statusDot.classList.add('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
-      eqVisualizer.classList.remove('hidden');
-    } else {
-      video.muted = true;
-      
-      if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-
-      btnText.innerText = "AUDIO FEED: OFF";
-      btn.classList.remove('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
-      btn.classList.add('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
-      
-      statusDot.classList.remove('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
-      statusDot.classList.add('bg-zinc-600');
-      eqVisualizer.classList.add('hidden');
-    }
-  }
-</script>
-			
-	
-			<!-- PREMIUM CORPORATE GALLERY -->
-       <section id="corporate" class="pt-8 pb-20 bg-black">
-		 <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
-                <div>
-                    <span class="text-xs font-bold tracking-widest text-red-600 uppercase block mb-3">Physical Presence</span>
-                    <h2 class="text-3xl font-bold tracking-tight text-white">The Corporate Headquarters</h2>
-                </div>
-                <p class="text-zinc-400 font-light max-w-md">Our main headquarters is located on Floor 35 at the World Trade Center (WTC), providing a modern, professional space for our team to manage global logistics, vehicle sourcing, and private client consultations.
+                <p class="text-zinc-300 text-sm md:text-base leading-relaxed mb-6 font-light">
+                    Established in June 2025, <span class="text-white font-medium">REVMAXX</span> was founded to deliver premium automotive importing and brokerage services across Sri Lanka. We bridge the gap between elite global auctions and local car enthusiasts, ensuring a transparent process built on absolute trust.
                 </p>
-            </div>
 
-            <!-- 4-Image Grid -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
-                    <img src="Office reception.jpg" alt="REVMAXX Corporate Reception Desk" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                </div>
-                <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
-                    <img src="office 1.jpg" alt="Executive Meeting Rooms" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                </div>
-                <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
-                    <img src="office 2.jpg" alt="Executive Workspace Skyline View" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                </div>
-                <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
-                    <img src="office 3.jpg" alt="Private Desk Configurations" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                </div>
+                <p class="text-zinc-400 text-sm md:text-base leading-relaxed font-light">
+                    From sourcing high-performance vehicles to handling secure international shipping and local customs, we provide the expertise needed to import your next car with complete confidence.
+                </p>
+
             </div>
         </div>
     </section>
 
-    <!-- GEOGRAPHIC LOCATION ENGINE (GOOGLE MAPS) -->
-            <div id="location" class="pt-4">
-            <!-- ADJUSTABLE BORDER: Tweak border-left and min-height pixels below -->
-            <div style="border-left: 3px solid #dc2626; padding-left: 16px; min-height: 85px; display: flex; flex-direction: column; justify-content: center;">
-                <p class="text-xs font-bold tracking-wider text-zinc-500 uppercase mb-1">COLOMBO HEADQUARTERS</p>
-                <p class="text-sm font-medium text-white leading-relaxed">
-                    World Trade Center, West tower,<br>
-                    1 Bank of Ceylon Mawatha,<br>
-                    Colombo 00100
-                </p>
-            </div>
-            </div>
-    
-                    <!-- Pinpointed App Redirect Link -->
-                    <a href="https://maps.app.goo.gl/NSxruB9AHjGevqpp6" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-red-500 hover:text-red-400 uppercase transition-colors pt-2 group">
-                        Open Directly in Google Maps App
-                        <span class="transition-transform group-hover:translate-x-1">→</span>
-                    </a>
-                </div>
-                
-                <!-- Normal Colored Blue Map Embed Canvas -->
-                <div class="lg:col-span-2 w-full h-[450px] rounded-xl overflow-hidden border border-zinc-900 shadow-2xl relative bg-zinc-950">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=World%20Trade%20Center%20Colombo&t=&z=15&ie=UTF-8&iwloc=&output=embed" 
-                        class="w-full h-full border-0 relative z-10" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
+    <!-- ========================================== -->
+    <!-- CORPORATE SUBDIVISIONS & AUCTION DESK      -->
+    <!-- ========================================== -->
+    <section id="subdivisions" class="pt-16 pb-24 border-t border-zinc-900 bg-gradient-to-b from-[#050506] via-zinc-950 to-black">
+      <div class="max-w-7xl mx-auto px-6">
+
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Group Architecture</h2>
+          <p class="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Our Core Divisions</p>
         </div>
+
+        <div class="grid lg:grid-cols-2 gap-8 mb-16">
+
+          <!-- Card 1: Brokerage -->
+          <div class="rx-panel p-8 sm:p-10 rounded-2xl hover:border-red-600/40 transition-colors duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-center mb-8">
+                <img src="revmaxx brokerage.png" alt="REVMAXX Vehicle Brokerage" class="h-36 sm:h-48 w-auto max-w-full mx-auto object-contain hover:scale-105 transition-transform duration-300">
+              </div>
+              <p class="text-zinc-400 text-sm font-light leading-relaxed mb-6 text-center sm:text-left">
+                Operating as dedicated vehicle sourcing and brokerage managers, connecting clients with off-market inventory, rare factory allocation build slots, and premier global auction listings.
+              </p>
+              <ul class="space-y-3 mb-8">
+                <li class="rx-ledger"><span class="rx-label">01</span><span class="rx-fill"></span><span class="rx-value">Factory Build Slot Procurement &amp; Allocation Hunting</span></li>
+                <li class="rx-ledger"><span class="rx-label">02</span><span class="rx-fill"></span><span class="rx-value">Direct Representation at Private Collector Sales</span></li>
+                <li class="rx-ledger"><span class="rx-label">03</span><span class="rx-fill"></span><span class="rx-value">Verified Physical Pre-Purchase Condition Reports</span></li>
+                <li class="rx-ledger"><span class="rx-label">04</span><span class="rx-fill"></span><span class="rx-value">Confidential Acquisition &amp; Anonymized Bidding</span></li>
+              </ul>
+            </div>
+            <a href="https://wa.me/94722114115" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
+              Access Broker Desk <span class="text-base">→</span>
+            </a>
+          </div>
+
+          <!-- Card 2: Logistics -->
+          <div class="rx-panel p-8 sm:p-10 rounded-2xl hover:border-red-600/40 transition-colors duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-center mb-8">
+                <img src="revmaxx imports and logistics.png" alt="REVMAXX Vehicle Imports and Logistics" class="h-36 sm:h-48 w-auto max-w-full mx-auto object-contain hover:scale-105 transition-transform duration-300">
+              </div>
+              <p class="text-zinc-400 text-sm font-light leading-relaxed mb-6 text-center sm:text-left">
+                We handle complete end-to-end international freight, utilizing secure climate-controlled container shipping, customs clearance, and insured door-to-door transit.
+              </p>
+              <ul class="space-y-3 mb-8">
+                <li class="rx-ledger"><span class="rx-label">01</span><span class="rx-fill"></span><span class="rx-value">Fully Insured Enclosed Container Transport</span></li>
+                <li class="rx-ledger"><span class="rx-label">02</span><span class="rx-fill"></span><span class="rx-value">Colombo Port Expedited Customs &amp; Duty Clearance</span></li>
+                <li class="rx-ledger"><span class="rx-label">03</span><span class="rx-fill"></span><span class="rx-value">Intercontinental Air &amp; Sea Freight Protocols</span></li>
+              </ul>
+            </div>
+            <a href="https://wa.me/94722114115" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
+              Review Logistics Pipelines <span class="text-base">→</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Global Auction Networks Ribbon -->
+        <div class="rx-panel p-6 sm:p-8 rounded-2xl text-center">
+          <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-red-500 block mb-6">Global Auction Networks</span>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-4 gap-x-2 font-mono text-xs font-medium tracking-wider text-zinc-300 uppercase items-center">
+            <div class="hover:text-red-500 transition-colors py-1">RM Sotheby's</div>
+            <div class="hover:text-red-500 transition-colors py-1">Bonhams</div>
+            <div class="hover:text-red-500 transition-colors py-1">Gooding &amp; Co.</div>
+            <div class="hover:text-red-500 transition-colors py-1">Christie's</div>
+            <div class="hover:text-red-500 transition-colors py-1">Dorotheum</div>
+            <div class="hover:text-red-500 transition-colors py-1">USS Tokyo Grade-S</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SOURCING ENGINE — MULTI-STEP WIZARD        -->
+    <!-- ========================================== -->
+    <section id="sourcing" class="pt-16 sm:pt-24 pb-16 sm:pb-20 border-t border-zinc-900 bg-black">
+      <div class="max-w-3xl mx-auto px-6">
+
+        <div class="text-center mb-12">
+          <span class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Sourcing Engine</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Request Vehicle Sourcing</h2>
+          <p class="text-zinc-400 font-light max-w-xl mx-auto mt-3 text-sm">A four-step private intake. Our brokerage desk reviews global auction feeds and off-market inventory against your exact spec.</p>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-6 sm:p-10">
+
+          <!-- Progress Rail -->
+          <div class="flex items-center justify-between mb-10" aria-hidden="false">
+            <div class="rx-step-item flex-1 flex items-center gap-3" data-step-indicator="1">
+              <span class="rx-dot font-mono text-[11px] font-semibold w-7 h-7 rounded-full flex items-center justify-center border transition-colors">01</span>
+              <span class="rx-step-label font-mono text-[10px] tracking-widest uppercase text-zinc-500 hidden sm:inline">Vehicle</span>
+              <span class="flex-1 h-px bg-zinc-800"></span>
+            </div>
+            <div class="rx-step-item flex-1 flex items-center gap-3" data-step-indicator="2">
+              <span class="rx-dot font-mono text-[11px] font-semibold w-7 h-7 rounded-full flex items-center justify-center border transition-colors">02</span>
+              <span class="rx-step-label font-mono text-[10px] tracking-widest uppercase text-zinc-500 hidden sm:inline">Budget</span>
+              <span class="flex-1 h-px bg-zinc-800"></span>
+            </div>
+            <div class="rx-step-item flex-1 flex items-center gap-3" data-step-indicator="3">
+              <span class="rx-dot font-mono text-[11px] font-semibold w-7 h-7 rounded-full flex items-center justify-center border transition-colors">03</span>
+              <span class="rx-step-label font-mono text-[10px] tracking-widest uppercase text-zinc-500 hidden sm:inline">Spec</span>
+              <span class="flex-1 h-px bg-zinc-800"></span>
+            </div>
+            <div class="rx-step-item flex items-center gap-3" data-step-indicator="4">
+              <span class="rx-dot font-mono text-[11px] font-semibold w-7 h-7 rounded-full flex items-center justify-center border transition-colors">04</span>
+              <span class="rx-step-label font-mono text-[10px] tracking-widest uppercase text-zinc-500 hidden sm:inline">Contact</span>
+            </div>
+          </div>
+
+          <form id="whatsappForm" novalidate>
+
+            <!-- STEP 1: VEHICLE -->
+            <div class="rx-step space-y-6" data-step="1">
+              <div>
+                <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Desired Make &amp; Model</label>
+                <input type="text" id="makeModel" placeholder="e.g. Porsche 911 GT3 RS / Ferrari 296" required class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600">
+              </div>
+              <div>
+                <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Year / Generation</label>
+                <input type="text" id="year" placeholder="e.g. 2025 / Unregistered" required class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600">
+              </div>
+              <div>
+                <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Condition Target</label>
+                <select id="condition" class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors">
+                  <option>Brand New / Delivery Miles</option>
+                  <option>Pre-Owned / Grade 5-S</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- STEP 2: BUDGET & REGION -->
+            <div class="rx-step space-y-6 hidden" data-step="2">
+              <div>
+                <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Target Budget</label>
+                <div class="relative flex rounded-xl bg-zinc-900/90 border border-zinc-800 focus-within:border-red-600 transition-colors overflow-hidden">
+                  <select id="currency" class="bg-zinc-800/90 text-red-500 font-mono font-semibold text-xs uppercase px-3 py-3.5 outline-none border-r border-zinc-800 cursor-pointer hover:bg-zinc-800 transition-colors">
+                    <option value="USD">$ USD</option>
+                    <option value="LKR">Rs. LKR</option>
+                    <option value="GBP">£ GBP</option>
+                    <option value="EUR">€ EUR</option>
+                  </select>
+                  <input type="text" id="budget" placeholder="e.g. 250,000 or Open" class="w-full bg-transparent px-4 py-3.5 text-white text-sm focus:outline-none placeholder-zinc-600">
+                </div>
+              </div>
+              <div>
+                <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Preferred Sourcing Region</label>
+                <select id="region" class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors">
+                  <option>United Kingdom (UK)</option>
+                  <option>Europe</option>
+                  <option>Japan</option>
+                  <option>United States (USA)</option>
+                  <option>South Korea</option>
+                  <option>Sri Lanka</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- STEP 3: SPECIFICATION -->
+            <div class="rx-step space-y-6 hidden" data-step="3">
+              <div>
+                <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Specific Options, Exterior Colors &amp; Special Requests</label>
+                <textarea id="specs" rows="6" placeholder="List desired trim options, PTS colors, carbon package preferences, or delivery timeline..." class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600 resize-none"></textarea>
+                <p class="text-zinc-600 text-xs mt-2 font-light">Optional — leave blank for a standard spec request.</p>
+              </div>
+            </div>
+
+            <!-- STEP 4: CONTACT & REVIEW -->
+            <div class="rx-step space-y-6 hidden" data-step="4">
+              <div class="grid sm:grid-cols-2 gap-6">
+                <div>
+                  <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Full Name / Corporate Entity</label>
+                  <input type="text" id="clientName" name="clientName" required class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600">
+                </div>
+                <div>
+                  <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Contact Number / WhatsApp</label>
+                  <input type="tel" id="contactNumber" name="contactNumber" required placeholder="+94 7X XXX XXXX" class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors placeholder-zinc-600">
+                </div>
+              </div>
+
+              <!-- Review Ledger (signature element, reused from divisions) -->
+              <div class="rx-panel rounded-xl p-5 sm:p-6 mt-2">
+                <p class="font-mono text-[10px] tracking-[0.25em] uppercase text-zinc-500 mb-4">Request Summary</p>
+                <div class="space-y-2.5" id="reviewLedger">
+                  <div class="rx-ledger"><span class="rx-label">Vehicle</span><span class="rx-fill"></span><span class="rx-value" data-review="makeModel">—</span></div>
+                  <div class="rx-ledger"><span class="rx-label">Year</span><span class="rx-fill"></span><span class="rx-value" data-review="year">—</span></div>
+                  <div class="rx-ledger"><span class="rx-label">Condition</span><span class="rx-fill"></span><span class="rx-value" data-review="condition">—</span></div>
+                  <div class="rx-ledger"><span class="rx-label">Budget</span><span class="rx-fill"></span><span class="rx-value" data-review="budget">—</span></div>
+                  <div class="rx-ledger"><span class="rx-label">Region</span><span class="rx-fill"></span><span class="rx-value" data-review="region">—</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nav Buttons -->
+            <div class="flex items-center gap-4 mt-10">
+              <button type="button" id="rxBackBtn" onclick="rxWizardBack()" class="hidden font-mono text-xs font-semibold tracking-wider uppercase text-zinc-400 hover:text-white px-5 py-3.5 transition-colors">
+                ← Back
+              </button>
+              <button type="button" id="rxNextBtn" onclick="rxWizardNext()" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-mono font-semibold text-sm tracking-wider uppercase py-4 rounded-xl transition-all duration-200 shadow-lg shadow-red-950/40">
+                Continue
+              </button>
+              <button type="button" id="rxSubmitBtn" onclick="triggerWhatsAppSourcing()" class="hidden flex-1 bg-red-600 hover:bg-red-700 text-white font-mono font-semibold text-sm tracking-wider uppercase py-4 rounded-xl transition-all duration-200 shadow-lg shadow-red-950/40">
+                Submit Sourcing Request
+              </button>
+            </div>
+
+            <p class="text-center text-zinc-600 text-xs font-light mt-5">
+              Prefer to talk it through? <a href="https://wa.me/94722114115" target="_blank" class="text-red-500 hover:text-red-400 underline underline-offset-2">Message the broker desk on WhatsApp</a> instead.
+            </p>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SOURCING WIZARD SCRIPT                      -->
+    <!-- ========================================== -->
+    <script>
+    (function () {
+      const steps = Array.from(document.querySelectorAll('.rx-step'));
+      const indicators = Array.from(document.querySelectorAll('.rx-step-item'));
+      const backBtn = document.getElementById('rxBackBtn');
+      const nextBtn = document.getElementById('rxNextBtn');
+      const submitBtn = document.getElementById('rxSubmitBtn');
+      let current = 1;
+      const totalSteps = steps.length;
+
+      const requiredByStep = {
+        1: ['makeModel', 'year'],
+        4: ['clientName', 'contactNumber']
+      };
+
+      function paintIndicators() {
+        indicators.forEach((item) => {
+          const stepNum = parseInt(item.dataset.stepIndicator, 10);
+          const dot = item.querySelector('.rx-dot');
+          const label = item.querySelector('.rx-step-label');
+          if (stepNum < current) {
+            dot.className = 'rx-dot font-mono text-[11px] font-semibold w-7 h-7 rounded-full flex items-center justify-center border transition-colors bg-red-600 border-red-600 text-white';
+            label.classList.add('text-zinc-300');
+            label.classList.remove('text-zinc-500');
+          } else if (stepNum === current) {
+            dot.className = 'rx-dot font-mono text-[11px] font-semibold w-7 h-7 rounded-full flex items-center justify-center border transition-colors border-red-600 text-red-500';
+            label.classList.add('text-zinc-300');
+            label.classList.remove('text-zinc-500');
+          } else {
+            dot.className = 'rx-dot font-mono text-[11px] font-semibold w-7 h-7 rounded-full flex items-center justify-center border transition-colors border-zinc-700 text-zinc-600';
+            label.classList.add('text-zinc-500');
+            label.classList.remove('text-zinc-300');
+          }
+        });
+      }
+
+      function showStep(n) {
+        steps.forEach((el) => {
+          el.classList.toggle('hidden', parseInt(el.dataset.step, 10) !== n);
+        });
+        backBtn.classList.toggle('hidden', n === 1);
+        nextBtn.classList.toggle('hidden', n === totalSteps);
+        submitBtn.classList.toggle('hidden', n !== totalSteps);
+        if (n === totalSteps) fillReviewLedger();
+        paintIndicators();
+      }
+
+      function validateStep(n) {
+        const ids = requiredByStep[n] || [];
+        for (const id of ids) {
+          const el = document.getElementById(id);
+          if (!el.value.trim()) {
+            el.focus();
+            el.classList.add('border-red-600');
+            return false;
+          }
+          el.classList.remove('border-red-600');
+        }
+        if (n === 4) {
+          const digits = document.getElementById('contactNumber').value.replace(/\D/g, '');
+          if (digits.length < 9) {
+            document.getElementById('contactNumber').focus();
+            alert('Please enter a valid phone or WhatsApp contact number.');
+            return false;
+          }
+        }
+        return true;
+      }
+
+      function fillReviewLedger() {
+        const currency = document.getElementById('currency').value;
+        const rawBudget = document.getElementById('budget').value.trim();
+        const budget = rawBudget ? `${currency} ${rawBudget}` : 'Open / Unspecified';
+        const map = {
+          makeModel: document.getElementById('makeModel').value.trim() || '—',
+          year: document.getElementById('year').value.trim() || '—',
+          condition: document.getElementById('condition').value,
+          budget: budget,
+          region: document.getElementById('region').value
+        };
+        Object.keys(map).forEach((key) => {
+          const target = document.querySelector(`[data-review="${key}"]`);
+          if (target) target.textContent = map[key];
+        });
+      }
+
+      window.rxWizardNext = function () {
+        if (!validateStep(current)) return;
+        if (current < totalSteps) {
+          current += 1;
+          showStep(current);
+        }
+      };
+
+      window.rxWizardBack = function () {
+        if (current > 1) {
+          current -= 1;
+          showStep(current);
+        }
+      };
+
+      showStep(current);
+    })();
+    </script>
+
+    <!-- ========================================== -->
+    <!-- WEB3FORMS EMAIL SUBMISSION SCRIPT           -->
+    <!-- ========================================== -->
+    <script>
+    async function triggerWhatsAppSourcing() {
+      const submitBtn = document.getElementById('rxSubmitBtn');
+
+      try {
+        const makeModel = document.getElementById('makeModel').value.trim();
+        const year = document.getElementById('year').value.trim();
+        const condition = document.getElementById('condition').value;
+        const selectedCurrency = document.getElementById('currency').value;
+        const rawBudget = document.getElementById('budget').value.trim();
+        const budget = rawBudget ? `${selectedCurrency} ${rawBudget}` : 'Open / Unspecified';
+        const region = document.getElementById('region').value;
+        const clientName = document.getElementById('clientName').value.trim();
+        const contactNumber = document.getElementById('contactNumber').value.trim();
+        const specs = document.getElementById('specs').value.trim();
+
+        if (!makeModel || !clientName || !contactNumber) {
+          alert('Please enter your Full Name, Desired Vehicle, and Contact Number.');
+          return;
+        }
+
+        const cleanDigitsOnly = contactNumber.replace(/\D/g, '');
+        if (cleanDigitsOnly.length < 9) {
+          alert('Please enter a valid phone or WhatsApp contact number.');
+          return;
+        }
+
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.innerText = 'TRANSMITTING TO DESK...';
+        submitBtn.disabled = true;
+
+        const emailPayload = {
+          access_key: '8e827da2-78ca-4c84-a4db-75d3d6f1d611',
+          subject: `[REVMAXX SOURCING REQUEST] ${makeModel} - ${clientName}`,
+          from_name: 'REVMAXX Web Broker Desk',
+          client_name: clientName,
+          contact_number: contactNumber,
+          vehicle_requested: makeModel,
+          year_generation: year || 'Not specified',
+          condition_target: condition,
+          budget_target: budget,
+          preferred_region: region,
+          custom_specifications: specs || 'Standard spec requested'
+        };
+
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(emailPayload)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          submitBtn.innerText = 'REQUEST SUBMITTED';
+          submitBtn.classList.remove('bg-red-600', 'hover:bg-red-700');
+          submitBtn.classList.add('bg-emerald-600');
+
+          alert('Your sourcing request has been successfully transmitted to our executive desk. A broker will review your specs and contact you shortly.');
+
+          setTimeout(() => {
+            document.getElementById('whatsappForm').reset();
+            submitBtn.innerText = originalBtnText;
+            submitBtn.classList.remove('bg-emerald-600');
+            submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
+            submitBtn.disabled = false;
+            window.rxWizardBack && (window.location.hash = '#sourcing');
+          }, 3000);
+        } else {
+          throw new Error(result.message || 'Form submission failed');
+        }
+      } catch (error) {
+        console.error('Error submitting sourcing request:', error);
+        alert('An error occurred while transmitting your request. Please try again or email enquiries@revmaxxgroup.info directly.');
+        submitBtn.innerText = 'SUBMIT SOURCING REQUEST';
+        submitBtn.disabled = false;
+      }
+    }
+    </script>
+
+    <!-- ============================================== -->
+    <!-- CINEMATIC SHOWCASE VIDEO SECTION               -->
+    <!-- ============================================== -->
+    <section class="w-full bg-black pt-2 sm:pt-3 pb-12 sm:pb-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col items-start gap-4">
+
+          <div class="w-full overflow-hidden rounded-lg sm:rounded-xl border border-zinc-800/80 shadow-2xl bg-black">
+            <video
+              id="revmaxx-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              class="w-full h-auto block">
+              <source src="https://github.com/revmaxxvehiclebrokerage-del/revmaxx-test-/releases/download/v1.0.0/lv_0_20260723225929.mp4" type="video/mp4">
+            </video>
+          </div>
+
+          <button
+            id="exhaust-btn"
+            onclick="toggleExhaustSound()"
+            class="flex items-center gap-2.5 sm:gap-3 bg-zinc-950/80 backdrop-blur-md border border-zinc-800 text-zinc-400 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl font-mono text-[11px] sm:text-xs tracking-wider uppercase transition-all duration-300 hover:border-zinc-600 hover:text-white active:scale-95 cursor-pointer select-none whitespace-nowrap">
+
+            <span id="status-dot" class="w-2 h-2 rounded-full bg-zinc-600 transition-all duration-300 flex-shrink-0"></span>
+
+            <div id="eq-visualizer" class="hidden flex items-end gap-[2px] h-3 flex-shrink-0">
+              <span class="w-[2px] bg-red-500 h-full animate-[bounce_1s_infinite_100ms]"></span>
+              <span class="w-[2px] bg-red-500 h-2/3 animate-[bounce_1s_infinite_300ms]"></span>
+              <span class="w-[2px] bg-red-500 h-4/5 animate-[bounce_1s_infinite_200ms]"></span>
+            </div>
+
+            <span id="btn-text" class="font-semibold">AUDIO FEED: OFF</span>
+          </button>
+
+          <audio id="exhaust-audio" src="exhaust.mp3" preload="auto"></audio>
+
+        </div>
+      </div>
+    </section>
+
+    <script>
+      function toggleExhaustSound() {
+        const video = document.getElementById('revmaxx-video');
+        const audio = document.getElementById('exhaust-audio');
+        const btnText = document.getElementById('btn-text');
+        const statusDot = document.getElementById('status-dot');
+        const eqVisualizer = document.getElementById('eq-visualizer');
+        const btn = document.getElementById('exhaust-btn');
+
+        if (video.muted) {
+          video.muted = false;
+
+          if (audio) {
+            audio.play().catch(() => {});
+          }
+
+          btnText.innerText = 'AUDIO FEED: ON';
+          btn.classList.remove('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
+          btn.classList.add('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
+
+          statusDot.classList.remove('bg-zinc-600');
+          statusDot.classList.add('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
+          eqVisualizer.classList.remove('hidden');
+        } else {
+          video.muted = true;
+
+          if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+          }
+
+          btnText.innerText = 'AUDIO FEED: OFF';
+          btn.classList.remove('border-red-600/80', 'text-white', 'bg-zinc-950/90', 'shadow-[0_0_20px_rgba(220,38,38,0.35)]');
+          btn.classList.add('border-zinc-800', 'text-zinc-400', 'bg-zinc-950/80');
+
+          statusDot.classList.remove('bg-red-500', 'animate-pulse', 'shadow-[0_0_8px_rgba(239,68,68,0.8)]');
+          statusDot.classList.add('bg-zinc-600');
+          eqVisualizer.classList.add('hidden');
+        }
+      }
+    </script>
+
+    <!-- PREMIUM CORPORATE GALLERY -->
+    <section id="corporate" class="pt-8 pb-20 bg-black">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+          <div>
+            <span class="font-mono text-xs font-semibold tracking-widest text-red-600 uppercase block mb-3">Physical Presence</span>
+            <h2 class="font-display text-3xl font-semibold tracking-tight text-white">The Corporate Headquarters</h2>
+          </div>
+          <p class="text-zinc-400 font-light max-w-md">Our main headquarters is located on Floor 35 at the World Trade Center (WTC), providing a modern, professional space for our team to manage global logistics, vehicle sourcing, and private client consultations.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
+            <img src="Office reception.jpg" alt="REVMAXX Corporate Reception Desk" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          </div>
+          <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
+            <img src="office 1.jpg" alt="Executive Meeting Rooms" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          </div>
+          <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
+            <img src="office 2.jpg" alt="Executive Workspace Skyline View" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          </div>
+          <div class="group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
+            <img src="office 3.jpg" alt="Private Desk Configurations" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GEOGRAPHIC LOCATION ENGINE (GOOGLE MAPS) -->
+    <section id="location" class="pt-4 pb-24 bg-black">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-3 gap-8 items-start">
+
+          <div class="lg:col-span-1">
+            <div style="border-left: 3px solid #dc2626; padding-left: 16px; min-height: 85px; display: flex; flex-direction: column; justify-content: center;">
+              <p class="font-mono text-xs font-semibold tracking-wider text-zinc-500 uppercase mb-1">Colombo Headquarters</p>
+              <p class="text-sm font-medium text-white leading-relaxed">
+                World Trade Center, West tower,<br>
+                1 Bank of Ceylon Mawatha,<br>
+                Colombo 00100
+              </p>
+            </div>
+
+            <a href="https://maps.app.goo.gl/NSxruB9AHjGevqpp6" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-widest text-red-500 hover:text-red-400 uppercase transition-colors pt-4 group">
+              Open Directly in Google Maps App
+              <span class="transition-transform group-hover:translate-x-1">→</span>
+            </a>
+          </div>
+
+          <div class="lg:col-span-2 w-full h-[450px] rounded-xl overflow-hidden border border-zinc-900 shadow-2xl relative bg-zinc-950">
+            <iframe
+              src="https://maps.google.com/maps?q=World%20Trade%20Center%20Colombo&t=&z=15&ie=UTF-8&iwloc=&output=embed"
+              class="w-full h-full border-0 relative z-10"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+
+        </div>
+      </div>
     </section>
 
     <!-- INTERCONTINENTAL SHIPPING PARTNERS -->
     <section class="py-24 border-t border-zinc-900 bg-black/40">
-        <div class="max-w-7xl mx-auto px-6">
-            <p class="text-center text-xs font-bold tracking-widest text-zinc-400 uppercase mb-16">Global Shipping Partners</p>
-            <div class="flex flex-wrap items-center justify-center gap-16 md:gap-28">
-                <img src="partner 1.png" alt="Logistics Partner 1" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
-                <img src="partner 2.png" alt="Logistics Partner 2" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
-                <img src="Partner 3.png" alt="Logistics Partner 3" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
-            </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="text-center font-mono text-xs font-semibold tracking-widest text-zinc-400 uppercase mb-16">Global Shipping Partners</p>
+        <div class="flex flex-wrap items-center justify-center gap-16 md:gap-28">
+          <img src="partner 1.png" alt="Logistics Partner 1" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
+          <img src="partner 2.png" alt="Logistics Partner 2" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
+          <img src="Partner 3.png" alt="Logistics Partner 3" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
+        </div>
+      </div>
     </section>
 
-    <!-- FOOTER / CONTACT & GLASS LEADERSHIP BOARD -->
+    <!-- FOOTER / CONTACT & LEADERSHIP BOARD -->
     <footer id="contact" class="bg-black text-zinc-500 text-xs py-16 border-t border-zinc-950">
-        <div class="max-w-7xl mx-auto px-6 space-y-16">
-            
-            <!-- FOUNDERS GLASS BOX GRID -->
-            <div class="space-y-6">
-                <p class="text-[10px] font-bold tracking-widest text-zinc-400 uppercase text-center">Founding Board of Directors</p>
-                <div class="grid md:grid-cols-3 gap-4">
-                    <div class="glass-panel p-6 rounded-lg text-center">
-                        <h4 class="text-white font-semibold text-sm tracking-wide">Senul Thiranagama</h4>
-                        <p class="text-red-500 font-medium text-[10px] uppercase tracking-wider mt-1">CEO &amp; Co-Founder</p>
-                    </div>
-                                        <div class="glass-panel p-6 rounded-lg text-center">
-                        <h4 class="text-white font-semibold text-sm tracking-wide">Sadun Jayasooriya</h4>
-                        <p class="text-red-500 font-medium text-[10px] uppercase tracking-wider mt-1">Director &amp; Co-Founder</p>
-                    </div>
-                    <div class="glass-panel p-6 rounded-lg text-center">
-                        <h4 class="text-white font-semibold text-sm tracking-wide">Shehan Mendis</h4>
-                        <p class="text-red-500 font-medium text-[10px] uppercase tracking-wider mt-1">Director &amp; Co-Founder</p>
-                    </div>
-                </div>
-            </div>
+      <div class="max-w-7xl mx-auto px-6 space-y-16">
 
-            <div class="grid md:grid-cols-2 gap-12 items-center pt-8 border-t border-zinc-900/60">
-                <div>
-                    <img src="revmaxx group main logo.png" alt="REVMAXX Logo Footer" class="h-14 w-auto object-contain mb-6 opacity-80">
-                    <p class="max-w-sm font-light leading-relaxed mb-4">
-                        A premier automotive brokerage specializing in global vehicle sourcing and international logistics, delivering seamless end-to-end import solutions.
-                    </p>
-                    <p class="text-zinc-600">© 2026 REVMAXX GROUP PVT LTD. All Rights Reserved.</p>
-                </div>
-                    <div class="md:text-right space-y-4">
-        <div>
-            <p class="text-zinc-400 font-medium uppercase tracking-wider text-[10px]">NAVIGATION</p>
-            <p class="text-white font-medium text-sm mt-1 leading-relaxed">
+        <!-- FOUNDERS GRID -->
+        <div class="space-y-6">
+          <p class="font-mono text-[10px] font-semibold tracking-widest text-zinc-400 uppercase text-center">Founding Board of Directors</p>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="glass-panel p-6 rounded-lg text-center">
+              <h4 class="text-white font-semibold text-sm tracking-wide">Senul Thiranagama</h4>
+              <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">CEO &amp; Co-Founder</p>
+            </div>
+            <div class="glass-panel p-6 rounded-lg text-center">
+              <h4 class="text-white font-semibold text-sm tracking-wide">Sadun Jayasooriya</h4>
+              <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">Director &amp; Co-Founder</p>
+            </div>
+            <div class="glass-panel p-6 rounded-lg text-center">
+              <h4 class="text-white font-semibold text-sm tracking-wide">Shehan Mendis</h4>
+              <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">Director &amp; Co-Founder</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-start pt-8 border-t border-zinc-900/60">
+          <div>
+            <img src="revmaxx group main logo.png" alt="REVMAXX Logo Footer" class="h-14 w-auto object-contain mb-6 opacity-80">
+            <p class="max-w-sm font-light leading-relaxed mb-4">
+              A premier automotive brokerage specializing in global vehicle sourcing and international logistics, delivering seamless end-to-end import solutions.
+            </p>
+            <p class="text-zinc-600">© 2026 REVMAXX GROUP PVT LTD. All Rights Reserved.</p>
+          </div>
+
+          <div class="md:text-right space-y-4">
+            <div>
+              <p class="text-zinc-400 font-mono font-medium uppercase tracking-wider text-[10px]">Navigation</p>
+              <p class="text-white font-medium text-sm mt-1 leading-relaxed">
                 World Trade Center, West tower,<br>
                 1 Bank of Ceylon Mawatha, Colombo 00100
-            </p>
-            <!-- Premium Corporate Contact Number Alignment -->
-            <p class="text-white font-medium text-sm mt-2 tracking-wide">
-                <span class="text-zinc-400 text-[11px] font-normal uppercase tracking-wider">Contact Number:</span> +94722114115
-            </p>
-        </div>
-                        
-                                                                    <!-- Secure Inbound Mailboxes & Social Matrix -->
-            <div id="socials-matrix" class="revmaxx-contact-channels flex flex-col gap-3 items-start md:items-end text-left md:text-right mt-6 scroll-behavior-smooth">
-                
-                <!-- Section Header -->
-                <span style="font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: #a1a1aa; font-weight: 500;">EMAIL ENQUIRIES</span>
-                
-                <!-- Corporate Email Grid -->
-                <div class="flex flex-col gap-1.5 items-start md:items-end">
-                    <a href="mailto:enquiries@revmaxxgroup.info" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s;">
-                        <span style="color: #a1a1aa; font-size: 11px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.5px;">Corporate:</span> enquiries@revmaxxgroup.info
-                    </a>
-                    <a href="mailto:senul.thiranagama@revmaxxgroup.info" style="color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s;">
-                        <span style="color: #a1a1aa; font-size: 11px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.5px;">Executive Desk:</span> senul.thiranagama@revmaxxgroup.info
-                    </a>
-                </div>
-
-                <!-- Social Sockets Matrix (Signature Brand Styling) -->
-                <div class="flex gap-2 justify-start md:justify-end items-center mt-1">
-                    <!-- Instagram Link (Premium Brand Gradient) -->
-                    <a href="https://www.instagram.com/revmaxx_group?igsh=ZzhqaHJrNmJtcHdj" target="_blank" aria-label="Instagram Matrix" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-radius: 4px; color: #ffffff; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.174.01 2.446.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.446-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0zm0 1.441c2.117 0 2.37.008 3.205.046.77.035 1.188.164 1.466.273.369.144.633.314.91.59.277.277.446.543.59.91.109.278.238.696.273 1.466.038.836.046 1.09.046 3.205s-.008 2.37-.046 3.205c-.035.77-.164 1.188-.273 1.466a2.473 2.473 0 0 1-.59.91c-.276.277-.543.446-.91.59-.278.109-.696.238-1.466.273-.836.038-1.09.046-3.205.046s-2.37-.008-3.205-.046c-.77-.035-1.188-.164-1.466-.273a2.48 2.48 0 0 1-.91-.59 2.477 2.477 0 0 1-.59-.91c-.109-.278-.238-.696-.273-1.466-.038-.836-.046-1.09-.046-3.205s.008-2.37.046-3.205c.035-.77.164-1.188.273-1.466.144-.369.314-.633.59-.91.277-.277.543-.446.91-.59.278-.109.696-.238 1.466-.273.836-.038 1.09-.046 3.205-.046zm0 2.443a4.116 4.116 0 1 0 0 8.232 4.116 4.116 0 0 0 0-8.232zm0 6.79a2.674 2.674 0 1 1 0-5.348 2.674 2.674 0 0 1 0 5.348zm4.118-6.79a.966.966 0 1 1-1.933 0 .966.966 0 0 1 1.933 0z"/></svg>
-                    </a>
-
-                    <!-- Facebook Link (Official Corporate Blue) -->
-                    <a href="https://www.facebook.com/profile.php?id=61590320872247&mibextid=ZbWKwL" target="_blank" aria-label="Facebook Space" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #1877F2; border-radius: 4px; color: #ffffff; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>
-                    </a>
-					         
-					<!-- X Link (Official Minimalist Corporate Style) -->
-            <a href="https://x.com/REVMAXXGROUP" target="_blank" aria-label="X Matrix" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #000000; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; transition: transform 0.2s ease;">
-            <svg width="16" height="16" fill="#ffffff" viewBox="0 0 24 24">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-		</a>
-				   
-					<!-- LinkedIn Link (Official Brand Style) -->
-        <a href="https://www.linkedin.com/company/revmaxx-group-pvt-ltd" target="_blank" aria-label="LinkedIn Matrix" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #0077b5; border-radius: 8px; transition: transform 0.2s ease;">
-            <svg width="16" height="16" fill="#ffffff" viewBox="0 0 24 24">
-                <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43c-1.14 0-2.06-.92-2.06-2.06 0-1.14.92-2.06 2.06-2.06 2.06 0 2.06.92 2.06 2.06 0 1.14-.92 2.06-2.06 2.06zm15.11 13.02h-3.56v-5.6c0-1.34-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.7H9.33V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29z"/>
-            </svg>
-		</a>
-		            
-					<!-- Crunchbase Link (Official Vibrant Blue - Modern CB Logo) -->
-			<a href="https://www.crunchbase.com/organization/revmaxx-group-pvt-ltd" target="_blank" aria-label="Crunchbase Entity Matrix" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #146aff; border-radius: 6px; color: #ffffff; transition: opacity 0.2s; text-decoration: none;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
-				<span style="font-family: 'Arial', sans-serif; font-weight: 700; font-size: 16px; color: #ffffff; line-height: 1; letter-spacing: -0.5px; transform: translateY(-0.5px);">cb</span>
-			</a>
-				
-				</div>
+              </p>
+              <p class="text-white font-medium text-sm mt-2 tracking-wide">
+                <span class="text-zinc-400 text-[11px] font-normal uppercase tracking-wider font-mono">Contact Number:</span> +94722114115
+              </p>
             </div>
+
+            <div id="socials-matrix" class="flex flex-col gap-3 items-start md:items-end text-left md:text-right mt-6">
+
+              <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-zinc-400 font-medium">Email Enquiries</span>
+
+              <div class="flex flex-col gap-1.5 items-start md:items-end">
+                <a href="mailto:enquiries@revmaxxgroup.info" class="text-white text-[13px] font-medium tracking-wide hover:text-red-400 transition-colors">
+                  <span class="text-zinc-400 text-[11px] font-normal uppercase tracking-wider font-mono">Corporate:</span> enquiries@revmaxxgroup.info
+                </a>
+                <a href="mailto:senul.thiranagama@revmaxxgroup.info" class="text-white text-[13px] font-medium tracking-wide hover:text-red-400 transition-colors">
+                  <span class="text-zinc-400 text-[11px] font-normal uppercase tracking-wider font-mono">Executive Desk:</span> senul.thiranagama@revmaxxgroup.info
+                </a>
+              </div>
+
+              <!-- Social Sockets -->
+              <div class="flex gap-2 justify-start md:justify-end items-center mt-1">
+                <a href="https://www.instagram.com/revmaxx_group?igsh=ZzhqaHJrNmJtcHdj" target="_blank" aria-label="Instagram" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-radius: 4px; color: #ffffff; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.174.01 2.446.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.446-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0zm0 1.441c2.117 0 2.37.008 3.205.046.77.035 1.188.164 1.466.273.369.144.633.314.91.59.277.277.446.543.59.91.109.278.238.696.273 1.466.038.836.046 1.09.046 3.205s-.008 2.37-.046 3.205c-.035.77-.164 1.188-.273 1.466a2.473 2.473 0 0 1-.59.91c-.276.277-.543.446-.91.59-.278.109-.696.238-1.466.273-.836.038-1.09.046-3.205.046s-2.37-.008-3.205-.046c-.77-.035-1.188-.164-1.466-.273a2.48 2.48 0 0 1-.91-.59 2.477 2.477 0 0 1-.59-.91c-.109-.278-.238-.696-.273-1.466-.038-.836-.046-1.09-.046-3.205s.008-2.37.046-3.205c.035-.77.164-1.188.273-1.466.144-.369.314-.633.59-.91.277-.277.543-.446.91-.59.278-.109.696-.238 1.466-.273.836-.038 1.09-.046 3.205-.046zm0 2.443a4.116 4.116 0 1 0 0 8.232 4.116 4.116 0 0 0 0-8.232zm0 6.79a2.674 2.674 0 1 1 0-5.348 2.674 2.674 0 0 1 0 5.348zm4.118-6.79a.966.966 0 1 1-1.933 0 .966.966 0 0 1 1.933 0z"/></svg>
+                </a>
+
+                <a href="https://www.facebook.com/profile.php?id=61590320872247&mibextid=ZbWKwL" target="_blank" aria-label="Facebook" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #1877F2; border-radius: 4px; color: #ffffff; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>
+                </a>
+
+                <a href="https://x.com/REVMAXXGROUP" target="_blank" aria-label="X" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #000000; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; transition: transform 0.2s ease;">
+                  <svg width="16" height="16" fill="#ffffff" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+
+                <a href="https://www.linkedin.com/company/revmaxx-group-pvt-ltd" target="_blank" aria-label="LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #0077b5; border-radius: 8px; transition: transform 0.2s ease;">
+                  <svg width="16" height="16" fill="#ffffff" viewBox="0 0 24 24">
+                    <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43c-1.14 0-2.06-.92-2.06-2.06 0-1.14.92-2.06 2.06-2.06 2.06 0 2.06.92 2.06 2.06 0 1.14-.92 2.06-2.06 2.06zm15.11 13.02h-3.56v-5.6c0-1.34-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.7H9.33V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29z"/>
+                  </svg>
+                </a>
+
+                <a href="https://www.crunchbase.com/organization/revmaxx-group-pvt-ltd" target="_blank" aria-label="Crunchbase" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #146aff; border-radius: 6px; color: #ffffff; transition: opacity 0.2s; text-decoration: none;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                  <span style="font-family: 'Arial', sans-serif; font-weight: 700; font-size: 16px; color: #ffffff; line-height: 1; letter-spacing: -0.5px; transform: translateY(-0.5px);">cb</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
-                                              <!-- GLOBAL FULL-WIDTH CENTERED LEGAL & CREDITS MATRIX -->
-        <div class="w-full col-span-full block clear-both mt-12 pt-8" style="width: 100% !important; min-width: 100% !important; border-top: 1px solid rgba(39, 39, 42, 0.6); display: block; clear: both !important;">
-            
-            <!-- Disclaimer Text Box (Perfectly Centered & Full Width) -->
-            <p class="text-[11px] md:text-xs text-zinc-400 font-medium tracking-wide leading-relaxed" style="width: 100% !important; text-align: center !important; display: block; margin: 0 auto 16px auto;">
-                All third-party corporate, logos, brands, and trademarks displayed on this website—including but not limited to Wallenius Wilhelmsen, DHL Aviation, and Atlas Air—remain the sole intellectual property of their respective registered owners.
-            </p>
-            
-            <!-- Centralized Developer Signature -->
-            <p class="text-[10px] md:text-xs text-zinc-500 font-bold tracking-widest uppercase" style="width: 100% !important; text-align: center !important; display: block; margin-top: 12px;">
-                Developed by REVMAXX IT
-            </p>
-
+        <!-- LEGAL & CREDITS -->
+        <div class="w-full pt-8 border-t border-zinc-900/60">
+          <p class="text-[11px] md:text-xs text-zinc-400 font-medium tracking-wide leading-relaxed text-center">
+            All third-party corporate logos, brands, and trademarks displayed on this website — including but not limited to Wallenius Wilhelmsen, DHL Aviation, and Atlas Air — remain the sole intellectual property of their respective registered owners.
+          </p>
+          <p class="text-[10px] md:text-xs text-zinc-500 font-semibold tracking-widest uppercase text-center mt-3">
+            Developed by REVMAXX IT
+          </p>
         </div>
-                
-            
-                </p>
-            <!-- SOURCING ENGINE BACKGROUND WIRE -->
-<script>
-function triggerWhatsAppSourcing() {
-    try {
-        const makeModel = document.getElementById('makeModel').value;
-        const year = document.getElementById('year').value;
-        const condition = document.getElementById('condition').value;
-        const budget = document.getElementById('budget').value;
-        const region = document.getElementById('region').value;
-        const specs = document.getElementById('specs').value;
-        const contactNumber = document.getElementById('contactNumber').value;
-        const clientName = document.getElementById('clientName').value;
 
-        const cleanDigitsOnly = contactNumber.replace(/\D/g, '');
-        if (cleanDigitsOnly.length < 10) {
-            alert("Please enter proper details of phone number.");
-            return;
-        }
+      </div>
+    </footer>
 
-        const emailPayload = {
-            access_key: "8e827da2-78ca-4c84-a4db-75d3d6f1d611",
-            subject: `[New Sourcing Lead] - ${makeModel}`,
-            from_name: "REVMAXX Web Broker Desk",
-            "Asset Specification": makeModel,
-            "Production Year": year,
-            "Asset Condition": condition,
-            "Target Budget": budget,
-            "Sourcing Region": region,
-            "Bespoke Details": specs,
-            "Client Contact Phone": contactNumber,
-            "Client Name": clientName
-        };
-
-        fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(emailPayload)
-        })
-        .then(async (response) => {
-            if (response.status === 200) {
-                alert("Sourcing request submitted successfully! Our broker desk will contact you shortly.");
-            } else {
-                alert("Web3Forms Error Status: " + response.status);
-            }
-        })
-        .catch((fetchError) => {
-            alert("Network Error: " + fetchError.message);
-        });
-
-    } catch (error) {
-        alert("JavaScript Error: " + error.message);
-    }
-}
-</script>
-                
-            
 </body>
 </html>
