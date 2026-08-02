@@ -41,8 +41,9 @@
            divisions, the wizard review step, and anywhere a value needs to read
            like a confirmed line-item rather than a marketing bullet. */
         .rx-ledger { display:flex; align-items:baseline; gap:0.75rem; }
-        .rx-ledger .rx-label { font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.04em; color:#71717a; white-space:nowrap; }
-        .rx-ledger .rx-fill { flex:1; border-bottom:1px dotted rgba(255,255,255,0.15); transform:translateY(-4px); }
+        .rx-ledger .rx-label { font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.04em; color:#71717a; white-space:nowrap; position:relative; padding-left:14px; }
+        .rx-ledger .rx-label::before { content:''; position:absolute; left:0; top:50%; transform:translateY(-50%); width:5px; height:5px; border-radius:9999px; background:#dc2626; }
+        .rx-ledger .rx-fill { flex:1; border-bottom:1px dotted rgba(255,255,255,0.3); transform:translateY(-4px); }
         .rx-ledger .rx-value { font-size:13px; color:#e4e4e7; font-weight:500; text-align:right; }
 
         input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible {
@@ -232,6 +233,84 @@
           </div>
         </div>
 
+        <!-- Manufacturer Relationships Strip -->
+        <div class="rx-panel p-6 sm:p-8 rounded-2xl text-center mt-6">
+          <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-red-500 block mb-6">Direct Manufacturer Relationships</span>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-4 gap-x-2 font-mono text-xs font-medium tracking-wider text-zinc-300 uppercase items-center">
+            <div class="hover:text-red-500 transition-colors py-1">Ferrari</div>
+            <div class="hover:text-red-500 transition-colors py-1">Mercedes-Benz</div>
+            <div class="hover:text-red-500 transition-colors py-1">BMW</div>
+            <div class="hover:text-red-500 transition-colors py-1">Porsche</div>
+            <div class="hover:text-red-500 transition-colors py-1">Volkswagen Group</div>
+            <div class="hover:text-red-500 transition-colors py-1">Aston Martin</div>
+            <div class="hover:text-red-500 transition-colors py-1">McLaren</div>
+            <div class="hover:text-red-500 transition-colors py-1">Maybach</div>
+            <div class="hover:text-red-500 transition-colors py-1">Lamborghini</div>
+            <div class="hover:text-red-500 transition-colors py-1">Ford</div>
+            <div class="hover:text-red-500 transition-colors py-1">Corvette</div>
+            <div class="hover:text-red-500 transition-colors py-1">GMC</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- THE ACQUISITION PROCESS                     -->
+    <!-- ========================================== -->
+    <section id="process" class="pt-16 pb-20 border-t border-zinc-900 bg-black">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">How It Works</h2>
+          <p class="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">The Acquisition Process</p>
+          <p class="text-zinc-400 font-light mt-3 text-sm">Five stages, from first enquiry to a vehicle in your possession — managed end-to-end by the broker desk.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4">
+
+          <div class="rx-panel rounded-2xl p-6 flex flex-col gap-4">
+            <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">01</span>
+            <div>
+              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Enquiry</p>
+              <p class="text-zinc-400 text-xs leading-relaxed font-light">Submit your spec through the private sourcing desk. A broker reviews it within hours.</p>
+            </div>
+          </div>
+
+          <div class="rx-panel rounded-2xl p-6 flex flex-col gap-4">
+            <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">02</span>
+            <div>
+              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Global Sourcing</p>
+              <p class="text-zinc-400 text-xs leading-relaxed font-light">We canvas private collector networks and international auction houses for a matching vehicle.</p>
+            </div>
+          </div>
+
+          <div class="rx-panel rounded-2xl p-6 flex flex-col gap-4">
+            <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">03</span>
+            <div>
+              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Verification</p>
+              <p class="text-zinc-400 text-xs leading-relaxed font-light">Every vehicle is physically inspected and condition-reported before any commitment is made.</p>
+            </div>
+          </div>
+
+          <div class="rx-panel rounded-2xl p-6 flex flex-col gap-4">
+            <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">04</span>
+            <div>
+              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Import &amp; Customs</p>
+              <p class="text-zinc-400 text-xs leading-relaxed font-light">Fully insured shipping, Colombo Port clearance, and duty handling — managed end-to-end.</p>
+            </div>
+          </div>
+
+          <div class="rx-panel rounded-2xl p-6 flex flex-col gap-4 sm:col-span-2 sm:max-w-sm sm:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0">
+            <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">05</span>
+            <div>
+              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Delivery</p>
+              <p class="text-zinc-400 text-xs leading-relaxed font-light">Your vehicle arrives ready to register and drive, with full documentation in hand.</p>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
 
@@ -245,6 +324,11 @@
           <span class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Sourcing Engine</span>
           <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Request Vehicle Sourcing</h2>
           <p class="text-zinc-400 font-light max-w-xl mx-auto mt-3 text-sm">A four-step private intake. Our brokerage desk reviews global auction feeds and off-market inventory against your exact spec.</p>
+        </div>
+
+        <div class="flex items-center justify-center gap-3 rx-panel rounded-xl px-5 py-4 mb-10 max-w-xl mx-auto">
+          <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" /></svg>
+          <p class="text-zinc-400 text-xs font-light leading-relaxed text-left">Every enquiry is handled in strict confidence — client identities, budgets, and specifications are never disclosed beyond the broker desk.</p>
         </div>
 
         <div class="glass-panel rounded-2xl p-6 sm:p-10">
@@ -820,7 +904,7 @@
         <!-- LEGAL & CREDITS -->
         <div class="w-full pt-8 border-t border-zinc-900/60">
           <p class="text-[11px] md:text-xs text-zinc-400 font-medium tracking-wide leading-relaxed text-center">
-            All third-party corporate logos, brands, and trademarks displayed on this website — including but not limited to Wallenius Wilhelmsen, DHL Aviation, and Atlas Air — remain the sole intellectual property of their respective registered owners.
+            All third-party trade names, brand marks, and manufacturer or auction house references displayed on this website — including but not limited to RM Sotheby's, Bonhams, Gooding &amp; Co., Christie's, Dorotheum, Ferrari, Mercedes-Benz, BMW, Porsche, Volkswagen Group, Aston Martin, McLaren, Maybach, Lamborghini, Ford, Corvette, GMC, Wallenius Wilhelmsen, DHL Aviation, and Atlas Air — remain the sole intellectual property of their respective registered owners. Their inclusion is for informational purposes only and does not imply endorsement, partnership, or affiliation unless otherwise stated.
           </p>
           <p class="text-[10px] md:text-xs text-zinc-500 font-semibold tracking-widest uppercase text-center mt-3">
             Developed by REVMAXX IT
