@@ -52,6 +52,23 @@
 
         section[id] { scroll-margin-top: 6.5rem; }
 
+        .rx-gradient-text {
+            background-image:
+                radial-gradient(circle at 25% 20%, rgba(255,255,255,0.35), transparent 35%),
+                linear-gradient(120deg, #dc2626, #f97316, #f59e0b, #a855f7, #ec4899, #f97316, #dc2626);
+            background-size: 60% 60%, 400% auto;
+            background-blend-mode: overlay;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: rx-gradient-shift 16s ease-in-out infinite;
+        }
+        @keyframes rx-gradient-shift {
+            0% { background-position: 25% 20%, 0% 50%; }
+            50% { background-position: 25% 20%, 100% 50%; }
+            100% { background-position: 25% 20%, 0% 50%; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.001ms !important;
@@ -130,7 +147,7 @@
 
             <div class="mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
 
-                <h3 class="font-mono text-[11px] font-semibold tracking-[0.3em] text-red-600 uppercase mb-4">
+                <h3 class="rx-gradient-text font-mono text-[13px] font-bold tracking-[0.3em] uppercase mb-4">
                     About REVMAXX
                 </h3>
 
