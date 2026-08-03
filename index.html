@@ -137,6 +137,37 @@
             .rx-ledger .rx-fill::after { transform: scaleX(1) !important; }
         }
 
+        /* ============ FILM GRAIN OVERLAY ============ */
+        /* Barely-visible noise layer over the whole page, sits above everything
+           but never intercepts clicks — pure texture, not UI. */
+        #rxGrain {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            pointer-events: none;
+            opacity: 0.035;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+            background-repeat: repeat;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #rxGrain { opacity: 0.025; }
+        }
+
+        /* ============ MAGNETIC NAV UNDERLINE ============ */
+        #rxNavLinks { position: relative; }
+        #rxNavUnderline {
+            position: absolute;
+            bottom: -8px;
+            height: 1.5px;
+            width: 0;
+            left: 0;
+            background: var(--rx-red);
+            opacity: 0;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), width 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+            pointer-events: none;
+        }
+
         /* ============ INTRO OVERLAY ============ */
         #rxIntro {
             position: fixed; inset: 0; z-index: 9999;
@@ -144,8 +175,11 @@
             display: flex; align-items: center; justify-content: center;
             transition: opacity 0.6s ease, visibility 0.6s ease;
         }
+        #rxIntro-inner {
+            display: flex; flex-direction: column; align-items: center; gap: 28px;
+        }
         #rxIntro img {
-            height: 64px; width: auto;
+            height: 96px; width: auto;
             opacity: 0; transform: scale(0.92);
             animation: rx-intro-logo 1s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
         }
@@ -155,6 +189,29 @@
         #rxIntro.rx-intro-hide {
             opacity: 0;
             visibility: hidden;
+        }
+        /* Premium loading progress bar */
+        #rxIntro-track {
+            width: 220px; height: 2px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 9999px;
+            overflow: hidden;
+            opacity: 0;
+            animation: rx-intro-track-in 0.6s ease 0.35s forwards;
+        }
+        @keyframes rx-intro-track-in { to { opacity: 1; } }
+        #rxIntro-bar {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, #dc2626, #f97316);
+            border-radius: 9999px;
+            transition: width 0.25s ease-out;
+        }
+        #rxIntro-pct {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px; letter-spacing: 0.25em;
+            color: #71717a; text-transform: uppercase;
+            opacity: 0;
+            animation: rx-intro-track-in 0.6s ease 0.45s forwards;
         }
 
         /* ============ CURSOR GLOW ============ */
@@ -178,6 +235,52 @@
 
         /* ============ PARALLAX ============ */
         .rx-parallax { will-change: transform; }
+        @media (min-width: 640px) {
+            #rxHeroImg { width: 100% !important; }
+        }
+
+        /* ============ MOBILE NAV ============ */
+        .rx-burger, .rx-burger::before, .rx-burger::after {
+            position: absolute; left: 50%; top: 50%;
+            width: 22px; height: 2px;
+            background: #e4e4e7;
+            border-radius: 2px;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), opacity 0.2s ease, background 0.2s ease;
+        }
+        .rx-burger::before, .rx-burger::after { content: ''; }
+        .rx-burger::before { transform: translate(-50%, -50%) translateY(-7px); }
+        .rx-burger::after  { transform: translate(-50%, -50%) translateY(7px); }
+        #rxNavToggle[aria-expanded="true"] .rx-burger { background: transparent; }
+        #rxNavToggle[aria-expanded="true"] .rx-burger::before { transform: translate(-50%, -50%) rotate(45deg); background: #dc2626; }
+        #rxNavToggle[aria-expanded="true"] .rx-burger::after  { transform: translate(-50%, -50%) rotate(-45deg); background: #dc2626; }
+
+        #rxMobileMenu {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            overflow: hidden;
+            border-top: 1px solid transparent;
+            transition: grid-template-rows 0.45s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease, border-color 0.45s ease;
+        }
+        #rxMobileMenu.rx-nav-open {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            border-top-color: var(--rx-hairline);
+        }
+        #rxMobileMenu > div { min-height: 0; }
+        .rx-mobile-link {
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--rx-hairline);
+            transition: color 0.2s ease;
+        }
+        .rx-mobile-link:last-child { border-bottom: none; }
+        .rx-mobile-link:hover, .rx-mobile-link:active { color: #fff; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .rx-burger, .rx-burger::before, .rx-burger::after { transition: none !important; }
+            #rxMobileMenu { transition: none !important; }
+        }
 
         /* ============ PINNED PROCESS TRACK ============ */
         #processPinWrap { height: 300vh; }
@@ -287,11 +390,18 @@
 
     <!-- INTRO REVEAL OVERLAY -->
     <div id="rxIntro">
-        <img src="revmaxx group main logo.png" alt="REVMAXX">
+        <div id="rxIntro-inner">
+            <img src="revmaxx group main logo.png" alt="REVMAXX">
+            <div id="rxIntro-track"><div id="rxIntro-bar"></div></div>
+            <div id="rxIntro-pct"><span id="rxIntro-pct-num">0</span>%</div>
+        </div>
     </div>
 
     <!-- CURSOR-REACTIVE AMBIENT GLOW -->
     <div id="rxCursorGlow"></div>
+
+    <!-- FILM GRAIN TEXTURE -->
+    <div id="rxGrain"></div>
 
     <!-- SCROLL PROGRESS BAR -->
     <div id="rxProgress"></div>
@@ -304,18 +414,33 @@
                 <img src="revmaxx group main logo.png" alt="REVMAXX Logo" style="height: 78px; width: auto; object-fit: contain;">
             </a>
 
-            <div class="flex flex-col items-end justify-center gap-2">
-                <div class="hidden md:flex items-center gap-6 text-zinc-400 font-mono font-medium tracking-widest uppercase text-[11px]">
-                    <a href="#subdivisions" class="hover:text-white transition-colors">Divisions</a>
-                    <a href="#sourcing" class="hover:text-white transition-colors">Sourcing Engine</a>
-                    <a href="#corporate" class="hover:text-white transition-colors">Corporate HQ</a>
-                    <a href="#location" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;" class="hover:text-white transition-colors">Find Us</a>
-                    <a href="#socials-matrix" class="hover:text-white transition-colors">Socials</a>
+            <div class="flex items-center gap-4 md:flex-col md:items-end md:justify-center md:gap-2">
+                <div id="rxNavLinks" class="hidden md:flex items-center gap-6 text-zinc-400 font-mono font-medium tracking-widest uppercase text-[11px]">
+                    <a href="#subdivisions" class="rx-nav-link hover:text-white transition-colors">Divisions</a>
+                    <a href="#sourcing" class="rx-nav-link hover:text-white transition-colors">Sourcing Engine</a>
+                    <a href="#corporate" class="rx-nav-link hover:text-white transition-colors">Corporate HQ</a>
+                    <a href="#location" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;" class="rx-nav-link hover:text-white transition-colors">Find Us</a>
+                    <a href="#socials-matrix" class="rx-nav-link hover:text-white transition-colors">Socials</a>
+                    <span id="rxNavUnderline"></span>
                 </div>
 
                 <a href="https://wa.me/94722114115" target="_blank" class="rx-glow-btn rx-magnetic bg-red-600 hover:bg-red-700 text-white text-[10px] font-mono font-bold tracking-wider uppercase px-4 py-2 rounded flex items-center gap-1.5 transition-colors">
                     <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Direct Broker Desk
                 </a>
+
+                <button id="rxNavToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="rxMobileMenu" class="md:hidden relative w-9 h-9 flex-shrink-0 flex items-center justify-center">
+                    <span class="rx-burger"></span>
+                </button>
+            </div>
+        </div>
+
+        <div id="rxMobileMenu" class="md:hidden">
+            <div class="flex flex-col px-6 py-6 gap-1 text-zinc-300 font-mono font-medium tracking-widest uppercase text-[13px]">
+                <a href="#subdivisions" class="rx-mobile-link">Divisions</a>
+                <a href="#sourcing" class="rx-mobile-link">Sourcing Engine</a>
+                <a href="#corporate" class="rx-mobile-link">Corporate HQ</a>
+                <a href="#location" class="rx-mobile-link" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;">Find Us</a>
+                <a href="#socials-matrix" class="rx-mobile-link">Socials</a>
             </div>
         </div>
     </nav>
@@ -324,7 +449,7 @@
     <section class="relative flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden bg-black">
         <div class="relative z-10 w-full max-w-5xl px-6">
 
-            <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain mx-auto mt-2">
+            <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
 
             <div class="rx-reveal mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
 
@@ -1170,21 +1295,99 @@
         updateProgress();
       }
 
+      /* ---------- MOBILE NAV ---------- */
+      const navToggle = document.getElementById('rxNavToggle');
+      const mobileMenu = document.getElementById('rxMobileMenu');
+      if (navToggle && mobileMenu) {
+        function closeMobileMenu() {
+          navToggle.setAttribute('aria-expanded', 'false');
+          mobileMenu.classList.remove('rx-nav-open');
+        }
+        function openMobileMenu() {
+          navToggle.setAttribute('aria-expanded', 'true');
+          mobileMenu.classList.add('rx-nav-open');
+        }
+        navToggle.addEventListener('click', () => {
+          const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+          isOpen ? closeMobileMenu() : openMobileMenu();
+        });
+        mobileMenu.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', closeMobileMenu);
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') closeMobileMenu();
+        });
+        window.addEventListener('resize', () => {
+          if (window.matchMedia('(min-width: 768px)').matches) closeMobileMenu();
+        });
+      }
+
       /* ---------- INTRO OVERLAY ---------- */
       const intro = document.getElementById('rxIntro');
       if (intro) {
-        let skipIntro = false;
-        try { skipIntro = sessionStorage.getItem('rxIntroPlayed') === '1'; } catch (e) {}
-        if (skipIntro || reduceMotion) {
+        if (reduceMotion) {
           intro.style.display = 'none';
         } else {
-          window.addEventListener('load', () => {
-            setTimeout(() => {
-              intro.classList.add('rx-intro-hide');
-              try { sessionStorage.setItem('rxIntroPlayed', '1'); } catch (e) {}
-              setTimeout(() => { intro.style.display = 'none'; }, 700);
-            }, 900);
-          });
+          const HARD_MAX_MS = 3800;   // absolute ceiling — overlay never outlives this
+          const MIN_HOLD_MS = 1100;   // don't flash off instantly even if load is fast
+          const bar = document.getElementById('rxIntro-bar');
+          const pctNum = document.getElementById('rxIntro-pct-num');
+          const startTime = performance.now();
+          let finished = false;
+          let realProgress = 0; // 0..1 from actual asset loading
+
+          // Track real loading progress across images on the page
+          const imgs = Array.from(document.images || []);
+          const total = imgs.length;
+          let loadedCount = 0;
+          function bumpLoaded() {
+            loadedCount++;
+            realProgress = total > 0 ? loadedCount / total : 1;
+          }
+          if (total === 0) {
+            realProgress = 1;
+          } else {
+            imgs.forEach((img) => {
+              if (img.complete) { bumpLoaded(); }
+              else {
+                img.addEventListener('load', bumpLoaded, { once: true });
+                img.addEventListener('error', bumpLoaded, { once: true });
+              }
+            });
+          }
+
+          function setPct(p) {
+            const pct = Math.round(p * 100);
+            if (bar) bar.style.width = pct + '%';
+            if (pctNum) pctNum.textContent = pct;
+          }
+
+          function finishIntro() {
+            if (finished) return;
+            finished = true;
+            setPct(1);
+            intro.classList.add('rx-intro-hide');
+            setTimeout(() => { intro.style.display = 'none'; }, 700);
+          }
+
+          function tick() {
+            if (finished) return;
+            const elapsed = performance.now() - startTime;
+            // Displayed progress: never outrun real loading by much, but always
+            // creep forward so it doesn't look stalled, and always reach 100%
+            // by HARD_MAX_MS.
+            const timeProgress = Math.min(elapsed / HARD_MAX_MS, 1);
+            const shown = Math.max(realProgress * 0.9, timeProgress);
+            setPct(Math.min(shown, 0.99));
+
+            const readyToClose = realProgress >= 1 && elapsed >= MIN_HOLD_MS;
+            if (readyToClose || elapsed >= HARD_MAX_MS) {
+              finishIntro();
+              return;
+            }
+            requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
         }
       }
 
@@ -1307,7 +1510,7 @@
         let startTime = performance.now();
         function heroLoop(now) {
           const t = (now - startTime) / 1000;
-          const floatOffset = Math.sin(t * (2 * Math.PI / 6)) * 10;
+          const floatOffset = Math.sin(t * (2 * Math.PI / 10)) * 4;
           const sectionHeight = heroSection ? heroSection.offsetHeight : 600;
           const zoomProgress = Math.min(Math.max(window.scrollY / sectionHeight, 0), 1);
           const scrollOffset = window.scrollY * -0.06;
@@ -1318,6 +1521,24 @@
           requestAnimationFrame(heroLoop);
         }
         requestAnimationFrame(heroLoop);
+      }
+
+      /* ---------- MAGNETIC NAV UNDERLINE ---------- */
+      const navLinksWrap = document.getElementById('rxNavLinks');
+      const navUnderline = document.getElementById('rxNavUnderline');
+      if (navLinksWrap && navUnderline) {
+        const navLinks = navLinksWrap.querySelectorAll('.rx-nav-link');
+        function moveUnderlineTo(link) {
+          navUnderline.style.width = link.offsetWidth + 'px';
+          navUnderline.style.transform = `translateX(${link.offsetLeft}px)`;
+          navUnderline.style.opacity = '1';
+        }
+        navLinks.forEach((link) => {
+          link.addEventListener('mouseenter', () => moveUnderlineTo(link));
+        });
+        navLinksWrap.addEventListener('mouseleave', () => {
+          navUnderline.style.opacity = '0';
+        });
       }
 
       /* ---------- PINNED HORIZONTAL PROCESS SCROLL ---------- */
