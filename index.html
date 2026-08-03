@@ -137,6 +137,108 @@
             .rx-ledger .rx-fill::after { transform: scaleX(1) !important; }
         }
 
+        /* ============ INTRO OVERLAY ============ */
+        #rxIntro {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #050506;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        #rxIntro img {
+            height: 64px; width: auto;
+            opacity: 0; transform: scale(0.92);
+            animation: rx-intro-logo 1s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+        }
+        @keyframes rx-intro-logo {
+            to { opacity: 1; transform: scale(1); }
+        }
+        #rxIntro.rx-intro-hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        /* ============ CURSOR GLOW ============ */
+        #rxCursorGlow {
+            position: fixed; top: 0; left: 0; z-index: 1;
+            width: 480px; height: 480px;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(220,38,38,0.14), transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            will-change: transform;
+        }
+        #rxCursorGlow.rx-active { opacity: 1; }
+
+        /* ============ MAGNETIC BUTTONS ============ */
+        .rx-magnetic {
+            transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+            will-change: transform;
+        }
+
+        /* ============ PARALLAX ============ */
+        .rx-parallax { will-change: transform; }
+
+        /* ============ PINNED PROCESS TRACK ============ */
+        #processPinWrap { height: 300vh; }
+        #processSticky {
+            position: sticky; top: 6.5rem;
+            height: 72vh;
+            display: flex; align-items: center;
+            overflow: hidden;
+        }
+        #processTrack {
+            display: flex; gap: 1.5rem;
+            will-change: transform;
+        }
+        .rx-pin-card {
+            width: 320px; flex-shrink: 0;
+            display: flex; flex-direction: column; justify-content: space-between;
+            height: 60vh; max-height: 420px;
+        }
+        .rx-pin-card .rx-pin-num {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5rem; line-height: 1;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(220,38,38,0.6);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            #rxIntro { display: none; }
+            #rxCursorGlow { display: none; }
+            .rx-magnetic { transform: none !important; }
+        }
+        @media (max-width: 1023px) {
+            #processPinWrap { display: none; }
+        }
+        @media (min-width: 1024px) {
+            #processMobileGrid { display: none; }
+        }
+
+        /* ============ SCROLL PROGRESS BAR ============ */
+        #rxProgress {
+            position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+            background: linear-gradient(90deg, #dc2626, #f97316, #dc2626);
+            z-index: 10000;
+            transition: width 0.05s linear;
+        }
+
+        /* ============ MOBILE STICKY STACK (Process) ============ */
+        @media (max-width: 1023px) {
+            #processMobileGrid { display: block; }
+            .rx-stack-card {
+                position: sticky;
+                margin-bottom: 0.85rem;
+                min-height: 0;
+                box-shadow: 0 -10px 24px rgba(0,0,0,0.5);
+            }
+            .rx-stack-card:nth-child(1) { top: 5.5rem; z-index: 1; }
+            .rx-stack-card:nth-child(2) { top: 6.25rem; z-index: 2; }
+            .rx-stack-card:nth-child(3) { top: 7rem; z-index: 3; }
+            .rx-stack-card:nth-child(4) { top: 7.75rem; z-index: 4; }
+            .rx-stack-card:nth-child(5) { top: 8.5rem; z-index: 5; margin-bottom: 0; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.001ms !important;
@@ -183,6 +285,17 @@
 </head>
 <body class="text-zinc-100 antialiased selection:bg-red-600 selection:text-white">
 
+    <!-- INTRO REVEAL OVERLAY -->
+    <div id="rxIntro">
+        <img src="revmaxx group main logo.png" alt="REVMAXX">
+    </div>
+
+    <!-- CURSOR-REACTIVE AMBIENT GLOW -->
+    <div id="rxCursorGlow"></div>
+
+    <!-- SCROLL PROGRESS BAR -->
+    <div id="rxProgress"></div>
+
     <!-- NAVIGATION BAR -->
     <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-zinc-900/40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between">
@@ -200,7 +313,7 @@
                     <a href="#socials-matrix" class="hover:text-white transition-colors">Socials</a>
                 </div>
 
-                <a href="https://wa.me/94722114115" target="_blank" class="rx-glow-btn bg-red-600 hover:bg-red-700 text-white text-[10px] font-mono font-bold tracking-wider uppercase px-4 py-2 rounded flex items-center gap-1.5 transition-colors">
+                <a href="https://wa.me/94722114115" target="_blank" class="rx-glow-btn rx-magnetic bg-red-600 hover:bg-red-700 text-white text-[10px] font-mono font-bold tracking-wider uppercase px-4 py-2 rounded flex items-center gap-1.5 transition-colors">
                     <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Direct Broker Desk
                 </a>
             </div>
@@ -211,7 +324,7 @@
     <section class="relative flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden bg-black">
         <div class="relative z-10 w-full max-w-5xl px-6">
 
-            <img src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-float w-full h-auto object-contain mx-auto mt-2">
+            <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain mx-auto mt-2">
 
             <div class="rx-reveal mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
 
@@ -239,7 +352,7 @@
 
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Group Architecture</h2>
-          <p class="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Our Core Divisions</p>
+          <p class="rx-scramble font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Our Core Divisions</p>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-8 mb-16">
@@ -260,7 +373,7 @@
                 <li class="rx-ledger"><span class="rx-label">04</span><span class="rx-fill"></span><span class="rx-value">Confidential Acquisition &amp; Anonymized Bidding</span></li>
               </ul>
             </div>
-            <a href="https://wa.me/94722114115" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
+            <a href="https://wa.me/94722114115" target="_blank" class="rx-magnetic inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
               Access Broker Desk <span class="text-base">→</span>
             </a>
           </div>
@@ -280,7 +393,7 @@
                 <li class="rx-ledger"><span class="rx-label">03</span><span class="rx-fill"></span><span class="rx-value">Intercontinental Air &amp; Sea Freight Protocols</span></li>
               </ul>
             </div>
-            <a href="https://wa.me/94722114115" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
+            <a href="https://wa.me/94722114115" target="_blank" class="rx-magnetic inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
               Review Logistics Pipelines <span class="text-base">→</span>
             </a>
           </div>
@@ -330,49 +443,99 @@
 
         <div class="text-center max-w-2xl mx-auto mb-16">
           <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">How It Works</h2>
-          <p class="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">The Acquisition Process</p>
+          <p class="rx-scramble font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">The Acquisition Process</p>
           <p class="text-zinc-400 font-light mt-3 text-sm">Five stages, from first enquiry to a vehicle in your possession — managed end-to-end by the broker desk.</p>
         </div>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4">
+        <!-- DESKTOP: Pinned horizontal scroll-through sequence -->
+        <div id="processPinWrap" class="relative">
+          <div id="processSticky">
+            <div id="processTrack">
 
-          <div class="rx-panel rx-reveal rx-tilt rounded-2xl p-6 flex flex-col gap-4">
+              <div class="rx-pin-card rx-panel rounded-2xl p-8">
+                <span class="rx-pin-num">01</span>
+                <div>
+                  <p class="text-white font-semibold text-lg tracking-wide mb-2">Enquiry</p>
+                  <p class="text-zinc-400 text-sm leading-relaxed font-light">Submit your spec through the private sourcing desk. A broker reviews it within hours.</p>
+                </div>
+              </div>
+
+              <div class="rx-pin-card rx-panel rounded-2xl p-8">
+                <span class="rx-pin-num">02</span>
+                <div>
+                  <p class="text-white font-semibold text-lg tracking-wide mb-2">Global Sourcing</p>
+                  <p class="text-zinc-400 text-sm leading-relaxed font-light">We canvas private collector networks and international auction houses for a matching vehicle.</p>
+                </div>
+              </div>
+
+              <div class="rx-pin-card rx-panel rounded-2xl p-8">
+                <span class="rx-pin-num">03</span>
+                <div>
+                  <p class="text-white font-semibold text-lg tracking-wide mb-2">Verification</p>
+                  <p class="text-zinc-400 text-sm leading-relaxed font-light">Every vehicle is physically inspected and condition-reported before any commitment is made.</p>
+                </div>
+              </div>
+
+              <div class="rx-pin-card rx-panel rounded-2xl p-8">
+                <span class="rx-pin-num">04</span>
+                <div>
+                  <p class="text-white font-semibold text-lg tracking-wide mb-2">Import &amp; Customs</p>
+                  <p class="text-zinc-400 text-sm leading-relaxed font-light">Fully insured shipping, Colombo Port clearance, and duty handling — managed end-to-end.</p>
+                </div>
+              </div>
+
+              <div class="rx-pin-card rx-panel rounded-2xl p-8">
+                <span class="rx-pin-num">05</span>
+                <div>
+                  <p class="text-white font-semibold text-lg tracking-wide mb-2">Delivery</p>
+                  <p class="text-zinc-400 text-sm leading-relaxed font-light">Your vehicle arrives ready to register and drive, with full documentation in hand.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- MOBILE/TABLET: Sticky scroll-stack -->
+        <div id="processMobileGrid" class="flex flex-col">
+
+          <div class="rx-stack-card rx-panel rx-reveal rounded-2xl p-6 flex flex-col gap-3">
             <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">01</span>
             <div>
-              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Enquiry</p>
-              <p class="text-zinc-400 text-xs leading-relaxed font-light">Submit your spec through the private sourcing desk. A broker reviews it within hours.</p>
+              <p class="text-white font-semibold text-base tracking-wide mb-1.5">Enquiry</p>
+              <p class="text-zinc-400 text-sm leading-relaxed font-light">Submit your spec through the private sourcing desk. A broker reviews it within hours.</p>
             </div>
           </div>
 
-          <div class="rx-panel rx-reveal rx-reveal-delay-1 rx-tilt rounded-2xl p-6 flex flex-col gap-4">
+          <div class="rx-stack-card rx-panel rx-reveal rounded-2xl p-6 flex flex-col gap-3">
             <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">02</span>
             <div>
-              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Global Sourcing</p>
-              <p class="text-zinc-400 text-xs leading-relaxed font-light">We canvas private collector networks and international auction houses for a matching vehicle.</p>
+              <p class="text-white font-semibold text-base tracking-wide mb-1.5">Global Sourcing</p>
+              <p class="text-zinc-400 text-sm leading-relaxed font-light">We canvas private collector networks and international auction houses for a matching vehicle.</p>
             </div>
           </div>
 
-          <div class="rx-panel rx-reveal rx-reveal-delay-2 rx-tilt rounded-2xl p-6 flex flex-col gap-4">
+          <div class="rx-stack-card rx-panel rx-reveal rounded-2xl p-6 flex flex-col gap-3">
             <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">03</span>
             <div>
-              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Verification</p>
-              <p class="text-zinc-400 text-xs leading-relaxed font-light">Every vehicle is physically inspected and condition-reported before any commitment is made.</p>
+              <p class="text-white font-semibold text-base tracking-wide mb-1.5">Verification</p>
+              <p class="text-zinc-400 text-sm leading-relaxed font-light">Every vehicle is physically inspected and condition-reported before any commitment is made.</p>
             </div>
           </div>
 
-          <div class="rx-panel rx-reveal rx-reveal-delay-3 rx-tilt rounded-2xl p-6 flex flex-col gap-4">
+          <div class="rx-stack-card rx-panel rx-reveal rounded-2xl p-6 flex flex-col gap-3">
             <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">04</span>
             <div>
-              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Import &amp; Customs</p>
-              <p class="text-zinc-400 text-xs leading-relaxed font-light">Fully insured shipping, Colombo Port clearance, and duty handling — managed end-to-end.</p>
+              <p class="text-white font-semibold text-base tracking-wide mb-1.5">Import &amp; Customs</p>
+              <p class="text-zinc-400 text-sm leading-relaxed font-light">Fully insured shipping, Colombo Port clearance, and duty handling — managed end-to-end.</p>
             </div>
           </div>
 
-          <div class="rx-panel rx-reveal rx-reveal-delay-4 rx-tilt rounded-2xl p-6 flex flex-col gap-4 sm:col-span-2 sm:max-w-sm sm:mx-auto lg:col-span-1 lg:max-w-none lg:mx-0">
+          <div class="rx-stack-card rx-panel rx-reveal rounded-2xl p-6 flex flex-col gap-3">
             <span class="font-mono text-sm font-semibold w-9 h-9 rounded-full flex items-center justify-center border border-red-600 text-red-500">05</span>
             <div>
-              <p class="text-white font-semibold text-sm tracking-wide mb-1.5">Delivery</p>
-              <p class="text-zinc-400 text-xs leading-relaxed font-light">Your vehicle arrives ready to register and drive, with full documentation in hand.</p>
+              <p class="text-white font-semibold text-base tracking-wide mb-1.5">Delivery</p>
+              <p class="text-zinc-400 text-sm leading-relaxed font-light">Your vehicle arrives ready to register and drive, with full documentation in hand.</p>
             </div>
           </div>
 
@@ -389,7 +552,7 @@
 
         <div class="text-center mb-12">
           <span class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Sourcing Engine</span>
-          <h2 class="font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Request Vehicle Sourcing</h2>
+          <h2 class="rx-scramble font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Request Vehicle Sourcing</h2>
           <p class="text-zinc-400 font-light max-w-xl mx-auto mt-3 text-sm">A four-step private intake. Our brokerage desk reviews global auction feeds and off-market inventory against your exact spec.</p>
         </div>
 
@@ -511,10 +674,10 @@
               <button type="button" id="rxBackBtn" onclick="rxWizardBack()" class="hidden font-mono text-xs font-semibold tracking-wider uppercase text-zinc-400 hover:text-white px-5 py-3.5 transition-colors">
                 ← Back
               </button>
-              <button type="button" id="rxNextBtn" onclick="rxWizardNext()" class="rx-glow-btn flex-1 bg-red-600 hover:bg-red-700 text-white font-mono font-semibold text-sm tracking-wider uppercase py-4 rounded-xl transition-all duration-200 shadow-lg shadow-red-950/40">
+              <button type="button" id="rxNextBtn" onclick="rxWizardNext()" class="rx-glow-btn rx-magnetic flex-1 bg-red-600 hover:bg-red-700 text-white font-mono font-semibold text-sm tracking-wider uppercase py-4 rounded-xl transition-all duration-200 shadow-lg shadow-red-950/40">
                 Continue
               </button>
-              <button type="button" id="rxSubmitBtn" onclick="triggerWhatsAppSourcing()" class="rx-glow-btn hidden flex-1 bg-red-600 hover:bg-red-700 text-white font-mono font-semibold text-sm tracking-wider uppercase py-4 rounded-xl transition-all duration-200 shadow-lg shadow-red-950/40">
+              <button type="button" id="rxSubmitBtn" onclick="triggerWhatsAppSourcing()" class="rx-glow-btn rx-magnetic hidden flex-1 bg-red-600 hover:bg-red-700 text-white font-mono font-semibold text-sm tracking-wider uppercase py-4 rounded-xl transition-all duration-200 shadow-lg shadow-red-950/40">
                 Submit Sourcing Request
               </button>
             </div>
@@ -811,7 +974,7 @@
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
           <div>
             <span class="font-mono text-xs font-semibold tracking-widest text-red-600 uppercase block mb-3">Physical Presence</span>
-            <h2 class="font-display text-3xl font-semibold tracking-tight text-white">The Corporate Headquarters</h2>
+            <h2 class="rx-scramble font-display text-3xl font-semibold tracking-tight text-white">The Corporate Headquarters</h2>
           </div>
           <p class="text-zinc-400 font-light max-w-md">Our main headquarters is located on Floor 35 at the World Trade Center (WTC), providing a modern, professional space for our team to manage global logistics, vehicle sourcing, and private client consultations.
           </p>
@@ -981,13 +1144,51 @@
       </div>
     </footer>
     <!-- ========================================== -->
-    <!-- MOTION ENGINE — scroll reveal + card tilt   -->
+    <!-- MOTION ENGINE — reveal, tilt, glow, magnetic, scramble, parallax, pin -->
     <!-- ========================================== -->
     <script>
     (function () {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isFinePointer = window.matchMedia('(pointer: fine)').matches;
 
-      // Scroll reveal
+      /* ---------- SCROLL PROGRESS BAR ---------- */
+      const progressBar = document.getElementById('rxProgress');
+      if (progressBar) {
+        let progressTicking = false;
+        function updateProgress() {
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+          progressBar.style.width = pct + '%';
+          progressTicking = false;
+        }
+        window.addEventListener('scroll', () => {
+          if (!progressTicking) {
+            requestAnimationFrame(updateProgress);
+            progressTicking = true;
+          }
+        }, { passive: true });
+        updateProgress();
+      }
+
+      /* ---------- INTRO OVERLAY ---------- */
+      const intro = document.getElementById('rxIntro');
+      if (intro) {
+        let skipIntro = false;
+        try { skipIntro = sessionStorage.getItem('rxIntroPlayed') === '1'; } catch (e) {}
+        if (skipIntro || reduceMotion) {
+          intro.style.display = 'none';
+        } else {
+          window.addEventListener('load', () => {
+            setTimeout(() => {
+              intro.classList.add('rx-intro-hide');
+              try { sessionStorage.setItem('rxIntroPlayed', '1'); } catch (e) {}
+              setTimeout(() => { intro.style.display = 'none'; }, 700);
+            }, 900);
+          });
+        }
+      }
+
+      /* ---------- SCROLL REVEAL ---------- */
       const revealEls = document.querySelectorAll('.rx-reveal');
       if (reduceMotion || !('IntersectionObserver' in window)) {
         revealEls.forEach((el) => el.classList.add('is-visible'));
@@ -1003,8 +1204,8 @@
         revealEls.forEach((el) => io.observe(el));
       }
 
-      // Card tilt — pointer devices only, respects reduced motion
-      if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+      /* ---------- CARD TILT ---------- */
+      if (!reduceMotion && isFinePointer) {
         document.querySelectorAll('.rx-tilt').forEach((card) => {
           card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
@@ -1020,6 +1221,128 @@
             card.style.setProperty('--rx-ry', '0deg');
           });
         });
+      }
+
+      /* ---------- CURSOR GLOW ---------- */
+      const glow = document.getElementById('rxCursorGlow');
+      if (glow && !reduceMotion && isFinePointer) {
+        let gx = 0, gy = 0, cx = 0, cy = 0;
+        let glowActive = false;
+        window.addEventListener('mousemove', (e) => {
+          gx = e.clientX; gy = e.clientY;
+          if (!glowActive) { glow.classList.add('rx-active'); glowActive = true; }
+        });
+        (function loop() {
+          cx += (gx - cx) * 0.12;
+          cy += (gy - cy) * 0.12;
+          glow.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+          requestAnimationFrame(loop);
+        })();
+      }
+
+      /* ---------- MAGNETIC BUTTONS ---------- */
+      if (!reduceMotion && isFinePointer) {
+        document.querySelectorAll('.rx-magnetic').forEach((btn) => {
+          const radius = 60;
+          btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = e.clientX - cx;
+            const dy = e.clientY - cy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < radius * 2) {
+              btn.style.transform = `translate(${dx * 0.25}px, ${dy * 0.25}px)`;
+            }
+          });
+          btn.addEventListener('mouseleave', () => {
+            btn.style.transform = 'translate(0, 0)';
+          });
+        });
+      }
+
+      /* ---------- TEXT SCRAMBLE ---------- */
+      const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      function scrambleInto(el) {
+        const finalText = el.textContent;
+        const len = finalText.length;
+        let frame = 0;
+        const totalFrames = 18;
+        const revealAt = Array.from({ length: len }, (_, i) => Math.floor((i / len) * totalFrames * 0.7));
+        const interval = setInterval(() => {
+          let out = '';
+          for (let i = 0; i < len; i++) {
+            const ch = finalText[i];
+            if (ch === ' ') { out += ' '; continue; }
+            if (frame >= revealAt[i]) { out += ch; }
+            else { out += scrambleChars[Math.floor(Math.random() * scrambleChars.length)]; }
+          }
+          el.textContent = out;
+          frame++;
+          if (frame > totalFrames) {
+            el.textContent = finalText;
+            clearInterval(interval);
+          }
+        }, 35);
+      }
+      const scrambleEls = document.querySelectorAll('.rx-scramble');
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        // leave text as-is
+      } else {
+        const scrambleIO = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              scrambleInto(entry.target);
+              scrambleIO.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.4 });
+        scrambleEls.forEach((el) => scrambleIO.observe(el));
+      }
+
+      /* ---------- HERO PARALLAX + FLOAT + CINEMATIC ZOOM (combined) ---------- */
+      const heroImg = document.getElementById('rxHeroImg');
+      const heroSection = heroImg ? heroImg.closest('section') : null;
+      if (heroImg && !reduceMotion) {
+        let startTime = performance.now();
+        function heroLoop(now) {
+          const t = (now - startTime) / 1000;
+          const floatOffset = Math.sin(t * (2 * Math.PI / 6)) * 10;
+          const sectionHeight = heroSection ? heroSection.offsetHeight : 600;
+          const zoomProgress = Math.min(Math.max(window.scrollY / sectionHeight, 0), 1);
+          const scrollOffset = window.scrollY * -0.06;
+          const scale = 1 + zoomProgress * 0.12;
+          const opacity = 1 - zoomProgress * 0.7;
+          heroImg.style.transform = `translateY(${(floatOffset + scrollOffset).toFixed(2)}px) scale(${scale.toFixed(3)})`;
+          heroImg.style.opacity = opacity.toFixed(2);
+          requestAnimationFrame(heroLoop);
+        }
+        requestAnimationFrame(heroLoop);
+      }
+
+      /* ---------- PINNED HORIZONTAL PROCESS SCROLL ---------- */
+      const pinWrap = document.getElementById('processPinWrap');
+      const pinSticky = document.getElementById('processSticky');
+      const pinTrack = document.getElementById('processTrack');
+      if (pinWrap && pinSticky && pinTrack && window.matchMedia('(min-width: 1024px)').matches) {
+        let ticking = false;
+        function updateTrack() {
+          const rect = pinWrap.getBoundingClientRect();
+          const scrollable = pinWrap.offsetHeight - pinSticky.offsetHeight;
+          const progress = scrollable > 0 ? Math.min(Math.max(-rect.top / scrollable, 0), 1) : 0;
+          const maxTranslate = Math.max(pinTrack.scrollWidth - pinSticky.clientWidth, 0);
+          const translateX = reduceMotion ? 0 : -progress * maxTranslate;
+          pinTrack.style.transform = `translateX(${translateX}px)`;
+          ticking = false;
+        }
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(updateTrack);
+            ticking = true;
+          }
+        }, { passive: true });
+        window.addEventListener('resize', updateTrack);
+        updateTrack();
       }
     })();
     </script>
