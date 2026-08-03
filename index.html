@@ -358,7 +358,13 @@
 
         /* ============ MOBILE STICKY STACK (Process) ============ */
         @media (max-width: 1023px) {
-            #processMobileGrid { display: block; }
+            /* Extra run-way after the last card: sticky cards 1-4 each get a
+               "hang time" equal to the margin/height of the sibling below them
+               before the next card scrolls over them. Card 5 has no sibling
+               after it, so without this padding it un-sticks almost instantly
+               and visibly jumps/snaps to the next section. This spacer gives
+               it the same kind of release the earlier cards get. */
+            #processMobileGrid { display: block; padding-bottom: 38vh; }
             .rx-stack-card {
                 position: sticky;
                 margin-bottom: 0.85rem;
@@ -1540,8 +1546,15 @@
       const heroImg = document.getElementById('rxHeroImg');
       const heroSection = heroImg ? heroImg.closest('section') : null;
       if (heroImg && !reduceMotion) {
-        let startTime = performance.now();
-        function heroLoop(now) {
+        // PERF: this rAF loop used to run forever, on every single frame, for
+        // the entire lifetime of the page — even after scrolling far past the
+        // hero, where it has no visible effect. On long pages / lower-end
+        // phones that's wasted CPU stacking up with all the other motion
+        // effects and is a real source of scroll jank. Now it only runs while
+        // the hero section is actually near the viewport.
+        let heroActive = true;
+        let heroRafId = null;
+        function heroLoop() {
           const sectionHeight = heroSection ? heroSection.offsetHeight : 600;
           const zoomProgress = Math.min(Math.max(window.scrollY / sectionHeight, 0), 1);
           const scrollOffset = window.scrollY * -0.06;
@@ -1549,9 +1562,20 @@
           const opacity = 1 - zoomProgress * 0.7;
           heroImg.style.transform = `translateY(${scrollOffset.toFixed(2)}px) scale(${scale.toFixed(3)})`;
           heroImg.style.opacity = opacity.toFixed(2);
-          requestAnimationFrame(heroLoop);
+          heroRafId = heroActive ? requestAnimationFrame(heroLoop) : null;
         }
-        requestAnimationFrame(heroLoop);
+        if (heroSection && 'IntersectionObserver' in window) {
+          const heroIO = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              heroActive = entry.isIntersecting;
+              if (heroActive && heroRafId === null) {
+                heroRafId = requestAnimationFrame(heroLoop);
+              }
+            });
+          }, { rootMargin: '200px 0px 200px 0px' });
+          heroIO.observe(heroSection);
+        }
+        heroRafId = requestAnimationFrame(heroLoop);
       }
 
       /* ---------- MAGNETIC NAV UNDERLINE ---------- */
@@ -1576,24 +1600,53 @@
       const pinWrap = document.getElementById('processPinWrap');
       const pinSticky = document.getElementById('processSticky');
       const pinTrack = document.getElementById('processTrack');
-      if (pinWrap && pinSticky && pinTrack && window.matchMedia('(min-width: 1024px)').matches) {
+      if (pinWrap && pinSticky && pinTrack) {
+        // BUG FIX: this used to check `matchMedia('(min-width: 1024px)').matches`
+        // a single time, right here at page load, and only attached the scroll
+        // listener if that was true. That meant: load the page at any width
+        // under 1024px (a phone/tablet in portrait) and then rotate to
+        // landscape or resize past 1024px — the CSS switches to showing this
+        // desktop track, but the JS that drives it was never attached, so the
+        // track just sits at translateX(0). With 5 cards at 320px + gaps that
+        // overflow the sticky viewport, only the first ~3.5 cards are visible
+        // and card 5 is permanently off-screen. Fix: always attach the
+        // listeners, and check the breakpoint live, every time, inside
+        // updateTrack — plus listen for the breakpoint changing.
+        const desktopMQ = window.matchMedia('(min-width: 1024px)');
         let ticking = false;
+
         function updateTrack() {
+          ticking = false;
+          if (!desktopMQ.matches) {
+            // Below 1024px the mobile stack is shown instead — clear any
+            // leftover transform so nothing is stuck off-screen if the
+            // viewport shrinks back down.
+            pinTrack.style.transform = '';
+            return;
+          }
           const rect = pinWrap.getBoundingClientRect();
           const scrollable = pinWrap.offsetHeight - pinSticky.offsetHeight;
           const progress = scrollable > 0 ? Math.min(Math.max(-rect.top / scrollable, 0), 1) : 0;
           const maxTranslate = Math.max(pinTrack.scrollWidth - pinSticky.clientWidth, 0);
           const translateX = reduceMotion ? 0 : -progress * maxTranslate;
           pinTrack.style.transform = `translateX(${translateX}px)`;
-          ticking = false;
         }
+
         window.addEventListener('scroll', () => {
           if (!ticking) {
-            requestAnimationFrame(updateTrack);
             ticking = true;
+            requestAnimationFrame(updateTrack);
           }
         }, { passive: true });
         window.addEventListener('resize', updateTrack);
+        // Rotation on a tablet/phone (or a manual window resize past 1024px)
+        // doesn't reliably fire a plain 'resize' in every browser — listen
+        // for the breakpoint itself changing too.
+        if (typeof desktopMQ.addEventListener === 'function') {
+          desktopMQ.addEventListener('change', updateTrack);
+        } else if (typeof desktopMQ.addListener === 'function') {
+          desktopMQ.addListener(updateTrack); // Safari < 14 fallback
+        }
         updateTrack();
       }
     })();
