@@ -363,8 +363,9 @@
                before the next card scrolls over them. Card 5 has no sibling
                after it, so without this padding it un-sticks almost instantly
                and visibly jumps/snaps to the next section. This spacer gives
-               it the same kind of release the earlier cards get. */
-            #processMobileGrid { display: block; padding-bottom: 38vh; }
+               it a bit of that same release — kept small (8vh, was 38vh)
+               so it doesn't leave a large empty gap before the next section. */
+            #processMobileGrid { display: block; padding-bottom: 8vh; }
             .rx-stack-card {
                 position: sticky;
                 margin-bottom: 0.85rem;
@@ -485,12 +486,12 @@
     <section class="relative flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden bg-black">
         <div class="relative z-10 w-full max-w-5xl px-6">
 
-            <div class="rx-carbon-wrap relative mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
-                <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain">
+            <div class="rx-carbon-wrap relative mt-2 -mx-6 sm:mx-0 h-[46vh] min-h-[300px] sm:h-[60vh] sm:min-h-[420px]" style="width: calc(100% + 3rem);">
+                <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-full object-fill">
                 <div class="rx-carbon-sheen"></div>
             </div>
 
-            <div class="rx-reveal mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
+            <div class="rx-reveal mt-6 sm:mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
 
                 <h3 class="rx-gradient-text font-mono text-[13px] font-bold tracking-[0.3em] uppercase mb-4">
                     About REVMAXX
