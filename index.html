@@ -137,6 +137,36 @@
             .rx-ledger .rx-fill::after { transform: scaleX(1) !important; }
         }
 
+        /* ============ HERO CARBON-FIBER SHEEN ============ */
+        /* The weave "moves" via a diagonal light-glint sweeping across the
+           static image, instead of the whole image (logo included) bobbing. */
+        .rx-carbon-wrap { overflow: hidden; animation: rx-hero-breathe 8s ease-in-out infinite; }
+        @keyframes rx-hero-breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.012); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .rx-carbon-wrap { animation: none !important; }
+        }
+        .rx-carbon-sheen {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.22) 48%, rgba(255,255,255,0.05) 54%, transparent 65%);
+            background-size: 260% 260%;
+            background-position: 200% 200%;
+            animation: rx-carbon-sheen-move 7s ease-in-out infinite;
+        }
+        @keyframes rx-carbon-sheen-move {
+            0%   { background-position: 200% 200%; }
+            50%  { background-position: 0% 0%; }
+            100% { background-position: 200% 200%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .rx-carbon-sheen { animation: none !important; opacity: 0.4; }
+        }
+
         /* ============ FILM GRAIN OVERLAY ============ */
         /* Barely-visible noise layer over the whole page, sits above everything
            but never intercepts clicks — pure texture, not UI. */
@@ -449,7 +479,10 @@
     <section class="relative flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden bg-black">
         <div class="relative z-10 w-full max-w-5xl px-6">
 
-            <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
+            <div class="rx-carbon-wrap relative mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
+                <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain">
+                <div class="rx-carbon-sheen"></div>
+            </div>
 
             <div class="rx-reveal mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
 
@@ -1509,14 +1542,12 @@
       if (heroImg && !reduceMotion) {
         let startTime = performance.now();
         function heroLoop(now) {
-          const t = (now - startTime) / 1000;
-          const floatOffset = Math.sin(t * (2 * Math.PI / 10)) * 4;
           const sectionHeight = heroSection ? heroSection.offsetHeight : 600;
           const zoomProgress = Math.min(Math.max(window.scrollY / sectionHeight, 0), 1);
           const scrollOffset = window.scrollY * -0.06;
           const scale = 1 + zoomProgress * 0.12;
           const opacity = 1 - zoomProgress * 0.7;
-          heroImg.style.transform = `translateY(${(floatOffset + scrollOffset).toFixed(2)}px) scale(${scale.toFixed(3)})`;
+          heroImg.style.transform = `translateY(${scrollOffset.toFixed(2)}px) scale(${scale.toFixed(3)})`;
           heroImg.style.opacity = opacity.toFixed(2);
           requestAnimationFrame(heroLoop);
         }
