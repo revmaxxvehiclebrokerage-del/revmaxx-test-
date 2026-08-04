@@ -313,7 +313,11 @@
         }
 
         /* ============ PINNED PROCESS TRACK ============ */
-        #processPinWrap { height: 300vh; }
+        /* Height is set dynamically by JS to match how far the track actually
+           needs to translate (see setPinHeight in the script below) — a fixed
+           vh value here scrolled way more than the cards ever moved on wide
+           desktop viewports. This is just a sane fallback before JS runs. */
+        #processPinWrap { height: 160vh; }
         #processSticky {
             position: sticky; top: 6.5rem;
             height: 72vh;
@@ -402,8 +406,16 @@
         }
 
         /* ============ SHIMMER TEXT (chrome sweep) ============ */
+        /* BUG FIX: the resting stops used to be a dark gray (#71717a), which
+           is low-contrast against the black background. Since the sweep
+           spends most of its 6s cycle sitting on those resting stops, the
+           text read as dim/muddy (or briefly looked like it disappeared)
+           except for the moment the bright band passed through. Resting
+           color is now a light silver so the text stays clearly legible at
+           all times, with the white/gold band sweeping through as an accent
+           on top rather than the text's only visible state. */
         .rx-shimmer {
-            background-image: linear-gradient(100deg, #71717a 20%, #ffffff 40%, #f5d68a 50%, #ffffff 60%, #71717a 80%);
+            background-image: linear-gradient(100deg, #d4d4d8 20%, #ffffff 40%, #f5d68a 50%, #ffffff 60%, #d4d4d8 80%);
             background-size: 220% auto;
             -webkit-background-clip: text;
             background-clip: text;
@@ -414,6 +426,32 @@
             0%   { background-position: 200% center; }
             100% { background-position: -200% center; }
         }
+
+        /* Silver/platinum variant — same chrome sweep, no gold stop. Used
+           where the gold tint would read too "flashy" for the tone we want
+           (e.g. the founders' names), while still feeling premium. */
+        .rx-shimmer-silver {
+            background-image: linear-gradient(100deg, #d4d4d8 20%, #ffffff 42%, #f4f4f5 50%, #ffffff 58%, #d4d4d8 80%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+            animation: rx-shimmer-sweep 6s linear infinite;
+        }
+
+        /* ============ FAQ ACCORDION ============ */
+        .rx-faq-item summary { list-style: none; cursor: pointer; }
+        .rx-faq-item summary::-webkit-details-marker { display: none; }
+        .rx-faq-item .rx-faq-body {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.35s cubic-bezier(0.16,1,0.3,1);
+        }
+        .rx-faq-item[open] .rx-faq-body { grid-template-rows: 1fr; }
+        .rx-faq-item .rx-faq-body-inner { overflow: hidden; }
+        .rx-faq-chevron { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); flex-shrink: 0; }
+        .rx-faq-item[open] .rx-faq-chevron { transform: rotate(180deg); }
+        .rx-faq-item[open] summary { color: #fff; }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -784,7 +822,7 @@
 
         <div class="text-center mb-12">
           <span class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Sourcing Engine</span>
-          <h2 class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Request Vehicle Sourcing</h2>
+          <h2 class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white -mt-1">Request Vehicle Sourcing</h2>
           <p class="text-zinc-400 font-light max-w-xl mx-auto mt-3 text-sm">A four-step private intake. Our brokerage desk reviews global auction feeds and off-market inventory against your exact spec.</p>
         </div>
 
@@ -1264,14 +1302,89 @@
       </div>
     </section>
 
-    <!-- INTERCONTINENTAL SHIPPING PARTNERS -->
-    <section class="py-24 border-t border-zinc-900 bg-black/40">
-      <div class="max-w-7xl mx-auto px-6">
-        <p class="text-center font-mono text-xs font-semibold tracking-widest text-zinc-400 uppercase mb-16">Global Shipping Partners</p>
-        <div class="flex flex-wrap items-center justify-center gap-16 md:gap-28">
-          <img src="partner 1.png" alt="Logistics Partner 1" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
-          <img src="partner 2.png" alt="Logistics Partner 2" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
-          <img src="Partner 3.png" alt="Logistics Partner 3" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
+    <!-- ========================================== -->
+    <!-- FAQ                                         -->
+    <!-- ========================================== -->
+    <section id="faq" class="pt-4 pb-24 border-t border-zinc-900 bg-black">
+      <div class="max-w-3xl mx-auto px-6">
+
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Common Questions</h2>
+          <p class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Frequently Asked Questions</p>
+        </div>
+
+        <div class="space-y-3">
+
+          <details class="rx-faq-item rx-panel rx-reveal rounded-xl">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
+              <span>How does the sourcing process work, from enquiry to delivery?</span>
+              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="rx-faq-body"><div class="rx-faq-body-inner">
+              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Every request moves through five managed stages — Enquiry, Global Sourcing, Verification, Shipping, and Delivery. Your assigned broker keeps you updated at each stage, and the vehicle arrives ready to register with full documentation in hand.</p>
+            </div></div>
+          </details>
+
+          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-1 rounded-xl">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
+              <span>Do you source right-hand drive vehicles for Sri Lankan registration?</span>
+              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="rx-faq-body"><div class="rx-faq-body-inner">
+              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Yes. For vehicles intended for local registration and road use, we source right-hand drive to meet Sri Lankan requirements. Let your broker know the intended use so we source correctly from the outset.</p>
+            </div></div>
+          </details>
+
+          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-2 rounded-xl">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
+              <span>Can I request a specific auction house or manufacturer?</span>
+              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="rx-faq-body"><div class="rx-faq-body-inner">
+              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Absolutely. If you have a preferred source in mind, mention it in your enquiry. Otherwise, we canvas our full network of global auction houses and direct manufacturer relationships to find the closest match to your spec.</p>
+            </div></div>
+          </details>
+
+          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-3 rounded-xl">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
+              <span>How do you verify a vehicle's condition before I commit?</span>
+              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="rx-faq-body"><div class="rx-faq-body-inner">
+              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Every vehicle is physically inspected and condition-reported before any commitment is made, so you know exactly what you're buying before it ships.</p>
+            </div></div>
+          </details>
+
+          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-4 rounded-xl">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
+              <span>Do you handle customs clearance and registration paperwork?</span>
+              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="rx-faq-body"><div class="rx-faq-body-inner">
+              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Yes — our logistics division manages international shipping, customs clearance, and registration documentation end-to-end, so the vehicle arrives ready to drive.</p>
+            </div></div>
+          </details>
+
+          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-5 rounded-xl">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
+              <span>Can you source brand-new vehicles, or only used imports?</span>
+              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="rx-faq-body"><div class="rx-faq-body-inner">
+              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Both. We handle brand new / delivery-mile vehicles as well as pre-owned imports (Grade 5-S and similar), depending on what you're after.</p>
+            </div></div>
+          </details>
+
+          <details class="rx-faq-item rx-panel rx-reveal rounded-xl">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
+              <span>How do I start a sourcing request?</span>
+              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="rx-faq-body"><div class="rx-faq-body-inner">
+              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Use the sourcing desk form above, or message us directly on WhatsApp via the Direct Broker Desk button — a broker will review your spec and respond personally.</p>
+            </div></div>
+          </details>
+
         </div>
       </div>
     </section>
@@ -1280,20 +1393,53 @@
     <footer id="contact" class="bg-black text-zinc-500 text-xs py-16 border-t border-zinc-950">
       <div class="max-w-7xl mx-auto px-6 space-y-16">
 
+        <!-- COMPANY SNAPSHOT: SHIPPING PARTNERS + TRUST BADGES -->
+        <div class="space-y-10 pb-16 border-b border-zinc-900/60">
+
+          <div>
+            <p class="text-center font-mono text-[10px] font-semibold tracking-widest text-zinc-400 uppercase mb-10">Global Shipping Partners</p>
+            <div class="flex flex-wrap items-center justify-center gap-16 md:gap-28">
+              <img src="partner 1.png" alt="Logistics Partner 1" class="rx-reveal h-14 md:h-16 w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
+              <img src="partner 2.png" alt="Logistics Partner 2" class="rx-reveal rx-reveal-delay-1 h-14 md:h-16 w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
+              <img src="Partner 3.png" alt="Logistics Partner 3" class="rx-reveal rx-reveal-delay-2 h-14 md:h-16 w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
+            </div>
+          </div>
+
+          <div class="rx-reveal rx-reveal-delay-3 rx-panel rounded-2xl px-6 py-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 text-center">
+            <div class="flex items-center gap-2.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+              <span class="font-mono text-xs tracking-wider text-zinc-300 uppercase">Established June 2025</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+              <span class="font-mono text-xs tracking-wider text-zinc-300 uppercase">Registered Private Limited Company</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M9 13h1M14 9h1M14 13h1"/></svg>
+              <span class="font-mono text-xs tracking-wider text-zinc-300 uppercase">Colombo Headquartered</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              <span class="font-mono text-xs tracking-wider text-zinc-300 uppercase">3+ Global Logistics Partners</span>
+            </div>
+          </div>
+
+        </div>
+
         <!-- FOUNDERS GRID -->
         <div class="space-y-6">
           <p class="font-mono text-[10px] font-semibold tracking-widest text-zinc-400 uppercase text-center">Founding Board of Directors</p>
           <div class="grid md:grid-cols-3 gap-4">
             <div class="rx-reveal glass-panel p-6 rounded-lg text-center">
-              <h4 class="text-white font-semibold text-sm tracking-wide">Senul Thiranagama</h4>
+              <h4 class="rx-scramble rx-shimmer-silver font-semibold text-sm tracking-wide">Senul Thiranagama</h4>
               <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">CEO &amp; Co-Founder</p>
             </div>
             <div class="rx-reveal rx-reveal-delay-1 glass-panel p-6 rounded-lg text-center">
-              <h4 class="text-white font-semibold text-sm tracking-wide">Sadun Jayasooriya</h4>
+              <h4 class="rx-scramble rx-shimmer-silver font-semibold text-sm tracking-wide">Sadun Jayasooriya</h4>
               <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">Director &amp; Co-Founder</p>
             </div>
             <div class="rx-reveal rx-reveal-delay-2 glass-panel p-6 rounded-lg text-center">
-              <h4 class="text-white font-semibold text-sm tracking-wide">Shehan Mendis</h4>
+              <h4 class="rx-scramble rx-shimmer-silver font-semibold text-sm tracking-wide">Shehan Mendis</h4>
               <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">Director &amp; Co-Founder</p>
             </div>
           </div>
@@ -1301,7 +1447,7 @@
 
         <div class="grid md:grid-cols-2 gap-12 items-start pt-8 border-t border-zinc-900/60">
           <div>
-            <img src="revmaxx group main logo.png" alt="REVMAXX Logo Footer" class="h-14 w-auto object-contain mb-6 opacity-80">
+            <img src="revmaxx group main logo.png" alt="REVMAXX Logo Footer" class="h-16 w-auto object-contain mb-6 opacity-80">
             <p class="max-w-sm font-light leading-relaxed mb-4">
               A premier automotive brokerage specializing in global vehicle sourcing and international logistics, delivering seamless end-to-end import solutions.
             </p>
@@ -1738,6 +1884,26 @@
         const desktopMQ = window.matchMedia('(min-width: 1024px)');
         let ticking = false;
 
+        // BUG FIX: the wrapper used to be a fixed 300vh no matter how far the
+        // track actually had to slide. maxTranslate (the real horizontal
+        // distance) depends on viewport width — on a wide desktop screen more
+        // cards already fit on-screen, so maxTranslate can be small (a few
+        // hundred px) while the pin still demanded ~300vh (often 2000px+) of
+        // scrolling to complete. That mismatch is exactly what read as "barely
+        // any card movement for a huge amount of scroll." Fix: measure
+        // maxTranslate and size the pin wrapper's height around that distance
+        // (plus a small buffer so the pin doesn't grab/release instantly), so
+        // scroll input and visible movement stay roughly 1:1.
+        function setPinHeight() {
+          if (!desktopMQ.matches) {
+            pinWrap.style.height = '';
+            return;
+          }
+          const maxTranslate = Math.max(pinTrack.scrollWidth - pinSticky.clientWidth, 0);
+          const buffer = pinSticky.offsetHeight * 0.35;
+          pinWrap.style.height = (pinSticky.offsetHeight + maxTranslate + buffer) + 'px';
+        }
+
         function updateTrack() {
           ticking = false;
           if (!desktopMQ.matches) {
@@ -1761,15 +1927,22 @@
             requestAnimationFrame(updateTrack);
           }
         }, { passive: true });
-        window.addEventListener('resize', updateTrack);
+        window.addEventListener('resize', () => {
+          setPinHeight();
+          updateTrack();
+        });
         // Rotation on a tablet/phone (or a manual window resize past 1024px)
         // doesn't reliably fire a plain 'resize' in every browser — listen
         // for the breakpoint itself changing too.
         if (typeof desktopMQ.addEventListener === 'function') {
-          desktopMQ.addEventListener('change', updateTrack);
+          desktopMQ.addEventListener('change', () => { setPinHeight(); updateTrack(); });
         } else if (typeof desktopMQ.addListener === 'function') {
-          desktopMQ.addListener(updateTrack); // Safari < 14 fallback
+          desktopMQ.addListener(() => { setPinHeight(); updateTrack(); }); // Safari < 14 fallback
         }
+        // Fonts/images loading after initial layout can shift card widths
+        // (and therefore scrollWidth) — re-measure once everything's settled.
+        window.addEventListener('load', () => { setPinHeight(); updateTrack(); });
+        setPinHeight();
         updateTrack();
       }
     })();
