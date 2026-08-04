@@ -379,6 +379,42 @@
             .rx-stack-card:nth-child(5) { top: 8.5rem; z-index: 5; margin-bottom: 0; }
         }
 
+        /* ============ FILM GRAIN OVERLAY ============ */
+        .rx-grain {
+            position: fixed;
+            inset: 0;
+            z-index: 40;
+            pointer-events: none;
+            opacity: 0.05;
+            mix-blend-mode: overlay;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            .rx-grain { animation: rx-grain-shift 1.4s steps(4) infinite; }
+        }
+        @keyframes rx-grain-shift {
+            0%   { transform: translate(0, 0); }
+            25%  { transform: translate(-1.5%, 1%); }
+            50%  { transform: translate(1%, -1.5%); }
+            75%  { transform: translate(-1%, -1%); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* ============ SHIMMER TEXT (chrome sweep) ============ */
+        .rx-shimmer {
+            background-image: linear-gradient(100deg, #71717a 20%, #ffffff 40%, #f5d68a 50%, #ffffff 60%, #71717a 80%);
+            background-size: 220% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent !important;
+            animation: rx-shimmer-sweep 6s linear infinite;
+        }
+        @keyframes rx-shimmer-sweep {
+            0%   { background-position: 200% center; }
+            100% { background-position: -200% center; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.001ms !important;
@@ -386,6 +422,7 @@
                 transition-duration: 0.001ms !important;
                 scroll-behavior: auto !important;
             }
+            .rx-grain { display: none; }
         }
     </style>
 	<script type="application/ld+json">
@@ -436,6 +473,7 @@
 
     <!-- CURSOR-REACTIVE AMBIENT GLOW -->
     <div id="rxCursorGlow"></div>
+    <div class="rx-grain" aria-hidden="true"></div>
 
     <!-- FILM GRAIN TEXTURE -->
     <div id="rxGrain"></div>
@@ -510,6 +548,32 @@
     </section>
 
     <!-- ========================================== -->
+    <!-- LEDGER STRIP: ANIMATED STAT COUNTERS        -->
+    <!-- ========================================== -->
+    <section class="pt-4 pb-16 bg-black">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="rx-reveal rx-panel rounded-2xl px-4 sm:px-8 py-8 sm:py-10 grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-4 text-center">
+                <div>
+                    <p class="rx-stat-num font-display text-3xl sm:text-4xl font-bold text-white" data-target="15" data-suffix="+">0</p>
+                    <p class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-zinc-500 uppercase mt-2">Manufacturer<br>Relationships</p>
+                </div>
+                <div>
+                    <p class="rx-stat-num font-display text-3xl sm:text-4xl font-bold text-white" data-target="6" data-suffix="+">0</p>
+                    <p class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-zinc-500 uppercase mt-2">Global Auction<br>Networks</p>
+                </div>
+                <div>
+                    <p class="rx-stat-num font-display text-3xl sm:text-4xl font-bold text-white" data-target="5">0</p>
+                    <p class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-zinc-500 uppercase mt-2">Stage Managed<br>Process</p>
+                </div>
+                <div>
+                    <p class="rx-stat-num font-display text-3xl sm:text-4xl font-bold text-white" data-target="3" data-suffix="+">0</p>
+                    <p class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-zinc-500 uppercase mt-2">Logistics &amp;<br>Shipping Partners</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
     <!-- CORPORATE SUBDIVISIONS & AUCTION DESK      -->
     <!-- ========================================== -->
     <section id="subdivisions" class="pt-16 pb-24 border-t border-zinc-900 bg-gradient-to-b from-[#050506] via-zinc-950 to-black">
@@ -517,7 +581,7 @@
 
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Group Architecture</h2>
-          <p class="rx-scramble font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Our Core Divisions</p>
+          <p class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Our Core Divisions</p>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-8 mb-16">
@@ -594,6 +658,9 @@
             <div class="hover:text-red-500 transition-colors py-1">Ford</div>
             <div class="hover:text-red-500 transition-colors py-1">Corvette</div>
             <div class="hover:text-red-500 transition-colors py-1">GMC</div>
+            <div class="hover:text-red-500 transition-colors py-1">Lotus</div>
+            <div class="hover:text-red-500 transition-colors py-1">Bentley</div>
+            <div class="hover:text-red-500 transition-colors py-1">Cadillac</div>
           </div>
         </div>
 
@@ -608,7 +675,7 @@
 
         <div class="text-center max-w-2xl mx-auto mb-16">
           <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">How It Works</h2>
-          <p class="rx-scramble font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">The Acquisition Process</p>
+          <p class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">The Acquisition Process</p>
           <p class="text-zinc-400 font-light mt-3 text-sm">Five stages, from first enquiry to a vehicle in your possession — managed end-to-end by the broker desk.</p>
         </div>
 
@@ -717,7 +784,7 @@
 
         <div class="text-center mb-12">
           <span class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Sourcing Engine</span>
-          <h2 class="rx-scramble font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Request Vehicle Sourcing</h2>
+          <h2 class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Request Vehicle Sourcing</h2>
           <p class="text-zinc-400 font-light max-w-xl mx-auto mt-3 text-sm">A four-step private intake. Our brokerage desk reviews global auction feeds and off-market inventory against your exact spec.</p>
         </div>
 
@@ -1139,7 +1206,7 @@
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
           <div>
             <span class="font-mono text-xs font-semibold tracking-widest text-red-600 uppercase block mb-3">Physical Presence</span>
-            <h2 class="rx-scramble font-display text-3xl font-semibold tracking-tight text-white">The Corporate Headquarters</h2>
+            <h2 class="rx-scramble rx-shimmer font-display text-3xl font-semibold tracking-tight text-white">The Corporate Headquarters</h2>
           </div>
           <p class="text-zinc-400 font-light max-w-md">Our main headquarters is located on Floor 35 at the World Trade Center (WTC), providing a modern, professional space for our team to manage global logistics, vehicle sourcing, and private client consultations.
           </p>
@@ -1299,7 +1366,7 @@
         <!-- LEGAL & CREDITS -->
         <div class="w-full pt-8 border-t border-zinc-900/60">
           <p class="text-[11px] md:text-xs text-zinc-400 font-medium tracking-wide leading-relaxed text-center">
-            All third-party trade names, brand marks, and manufacturer or auction house references displayed on this website — including but not limited to RM Sotheby's, Bonhams, Gooding &amp; Co., Christie's, Dorotheum, Ferrari, Mercedes-Benz, BMW, Porsche, Volkswagen Group, Aston Martin, McLaren, Maybach, Lamborghini, Ford, Corvette, GMC, Wallenius Wilhelmsen, DHL Aviation, and Atlas Air — remain the sole intellectual property of their respective registered owners. Their inclusion is for informational purposes only and does not imply endorsement, partnership, or affiliation unless otherwise stated.
+            All third-party trade names, brand marks, and manufacturer or auction house references displayed on this website — including but not limited to RM Sotheby's, Bonhams, Gooding &amp; Co., Christie's, Dorotheum, Ferrari, Mercedes-Benz, BMW, Porsche, Volkswagen Group, Aston Martin, McLaren, Maybach, Lamborghini, Ford, Corvette, GMC, Lotus, Bentley, Cadillac, Wallenius Wilhelmsen, DHL Aviation, and Atlas Air — remain the sole intellectual property of their respective registered owners. Their inclusion is for informational purposes only and does not imply endorsement, partnership, or affiliation unless otherwise stated.
           </p>
           <p class="text-[10px] md:text-xs text-zinc-500 font-semibold tracking-widest uppercase text-center mt-3">
             Developed by REVMAXX IT
@@ -1311,10 +1378,32 @@
     <!-- ========================================== -->
     <!-- MOTION ENGINE — reveal, tilt, glow, magnetic, scramble, parallax, pin -->
     <!-- ========================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script>
     (function () {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+      /* ---------- SMOOTH SCROLL (Lenis) ---------- */
+      // Skip entirely for reduced-motion users, and fail silently if the CDN
+      // didn't load — the site must work with plain native scroll either way.
+      if (!reduceMotion && typeof Lenis === 'function') {
+        try {
+          const lenis = new Lenis({
+            duration: 1.1,
+            easing: (t) => 1 - Math.pow(1 - t, 3),
+            smoothWheel: true,
+            syncTouch: false, // leave native touch scrolling alone on mobile
+          });
+          function lenisRaf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(lenisRaf);
+          }
+          requestAnimationFrame(lenisRaf);
+        } catch (e) {
+          // Lenis failed to init — native scroll still works, nothing to do.
+        }
+      }
 
       /* ---------- SCROLL PROGRESS BAR ---------- */
       const progressBar = document.getElementById('rxProgress');
@@ -1445,6 +1534,39 @@
           });
         }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
         revealEls.forEach((el) => io.observe(el));
+      }
+
+      /* ---------- ANIMATED STAT COUNTERS ---------- */
+      const statEls = document.querySelectorAll('.rx-stat-num');
+      function animateStat(el) {
+        const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+        const suffix = el.getAttribute('data-suffix') || '';
+        const durationMs = 1200;
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min((now - start) / durationMs, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+      if (statEls.length) {
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+          statEls.forEach((el) => {
+            el.textContent = (el.getAttribute('data-target') || '0') + (el.getAttribute('data-suffix') || '');
+          });
+        } else {
+          const statIO = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animateStat(entry.target);
+                statIO.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.5 });
+          statEls.forEach((el) => statIO.observe(el));
+        }
       }
 
       /* ---------- CARD TILT ---------- */
