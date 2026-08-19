@@ -24,7 +24,7 @@
 
     <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="favicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="tailwind.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -45,7 +45,12 @@
         "addressCountry": "LK"
       },
       "telephone": "+94722114115",
-      "sameAs": []
+      "sameAs": [
+        "https://www.instagram.com/revmaxx_group?igsh=ZzhqaHJrNmJtcHdj",
+        "https://www.facebook.com/profile.php?id=61590320872247&mibextid=ZbWKwL",
+        "https://x.com/REVMAXXGROUP",
+        "https://www.linkedin.com/company/revmaxx-group-pvt-ltd"
+      ]
     }
     </script>
 
@@ -1499,6 +1504,9 @@
             <p class="max-w-sm font-light leading-relaxed mb-4">
               A premier automotive brokerage specializing in global vehicle sourcing and international logistics, delivering seamless end-to-end import solutions.
             </p>
+            <a href="REVMAXX-Brochure.pdf" target="_blank" class="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wider uppercase text-zinc-500 hover:text-red-500 transition-colors mb-3">
+              Download Company Brochure (PDF)
+            </a>
             <p class="text-zinc-600">© 2026 REVMAXX GROUP PVT LTD. All Rights Reserved.</p>
           </div>
 
@@ -1791,12 +1799,22 @@
           gx = e.clientX; gy = e.clientY;
           if (!glowActive) { glow.classList.add('rx-active'); glowActive = true; }
         });
-        (function loop() {
+        let glowRafId = null;
+        function loop() {
           cx += (gx - cx) * 0.12;
           cy += (gy - cy) * 0.12;
           glow.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
-          requestAnimationFrame(loop);
-        })();
+          glowRafId = requestAnimationFrame(loop);
+        }
+        glowRafId = requestAnimationFrame(loop);
+        // Don't keep this rAF loop spinning in a background tab.
+        document.addEventListener('visibilitychange', () => {
+          if (document.hidden) {
+            if (glowRafId !== null) { cancelAnimationFrame(glowRafId); glowRafId = null; }
+          } else if (glowRafId === null) {
+            glowRafId = requestAnimationFrame(loop);
+          }
+        });
       }
 
       /* ---------- MAGNETIC BUTTONS ---------- */
