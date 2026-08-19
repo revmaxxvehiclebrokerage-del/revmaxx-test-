@@ -188,6 +188,7 @@
         /* The weave "moves" via a diagonal light-glint sweeping across the
            static image, instead of the whole image (logo included) bobbing. */
         .rx-carbon-wrap { overflow: hidden; animation: rx-hero-breathe 8s ease-in-out infinite; }
+        #rxHeroImg { transform: translateX(-4%) scale(1.06); transform-origin: center; }
         @keyframes rx-hero-breathe {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.012); }
@@ -581,6 +582,7 @@
                     <a href="#corporate" class="rx-nav-link hover:text-white transition-colors">Corporate HQ</a>
                     <a href="#location" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;" class="rx-nav-link hover:text-white transition-colors">Find Us</a>
                     <a href="#socials-matrix" class="rx-nav-link hover:text-white transition-colors">Socials</a>
+                    <a href="REVMAXX-Brochure.pdf" target="_blank" class="rx-nav-link hover:text-white transition-colors">Brochure</a>
                     <span id="rxNavUnderline"></span>
                 </div>
 
@@ -601,6 +603,7 @@
                 <a href="#corporate" class="rx-mobile-link">Corporate HQ</a>
                 <a href="#location" class="rx-mobile-link" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;">Find Us</a>
                 <a href="#socials-matrix" class="rx-mobile-link">Socials</a>
+                <a href="REVMAXX-Brochure.pdf" target="_blank" class="rx-mobile-link">Brochure</a>
             </div>
         </div>
     </nav>
@@ -1504,9 +1507,6 @@
             <p class="max-w-sm font-light leading-relaxed mb-4">
               A premier automotive brokerage specializing in global vehicle sourcing and international logistics, delivering seamless end-to-end import solutions.
             </p>
-            <a href="REVMAXX-Brochure.pdf" target="_blank" class="inline-flex items-center gap-1.5 font-mono text-[10px] tracking-wider uppercase text-zinc-500 hover:text-red-500 transition-colors mb-3">
-              Download Company Brochure (PDF)
-            </a>
             <p class="text-zinc-600">© 2026 REVMAXX GROUP PVT LTD. All Rights Reserved.</p>
           </div>
 
@@ -1893,9 +1893,9 @@
           const sectionHeight = heroSection ? heroSection.offsetHeight : 600;
           const zoomProgress = Math.min(Math.max(window.scrollY / sectionHeight, 0), 1);
           const scrollOffset = window.scrollY * -0.06;
-          const scale = 1 + zoomProgress * 0.12;
+          const scale = 1.06 + zoomProgress * 0.12;
           const opacity = 1 - zoomProgress * 0.7;
-          heroImg.style.transform = `translateY(${scrollOffset.toFixed(2)}px) scale(${scale.toFixed(3)})`;
+          heroImg.style.transform = `translateX(-4%) translateY(${scrollOffset.toFixed(2)}px) scale(${scale.toFixed(3)})`;
           heroImg.style.opacity = opacity.toFixed(2);
           heroRafId = heroActive ? requestAnimationFrame(heroLoop) : null;
         }
