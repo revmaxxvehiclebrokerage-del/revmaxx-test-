@@ -1123,6 +1123,14 @@
         }
       };
 
+      // Exposed so the submission handler can actually return the wizard
+      // to step 1 after a successful send, instead of leaving it stuck on
+      // the blanked-out review step.
+      window.rxWizardReset = function () {
+        current = 1;
+        showStep(current);
+      };
+
       showStep(current);
     })();
     </script>
@@ -1199,7 +1207,7 @@
             submitBtn.classList.remove('bg-emerald-600');
             submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
             submitBtn.disabled = false;
-            window.rxWizardBack && (window.location.hash = '#sourcing');
+            window.rxWizardReset && window.rxWizardReset();
           }, 3000);
         } else {
           throw new Error(result.message || 'Form submission failed');
@@ -1310,7 +1318,7 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="rx-reveal group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
-            <img src="Office reception.jpg" alt="REVMAXX Corporate Reception Desk" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            <img src="office reception.jpg" alt="REVMAXX Corporate Reception Desk" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           </div>
           <div class="rx-reveal rx-reveal-delay-1 group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
             <img src="office 1.jpg" alt="Executive Meeting Rooms" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
@@ -1448,14 +1456,14 @@
     </section>
 
     <!-- FOOTER / CONTACT & LEADERSHIP BOARD -->
-    <footer id="contact" class="bg-black text-zinc-500 text-xs py-16 border-t border-zinc-950">
-      <div class="max-w-7xl mx-auto px-6 space-y-16">
+    <footer id="contact" class="bg-black text-zinc-500 text-xs py-10 sm:py-16 border-t border-zinc-950">
+      <div class="max-w-7xl mx-auto px-6 space-y-10 sm:space-y-16">
 
         <!-- COMPANY SNAPSHOT: SHIPPING PARTNERS + TRUST BADGES -->
-        <div class="space-y-10 pb-16 border-b border-zinc-900/60">
+        <div class="space-y-6 sm:space-y-10 pb-10 sm:pb-16 border-b border-zinc-900/60">
 
           <div>
-            <p class="text-center font-mono text-[10px] font-semibold tracking-widest text-zinc-400 uppercase mb-10">Global Shipping Partners</p>
+            <p class="text-center font-mono text-[10px] font-semibold tracking-widest text-zinc-400 uppercase mb-6 sm:mb-10">Global Shipping Partners</p>
             <div class="grid grid-cols-3 items-center justify-items-center gap-3 sm:gap-8 md:gap-16">
               <div class="rx-reveal flex items-center justify-center h-14 sm:h-16 w-full max-w-[140px] sm:max-w-[180px]">
                 <img src="partner 2.png" alt="Logistics Partner 2" loading="lazy" decoding="async" class="max-h-full max-w-full w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
@@ -1464,12 +1472,12 @@
                 <img src="partner 1.png" alt="Logistics Partner 1" loading="lazy" decoding="async" class="max-h-full max-w-full w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
               </div>
               <div class="rx-reveal rx-reveal-delay-2 flex items-center justify-center h-14 sm:h-16 w-full max-w-[140px] sm:max-w-[180px]">
-                <img src="Partner 3.png" alt="Logistics Partner 3" loading="lazy" decoding="async" class="max-h-full max-w-full w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
+                <img src="partner 3.png" alt="Logistics Partner 3" loading="lazy" decoding="async" class="max-h-full max-w-full w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
               </div>
             </div>
           </div>
 
-          <div class="rx-reveal rx-reveal-delay-3 rx-panel rounded-2xl px-6 py-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 text-center">
+          <div class="rx-reveal rx-reveal-delay-3 rx-panel rounded-2xl px-6 py-5 sm:py-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 sm:gap-y-6 text-center">
             <div class="flex items-center gap-2.5">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
               <span class="font-mono text-xs tracking-wider text-zinc-300 uppercase">Established since June 2025</span>
@@ -1491,9 +1499,9 @@
         </div>
 
         <!-- FOUNDERS GRID -->
-        <div class="space-y-6">
+        <div class="space-y-4 sm:space-y-6">
           <p class="font-mono text-[10px] font-semibold tracking-widest text-zinc-400 uppercase text-center">Founding Board of Directors</p>
-          <div class="grid md:grid-cols-3 gap-4">
+          <div class="grid md:grid-cols-3 gap-3 sm:gap-4">
             <div class="rx-reveal glass-panel p-6 rounded-lg text-center">
               <h4 class="rx-scramble rx-shimmer-silver font-semibold text-sm tracking-wide">Senul Thiranagama</h4>
               <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">CEO &amp; Co-Founder</p>
@@ -1509,7 +1517,7 @@
           </div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-12 items-start pt-8 border-t border-zinc-900/60">
+        <div class="grid md:grid-cols-2 gap-8 sm:gap-12 items-start pt-6 sm:pt-8 border-t border-zinc-900/60">
           <div>
             <img src="revmaxx group main logo.png" alt="REVMAXX Logo Footer" loading="lazy" decoding="async" class="h-16 w-auto object-contain mb-6 opacity-80">
             <p class="max-w-sm font-light leading-relaxed mb-4">
@@ -1574,7 +1582,7 @@
         </div>
 
         <!-- LEGAL & CREDITS -->
-        <div class="w-full pt-8 border-t border-zinc-900/60">
+        <div class="w-full pt-6 sm:pt-8 border-t border-zinc-900/60">
           <p class="text-[11px] md:text-xs text-zinc-400 font-medium tracking-wide leading-relaxed text-center">
             All third-party trade names, brand marks, and manufacturer or auction house references displayed on this website — including but not limited to RM Sotheby's, Bonhams, Gooding &amp; Co., Christie's, Dorotheum, Ferrari, Mercedes-Benz, BMW, Porsche, Volkswagen Group, Aston Martin, McLaren, Maybach, Lamborghini, Ford, Corvette, GMC, Lotus, Bentley, Cadillac, Wallenius Wilhelmsen, DHL Aviation, and Atlas Air — remain the sole intellectual property of their respective registered owners. Their inclusion is for informational purposes only and does not imply endorsement, partnership, or affiliation unless otherwise stated.
           </p>
