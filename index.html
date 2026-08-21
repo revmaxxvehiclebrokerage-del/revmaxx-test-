@@ -4,56 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REVMAXX GROUP PVT LTD | Your Elite Automotive Partner</title>
-    <meta name="description" content="REVMAXX GROUP is Sri Lanka's premier automotive brokerage, sourcing elite vehicles from global auctions and manufacturers with end-to-end import, shipping, and customs handling. Colombo headquartered.">
-    <link rel="canonical" href="https://revmaxxgroup.online/">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="REVMAXX GROUP PVT LTD">
-    <meta property="og:title" content="REVMAXX GROUP PVT LTD | Your Elite Automotive Partner">
-    <meta property="og:description" content="Sri Lanka's premier automotive brokerage — elite global vehicle sourcing, international logistics, and seamless end-to-end import solutions.">
-    <meta property="og:image" content="https://revmaxxgroup.online/revmaxx%20group%20main%20logo.png">
-    <meta property="og:url" content="https://revmaxxgroup.online/">
-    <meta property="og:locale" content="en_LK">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="REVMAXX GROUP PVT LTD | Your Elite Automotive Partner">
-    <meta name="twitter:description" content="Sri Lanka's premier automotive brokerage — elite global vehicle sourcing, international logistics, and seamless end-to-end import solutions.">
-    <meta name="twitter:image" content="https://revmaxxgroup.online/revmaxx%20group%20main%20logo.png">
-
     <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="favicon.png">
-    <link rel="stylesheet" href="tailwind.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "AutomotiveBusiness",
-      "name": "REVMAXX GROUP PVT LTD",
-      "description": "Premier automotive brokerage specializing in global vehicle sourcing and international logistics, delivering seamless end-to-end import solutions.",
-      "foundingDate": "2025-06",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "World Trade Center, West Tower, 1 Bank of Ceylon Mawatha",
-        "addressLocality": "Colombo",
-        "postalCode": "00100",
-        "addressCountry": "LK"
-      },
-      "telephone": "+94722114115",
-      "sameAs": [
-        "https://www.instagram.com/revmaxx_group?igsh=ZzhqaHJrNmJtcHdj",
-        "https://www.facebook.com/profile.php?id=61590320872247&mibextid=ZbWKwL",
-        "https://x.com/REVMAXXGROUP",
-        "https://www.linkedin.com/company/revmaxx-group-pvt-ltd"
-      ]
-    }
-    </script>
-
     <style>
         :root{
             --rx-black:#050506;
@@ -95,10 +51,7 @@
             outline-offset: 2px;
         }
 
-        section[id] { scroll-margin-top: 4.5rem; }
-        @media (min-width: 768px) {
-            section[id] { scroll-margin-top: 6.5rem; }
-        }
+        section[id] { scroll-margin-top: 6.5rem; }
 
         .rx-gradient-text {
             background-image:
@@ -188,7 +141,6 @@
         /* The weave "moves" via a diagonal light-glint sweeping across the
            static image, instead of the whole image (logo included) bobbing. */
         .rx-carbon-wrap { overflow: hidden; animation: rx-hero-breathe 8s ease-in-out infinite; }
-        #rxHeroImg { transform: translateX(-4%) scale(1.06); transform-origin: center; }
         @keyframes rx-hero-breathe {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.012); }
@@ -361,11 +313,7 @@
         }
 
         /* ============ PINNED PROCESS TRACK ============ */
-        /* Height is set dynamically by JS to match how far the track actually
-           needs to translate (see setPinHeight in the script below) — a fixed
-           vh value here scrolled way more than the cards ever moved on wide
-           desktop viewports. This is just a sane fallback before JS runs. */
-        #processPinWrap { height: 160vh; }
+        #processPinWrap { height: 300vh; }
         #processSticky {
             position: sticky; top: 6.5rem;
             height: 72vh;
@@ -410,14 +358,7 @@
 
         /* ============ MOBILE STICKY STACK (Process) ============ */
         @media (max-width: 1023px) {
-            /* Extra run-way after the last card: sticky cards 1-4 each get a
-               "hang time" equal to the margin/height of the sibling below them
-               before the next card scrolls over them. Card 5 has no sibling
-               after it, so without this padding it un-sticks almost instantly
-               and visibly jumps/snaps to the next section. This spacer gives
-               it a bit of that same release — kept small (8vh, was 38vh)
-               so it doesn't leave a large empty gap before the next section. */
-            #processMobileGrid { display: block; padding-bottom: 8vh; }
+            #processMobileGrid { display: block; padding-bottom: 8.5rem; }
             .rx-stack-card {
                 position: sticky;
                 margin-bottom: 0.85rem;
@@ -428,78 +369,8 @@
             .rx-stack-card:nth-child(2) { top: 6.25rem; z-index: 2; }
             .rx-stack-card:nth-child(3) { top: 7rem; z-index: 3; }
             .rx-stack-card:nth-child(4) { top: 7.75rem; z-index: 4; }
-            .rx-stack-card:nth-child(5) { top: 8.5rem; z-index: 5; margin-bottom: 0; }
+            .rx-stack-card:nth-child(5) { top: 8.5rem; z-index: 5; }
         }
-
-        /* ============ FILM GRAIN OVERLAY ============ */
-        .rx-grain {
-            position: fixed;
-            inset: 0;
-            z-index: 40;
-            pointer-events: none;
-            opacity: 0.05;
-            mix-blend-mode: overlay;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-            background-repeat: repeat;
-        }
-        @media (prefers-reduced-motion: no-preference) {
-            .rx-grain { animation: rx-grain-shift 1.4s steps(4) infinite; }
-        }
-        @keyframes rx-grain-shift {
-            0%   { transform: translate(0, 0); }
-            25%  { transform: translate(-1.5%, 1%); }
-            50%  { transform: translate(1%, -1.5%); }
-            75%  { transform: translate(-1%, -1%); }
-            100% { transform: translate(0, 0); }
-        }
-
-        /* ============ SHIMMER TEXT (chrome sweep) ============ */
-        /* BUG FIX: the resting stops used to be a dark gray (#71717a), which
-           is low-contrast against the black background. Since the sweep
-           spends most of its 6s cycle sitting on those resting stops, the
-           text read as dim/muddy (or briefly looked like it disappeared)
-           except for the moment the bright band passed through. Resting
-           color is now a light silver so the text stays clearly legible at
-           all times, with the white/gold band sweeping through as an accent
-           on top rather than the text's only visible state. */
-        .rx-shimmer {
-            background-image: linear-gradient(100deg, #d4d4d8 20%, #ffffff 40%, #f5d68a 50%, #ffffff 60%, #d4d4d8 80%);
-            background-size: 220% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent !important;
-            animation: rx-shimmer-sweep 6s linear infinite;
-        }
-        @keyframes rx-shimmer-sweep {
-            0%   { background-position: 200% center; }
-            100% { background-position: -200% center; }
-        }
-
-        /* Silver/platinum variant — same chrome sweep, no gold stop. Used
-           where the gold tint would read too "flashy" for the tone we want
-           (e.g. the founders' names), while still feeling premium. */
-        .rx-shimmer-silver {
-            background-image: linear-gradient(100deg, #d4d4d8 20%, #ffffff 42%, #f4f4f5 50%, #ffffff 58%, #d4d4d8 80%);
-            background-size: 220% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent !important;
-            animation: rx-shimmer-sweep 6s linear infinite;
-        }
-
-        /* ============ FAQ ACCORDION ============ */
-        .rx-faq-item summary { list-style: none; cursor: pointer; }
-        .rx-faq-item summary::-webkit-details-marker { display: none; }
-        .rx-faq-item .rx-faq-body {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows 0.35s cubic-bezier(0.16,1,0.3,1);
-        }
-        .rx-faq-item[open] .rx-faq-body { grid-template-rows: 1fr; }
-        .rx-faq-item .rx-faq-body-inner { overflow: hidden; }
-        .rx-faq-chevron { transition: transform 0.3s cubic-bezier(0.16,1,0.3,1); flex-shrink: 0; }
-        .rx-faq-item[open] .rx-faq-chevron { transform: rotate(180deg); }
-        .rx-faq-item[open] summary { color: #fff; }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -508,7 +379,6 @@
                 transition-duration: 0.001ms !important;
                 scroll-behavior: auto !important;
             }
-            .rx-grain { display: none; }
         }
     </style>
 	<script type="application/ld+json">
@@ -559,7 +429,6 @@
 
     <!-- CURSOR-REACTIVE AMBIENT GLOW -->
     <div id="rxCursorGlow"></div>
-    <div class="rx-grain" aria-hidden="true"></div>
 
     <!-- FILM GRAIN TEXTURE -->
     <div id="rxGrain"></div>
@@ -569,10 +438,10 @@
 
     <!-- NAVIGATION BAR -->
     <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-zinc-900/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 md:h-24 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between">
 
             <a href="#" class="flex items-center">
-                <img src="revmaxx group main logo.png" alt="REVMAXX Logo" class="h-10 sm:h-14 md:h-[78px] w-auto object-contain">
+                <img src="revmaxx group main logo.png" alt="REVMAXX Logo" style="height: 78px; width: auto; object-fit: contain;">
             </a>
 
             <div class="flex items-center gap-4 md:flex-col md:items-end md:justify-center md:gap-2">
@@ -582,7 +451,6 @@
                     <a href="#corporate" class="rx-nav-link hover:text-white transition-colors">Corporate HQ</a>
                     <a href="#location" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;" class="rx-nav-link hover:text-white transition-colors">Find Us</a>
                     <a href="#socials-matrix" class="rx-nav-link hover:text-white transition-colors">Socials</a>
-                    <a href="REVMAXX-Brochure.pdf" target="_blank" class="rx-nav-link hover:text-white transition-colors">Brochure</a>
                     <span id="rxNavUnderline"></span>
                 </div>
 
@@ -603,13 +471,12 @@
                 <a href="#corporate" class="rx-mobile-link">Corporate HQ</a>
                 <a href="#location" class="rx-mobile-link" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;">Find Us</a>
                 <a href="#socials-matrix" class="rx-mobile-link">Socials</a>
-                <a href="REVMAXX-Brochure.pdf" target="_blank" class="rx-mobile-link">Brochure</a>
             </div>
         </div>
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="relative flex flex-col items-center justify-center pt-16 sm:pt-20 md:pt-24 pb-12 overflow-hidden bg-black">
+    <section class="relative flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden bg-black">
         <div class="relative z-10 w-full max-w-5xl px-6">
 
             <div class="rx-carbon-wrap relative mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
@@ -617,7 +484,7 @@
                 <div class="rx-carbon-sheen"></div>
             </div>
 
-            <div class="rx-reveal mt-6 sm:mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
+            <div class="rx-reveal mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
 
                 <h3 class="rx-gradient-text font-mono text-[13px] font-bold tracking-[0.3em] uppercase mb-4">
                     About REVMAXX
@@ -636,32 +503,6 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- LEDGER STRIP: ANIMATED STAT COUNTERS        -->
-    <!-- ========================================== -->
-    <section class="pt-4 pb-16 bg-black">
-        <div class="max-w-5xl mx-auto px-6">
-            <div class="rx-reveal rx-panel rounded-2xl px-4 sm:px-8 py-8 sm:py-10 grid grid-cols-2 sm:grid-cols-4 gap-y-8 gap-x-4 text-center">
-                <div>
-                    <p class="rx-stat-num font-display text-3xl sm:text-4xl font-bold text-white" data-target="15" data-suffix="+">0</p>
-                    <p class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-zinc-500 uppercase mt-2">Manufacturer<br>Relationships</p>
-                </div>
-                <div>
-                    <p class="rx-stat-num font-display text-3xl sm:text-4xl font-bold text-white" data-target="6" data-suffix="+">0</p>
-                    <p class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-zinc-500 uppercase mt-2">Global Auction<br>Networks</p>
-                </div>
-                <div>
-                    <p class="rx-stat-num font-display text-3xl sm:text-4xl font-bold text-white" data-target="5">0</p>
-                    <p class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-zinc-500 uppercase mt-2">Stage Managed<br>Process</p>
-                </div>
-                <div>
-                    <p class="rx-stat-num font-display text-3xl sm:text-4xl font-bold text-white" data-target="3" data-suffix="+">0</p>
-                    <p class="font-mono text-[10px] sm:text-[11px] tracking-[0.2em] text-zinc-500 uppercase mt-2">Logistics &amp;<br>Shipping Partners</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================== -->
     <!-- CORPORATE SUBDIVISIONS & AUCTION DESK      -->
     <!-- ========================================== -->
     <section id="subdivisions" class="pt-16 pb-24 border-t border-zinc-900 bg-gradient-to-b from-[#050506] via-zinc-950 to-black">
@@ -669,7 +510,7 @@
 
         <div class="text-center max-w-3xl mx-auto mb-16">
           <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Group Architecture</h2>
-          <p class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Our Core Divisions</p>
+          <p class="rx-scramble font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Our Core Divisions</p>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-8 mb-16">
@@ -678,7 +519,7 @@
           <div class="rx-panel rx-reveal rx-tilt p-8 sm:p-10 rounded-2xl hover:border-red-600/40 transition-colors duration-300 flex flex-col justify-between">
             <div>
               <div class="flex justify-center mb-8">
-                <img src="revmaxx brokerage.png" alt="REVMAXX Vehicle Brokerage" loading="lazy" decoding="async" class="h-36 sm:h-48 w-auto max-w-full mx-auto object-contain hover:scale-105 transition-transform duration-300">
+                <img src="revmaxx brokerage.png" alt="REVMAXX Vehicle Brokerage" class="h-36 sm:h-48 w-auto max-w-full mx-auto object-contain hover:scale-105 transition-transform duration-300">
               </div>
               <p class="text-zinc-400 text-sm font-light leading-relaxed mb-6 text-center sm:text-left">
                 Operating as dedicated vehicle sourcing and brokerage managers, connecting clients with off-market inventory, rare factory allocation build slots, and premier global auction listings.
@@ -699,7 +540,7 @@
           <div class="rx-panel rx-reveal rx-reveal-delay-2 rx-tilt p-8 sm:p-10 rounded-2xl hover:border-red-600/40 transition-colors duration-300 flex flex-col justify-between">
             <div>
               <div class="flex justify-center mb-8">
-                <img src="revmaxx imports and logistics.png" alt="REVMAXX Vehicle Imports and Logistics" loading="lazy" decoding="async" class="h-36 sm:h-48 w-auto max-w-full mx-auto object-contain hover:scale-105 transition-transform duration-300">
+                <img src="revmaxx imports and logistics.png" alt="REVMAXX Vehicle Imports and Logistics" class="h-36 sm:h-48 w-auto max-w-full mx-auto object-contain hover:scale-105 transition-transform duration-300">
               </div>
               <p class="text-zinc-400 text-sm font-light leading-relaxed mb-6 text-center sm:text-left">
                 We handle complete end-to-end international freight, utilizing secure climate-controlled container shipping, customs clearance, and insured door-to-door transit.
@@ -720,35 +561,32 @@
         <!-- Global Auction Networks Ribbon -->
         <div class="rx-panel rx-reveal p-6 sm:p-8 rounded-2xl text-center">
           <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-red-500 block mb-6">Global Auction Networks</span>
-          <div class="flex flex-wrap justify-center gap-y-4 gap-x-2 font-mono text-xs font-medium tracking-wider text-zinc-300 uppercase items-center">
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">RM Sotheby's</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Bonhams</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Gooding &amp; Co.</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Christie's</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Dorotheum</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">USS Tokyo Grade-S</div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-4 gap-x-2 font-mono text-xs font-medium tracking-wider text-zinc-300 uppercase items-center">
+            <div class="hover:text-red-500 transition-colors py-1">RM Sotheby's</div>
+            <div class="hover:text-red-500 transition-colors py-1">Bonhams</div>
+            <div class="hover:text-red-500 transition-colors py-1">Gooding &amp; Co.</div>
+            <div class="hover:text-red-500 transition-colors py-1">Christie's</div>
+            <div class="hover:text-red-500 transition-colors py-1">Dorotheum</div>
+            <div class="hover:text-red-500 transition-colors py-1">USS Tokyo Grade-S</div>
           </div>
         </div>
 
         <!-- Manufacturer Relationships Strip -->
         <div class="rx-panel rx-reveal rx-reveal-delay-1 p-6 sm:p-8 rounded-2xl text-center mt-6">
           <span class="font-mono text-[10px] font-semibold uppercase tracking-[0.3em] text-red-500 block mb-6">Direct Manufacturer Relationships</span>
-          <div class="flex flex-wrap justify-center gap-y-4 gap-x-2 font-mono text-xs font-medium tracking-wider text-zinc-300 uppercase items-center">
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Ferrari</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Mercedes-Benz</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">BMW</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Porsche</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Volkswagen Group</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Aston Martin</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">McLaren</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Maybach</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Lamborghini</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Ford</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Corvette</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">GMC</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Lotus</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Bentley</div>
-            <div class="w-1/2 sm:w-1/3 lg:w-1/6 hover:text-red-500 transition-colors py-1">Cadillac</div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-4 gap-x-2 font-mono text-xs font-medium tracking-wider text-zinc-300 uppercase items-center">
+            <div class="hover:text-red-500 transition-colors py-1">Ferrari</div>
+            <div class="hover:text-red-500 transition-colors py-1">Mercedes-Benz</div>
+            <div class="hover:text-red-500 transition-colors py-1">BMW</div>
+            <div class="hover:text-red-500 transition-colors py-1">Porsche</div>
+            <div class="hover:text-red-500 transition-colors py-1">Volkswagen Group</div>
+            <div class="hover:text-red-500 transition-colors py-1">Aston Martin</div>
+            <div class="hover:text-red-500 transition-colors py-1">McLaren</div>
+            <div class="hover:text-red-500 transition-colors py-1">Maybach</div>
+            <div class="hover:text-red-500 transition-colors py-1">Lamborghini</div>
+            <div class="hover:text-red-500 transition-colors py-1">Ford</div>
+            <div class="hover:text-red-500 transition-colors py-1">Corvette</div>
+            <div class="hover:text-red-500 transition-colors py-1">GMC</div>
           </div>
         </div>
 
@@ -763,7 +601,7 @@
 
         <div class="text-center max-w-2xl mx-auto mb-16">
           <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">How It Works</h2>
-          <p class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">The Acquisition Process</p>
+          <p class="rx-scramble font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">The Acquisition Process</p>
           <p class="text-zinc-400 font-light mt-3 text-sm">Five stages, from first enquiry to a vehicle in your possession — managed end-to-end by the broker desk.</p>
         </div>
 
@@ -872,7 +710,7 @@
 
         <div class="text-center mb-12">
           <span class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Sourcing Engine</span>
-          <h2 class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white -mt-1">Request Vehicle Sourcing</h2>
+          <h2 class="rx-scramble font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Request Vehicle Sourcing</h2>
           <p class="text-zinc-400 font-light max-w-xl mx-auto mt-3 text-sm">A four-step private intake. Our brokerage desk reviews global auction feeds and off-market inventory against your exact spec.</p>
         </div>
 
@@ -1294,7 +1132,7 @@
         <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
           <div>
             <span class="font-mono text-xs font-semibold tracking-widest text-red-600 uppercase block mb-3">Physical Presence</span>
-            <h2 class="rx-scramble rx-shimmer font-display text-3xl font-semibold tracking-tight text-white">The Corporate Headquarters</h2>
+            <h2 class="rx-scramble font-display text-3xl font-semibold tracking-tight text-white">The Corporate Headquarters</h2>
           </div>
           <p class="text-zinc-400 font-light max-w-md">Our main headquarters is located on Floor 35 at the World Trade Center (WTC), providing a modern, professional space for our team to manage global logistics, vehicle sourcing, and private client consultations.
           </p>
@@ -1302,16 +1140,16 @@
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="rx-reveal group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
-            <img src="Office reception.jpg" alt="REVMAXX Corporate Reception Desk" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            <img src="Office reception.jpg" alt="REVMAXX Corporate Reception Desk" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           </div>
           <div class="rx-reveal rx-reveal-delay-1 group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
-            <img src="office 1.jpg" alt="Executive Meeting Rooms" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            <img src="office 1.jpg" alt="Executive Meeting Rooms" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           </div>
           <div class="rx-reveal rx-reveal-delay-2 group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
-            <img src="office 2.jpg" alt="Executive Workspace Skyline View" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            <img src="office 2.jpg" alt="Executive Workspace Skyline View" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           </div>
           <div class="rx-reveal rx-reveal-delay-3 group overflow-hidden rounded-lg border border-zinc-900 bg-zinc-950 aspect-[4/3]">
-            <img src="office 3.jpg" alt="Private Desk Configurations" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            <img src="office 3.jpg" alt="Private Desk Configurations" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
           </div>
         </div>
       </div>
@@ -1352,158 +1190,44 @@
       </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- FAQ                                         -->
-    <!-- ========================================== -->
-    <section id="faq" class="pt-4 pb-24 border-t border-zinc-900 bg-black">
-      <div class="max-w-3xl mx-auto px-6">
-
-        <div class="text-center max-w-2xl mx-auto mb-12">
-          <h2 class="font-mono text-xs font-semibold tracking-[0.3em] text-red-600 uppercase">Common Questions</h2>
-          <p class="rx-scramble rx-shimmer font-display text-3xl sm:text-4xl font-semibold tracking-tight text-white mt-2">Frequently Asked Questions</p>
-        </div>
-
-        <div class="space-y-3">
-
-          <details class="rx-faq-item rx-panel rx-reveal rounded-xl">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
-              <span>How does the sourcing process work, from enquiry to delivery?</span>
-              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="rx-faq-body"><div class="rx-faq-body-inner">
-              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Every request moves through five managed stages — Enquiry, Global Sourcing, Verification, Shipping, and Delivery. Your assigned broker keeps you updated at each stage, and the vehicle arrives ready to register with full documentation in hand.</p>
-            </div></div>
-          </details>
-
-          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-1 rounded-xl">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
-              <span>Do you source right-hand drive vehicles for Sri Lankan registration?</span>
-              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="rx-faq-body"><div class="rx-faq-body-inner">
-              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Yes. For vehicles intended for local registration and road use, we source right-hand drive to meet Sri Lankan requirements. Let your broker know the intended use so we source correctly from the outset.</p>
-            </div></div>
-          </details>
-
-          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-2 rounded-xl">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
-              <span>Can I request a specific auction house or manufacturer?</span>
-              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="rx-faq-body"><div class="rx-faq-body-inner">
-              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Absolutely. If you have a preferred source in mind, mention it in your enquiry. Otherwise, we canvas our full network of global auction houses and direct manufacturer relationships to find the closest match to your spec.</p>
-            </div></div>
-          </details>
-
-          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-3 rounded-xl">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
-              <span>How do you verify a vehicle's condition before I commit?</span>
-              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="rx-faq-body"><div class="rx-faq-body-inner">
-              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Every vehicle is physically inspected and condition-reported before any commitment is made, so you know exactly what you're buying before it ships.</p>
-            </div></div>
-          </details>
-
-          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-4 rounded-xl">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
-              <span>Do you handle customs clearance and registration paperwork?</span>
-              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="rx-faq-body"><div class="rx-faq-body-inner">
-              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Yes — our logistics division manages international shipping, customs clearance, and registration documentation end-to-end, so the vehicle arrives ready to drive.</p>
-            </div></div>
-          </details>
-
-          <details class="rx-faq-item rx-panel rx-reveal rx-reveal-delay-5 rounded-xl">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
-              <span>Can you source brand-new vehicles, or only used imports?</span>
-              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="rx-faq-body"><div class="rx-faq-body-inner">
-              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Both. We handle brand new / delivery-mile vehicles as well as pre-owned imports (Grade 5-S and similar), depending on what you're after.</p>
-            </div></div>
-          </details>
-
-          <details class="rx-faq-item rx-panel rx-reveal rounded-xl">
-            <summary class="flex items-center justify-between gap-4 px-6 py-5 text-zinc-200 font-medium text-sm sm:text-base transition-colors">
-              <span>How do I start a sourcing request?</span>
-              <svg class="rx-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="rx-faq-body"><div class="rx-faq-body-inner">
-              <p class="px-6 pb-5 -mt-1 text-zinc-400 text-sm leading-relaxed font-light">Use the sourcing desk form above, or message us directly on WhatsApp via the Direct Broker Desk button — a broker will review your spec and respond personally.</p>
-            </div></div>
-          </details>
-
+    <!-- INTERCONTINENTAL SHIPPING PARTNERS -->
+    <section class="py-24 border-t border-zinc-900 bg-black/40">
+      <div class="max-w-7xl mx-auto px-6">
+        <p class="text-center font-mono text-xs font-semibold tracking-widest text-zinc-400 uppercase mb-16">Global Shipping Partners</p>
+        <div class="flex flex-wrap items-center justify-center gap-16 md:gap-28">
+          <img src="partner 1.png" alt="Logistics Partner 1" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
+          <img src="partner 2.png" alt="Logistics Partner 2" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
+          <img src="Partner 3.png" alt="Logistics Partner 3" class="h-16 md:h-20 w-auto object-contain transition-transform duration-300 hover:scale-105">
         </div>
       </div>
     </section>
 
     <!-- FOOTER / CONTACT & LEADERSHIP BOARD -->
-    <footer id="contact" class="bg-black text-zinc-500 text-xs py-16 border-t border-zinc-950">
-      <div class="max-w-7xl mx-auto px-6 space-y-16">
-
-        <!-- COMPANY SNAPSHOT: SHIPPING PARTNERS + TRUST BADGES -->
-        <div class="space-y-10 pb-16 border-b border-zinc-900/60">
-
-          <div>
-            <p class="text-center font-mono text-[10px] font-semibold tracking-widest text-zinc-400 uppercase mb-10">Global Shipping Partners</p>
-            <div class="grid grid-cols-3 items-center justify-items-center gap-3 sm:gap-8 md:gap-16">
-              <div class="rx-reveal flex items-center justify-center h-14 sm:h-16 w-full max-w-[140px] sm:max-w-[180px]">
-                <img src="partner 2.png" alt="Logistics Partner 2" loading="lazy" decoding="async" class="max-h-full max-w-full w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
-              </div>
-              <div class="rx-reveal rx-reveal-delay-1 flex items-center justify-center h-14 sm:h-16 w-full max-w-[140px] sm:max-w-[180px]">
-                <img src="partner 1.png" alt="Logistics Partner 1" loading="lazy" decoding="async" class="max-h-full max-w-full w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
-              </div>
-              <div class="rx-reveal rx-reveal-delay-2 flex items-center justify-center h-14 sm:h-16 w-full max-w-[140px] sm:max-w-[180px]">
-                <img src="Partner 3.png" alt="Logistics Partner 3" loading="lazy" decoding="async" class="max-h-full max-w-full w-auto object-contain opacity-80 transition-all duration-300 hover:opacity-100 hover:scale-105">
-              </div>
-            </div>
-          </div>
-
-          <div class="rx-reveal rx-reveal-delay-3 rx-panel rounded-2xl px-6 py-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 text-center">
-            <div class="flex items-center gap-2.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
-              <span class="font-mono text-xs tracking-wider text-zinc-300 uppercase">Established since June 2025</span>
-            </div>
-            <div class="flex items-center gap-2.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
-              <span class="font-mono text-xs tracking-wider text-zinc-300 uppercase">Registered Private Limited Company</span>
-            </div>
-            <div class="flex items-center gap-2.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1M9 13h1M14 9h1M14 13h1"/></svg>
-              <span class="font-mono text-xs tracking-wider text-zinc-300 uppercase">Colombo Headquartered</span>
-            </div>
-            <div class="flex items-center gap-2.5">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-              <span class="font-mono text-xs tracking-wider text-zinc-300 uppercase">3+ Global Logistics Partners</span>
-            </div>
-          </div>
-
-        </div>
+    <footer id="contact" class="bg-black text-zinc-500 text-xs py-10 sm:py-16 border-t border-zinc-950">
+      <div class="max-w-7xl mx-auto px-6 space-y-8 sm:space-y-16">
 
         <!-- FOUNDERS GRID -->
-        <div class="space-y-6">
+        <div class="space-y-4 sm:space-y-6">
           <p class="font-mono text-[10px] font-semibold tracking-widest text-zinc-400 uppercase text-center">Founding Board of Directors</p>
-          <div class="grid md:grid-cols-3 gap-4">
-            <div class="rx-reveal glass-panel p-6 rounded-lg text-center">
-              <h4 class="rx-scramble rx-shimmer-silver font-semibold text-sm tracking-wide">Senul Thiranagama</h4>
+          <div class="grid md:grid-cols-3 gap-3 sm:gap-4">
+            <div class="rx-reveal glass-panel p-4 sm:p-6 rounded-lg text-center">
+              <h4 class="text-white font-semibold text-sm tracking-wide">Senul Thiranagama</h4>
               <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">CEO &amp; Co-Founder</p>
             </div>
-            <div class="rx-reveal rx-reveal-delay-1 glass-panel p-6 rounded-lg text-center">
-              <h4 class="rx-scramble rx-shimmer-silver font-semibold text-sm tracking-wide">Sadun Jayasooriya</h4>
+            <div class="rx-reveal rx-reveal-delay-1 glass-panel p-4 sm:p-6 rounded-lg text-center">
+              <h4 class="text-white font-semibold text-sm tracking-wide">Sadun Jayasooriya</h4>
               <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">Director &amp; Co-Founder</p>
             </div>
-            <div class="rx-reveal rx-reveal-delay-2 glass-panel p-6 rounded-lg text-center">
-              <h4 class="rx-scramble rx-shimmer-silver font-semibold text-sm tracking-wide">Shehan Mendis</h4>
+            <div class="rx-reveal rx-reveal-delay-2 glass-panel p-4 sm:p-6 rounded-lg text-center">
+              <h4 class="text-white font-semibold text-sm tracking-wide">Shehan Mendis</h4>
               <p class="text-red-500 font-mono font-medium text-[10px] uppercase tracking-wider mt-1">Director &amp; Co-Founder</p>
             </div>
           </div>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-12 items-start pt-8 border-t border-zinc-900/60">
+        <div class="grid md:grid-cols-2 gap-6 sm:gap-12 items-start pt-6 sm:pt-8 border-t border-zinc-900/60">
           <div>
-            <img src="revmaxx group main logo.png" alt="REVMAXX Logo Footer" loading="lazy" decoding="async" class="h-16 w-auto object-contain mb-6 opacity-80">
+            <img src="revmaxx group main logo.png" alt="REVMAXX Logo Footer" class="h-14 w-auto object-contain mb-6 opacity-80">
             <p class="max-w-sm font-light leading-relaxed mb-4">
               A premier automotive brokerage specializing in global vehicle sourcing and international logistics, delivering seamless end-to-end import solutions.
             </p>
@@ -1522,7 +1246,7 @@
               </p>
             </div>
 
-            <div id="socials-matrix" class="flex flex-col gap-3 items-start md:items-end text-left md:text-right mt-6">
+            <div id="socials-matrix" class="flex flex-col gap-3 items-start md:items-end text-left md:text-right mt-4 sm:mt-6">
 
               <span class="font-mono text-[10px] tracking-[0.15em] uppercase text-zinc-400 font-medium">Email Enquiries</span>
 
@@ -1566,11 +1290,11 @@
         </div>
 
         <!-- LEGAL & CREDITS -->
-        <div class="w-full pt-8 border-t border-zinc-900/60">
+        <div class="w-full pt-6 sm:pt-8 border-t border-zinc-900/60">
           <p class="text-[11px] md:text-xs text-zinc-400 font-medium tracking-wide leading-relaxed text-center">
-            All third-party trade names, brand marks, and manufacturer or auction house references displayed on this website — including but not limited to RM Sotheby's, Bonhams, Gooding &amp; Co., Christie's, Dorotheum, Ferrari, Mercedes-Benz, BMW, Porsche, Volkswagen Group, Aston Martin, McLaren, Maybach, Lamborghini, Ford, Corvette, GMC, Lotus, Bentley, Cadillac, Wallenius Wilhelmsen, DHL Aviation, and Atlas Air — remain the sole intellectual property of their respective registered owners. Their inclusion is for informational purposes only and does not imply endorsement, partnership, or affiliation unless otherwise stated.
+            All third-party trade names, brand marks, and manufacturer or auction house references displayed on this website — including but not limited to RM Sotheby's, Bonhams, Gooding &amp; Co., Christie's, Dorotheum, Ferrari, Mercedes-Benz, BMW, Porsche, Volkswagen Group, Aston Martin, McLaren, Maybach, Lamborghini, Ford, Corvette, GMC, Wallenius Wilhelmsen, DHL Aviation, and Atlas Air — remain the sole intellectual property of their respective registered owners. Their inclusion is for informational purposes only and does not imply endorsement, partnership, or affiliation unless otherwise stated.
           </p>
-          <p class="text-[10px] md:text-xs text-zinc-500 font-semibold tracking-widest uppercase text-center mt-3">
+          <p class="text-[10px] md:text-xs text-zinc-500 font-semibold tracking-widest uppercase text-center mt-2 sm:mt-3">
             Developed by REVMAXX IT
           </p>
         </div>
@@ -1580,32 +1304,10 @@
     <!-- ========================================== -->
     <!-- MOTION ENGINE — reveal, tilt, glow, magnetic, scramble, parallax, pin -->
     <!-- ========================================== -->
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script>
     (function () {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const isFinePointer = window.matchMedia('(pointer: fine)').matches;
-
-      /* ---------- SMOOTH SCROLL (Lenis) ---------- */
-      // Skip entirely for reduced-motion users, and fail silently if the CDN
-      // didn't load — the site must work with plain native scroll either way.
-      if (!reduceMotion && typeof Lenis === 'function') {
-        try {
-          const lenis = new Lenis({
-            duration: 1.1,
-            easing: (t) => 1 - Math.pow(1 - t, 3),
-            smoothWheel: true,
-            syncTouch: false, // leave native touch scrolling alone on mobile
-          });
-          function lenisRaf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(lenisRaf);
-          }
-          requestAnimationFrame(lenisRaf);
-        } catch (e) {
-          // Lenis failed to init — native scroll still works, nothing to do.
-        }
-      }
 
       /* ---------- SCROLL PROGRESS BAR ---------- */
       const progressBar = document.getElementById('rxProgress');
@@ -1738,39 +1440,6 @@
         revealEls.forEach((el) => io.observe(el));
       }
 
-      /* ---------- ANIMATED STAT COUNTERS ---------- */
-      const statEls = document.querySelectorAll('.rx-stat-num');
-      function animateStat(el) {
-        const target = parseInt(el.getAttribute('data-target'), 10) || 0;
-        const suffix = el.getAttribute('data-suffix') || '';
-        const durationMs = 1200;
-        const start = performance.now();
-        function tick(now) {
-          const p = Math.min((now - start) / durationMs, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = Math.round(eased * target) + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      }
-      if (statEls.length) {
-        if (reduceMotion || !('IntersectionObserver' in window)) {
-          statEls.forEach((el) => {
-            el.textContent = (el.getAttribute('data-target') || '0') + (el.getAttribute('data-suffix') || '');
-          });
-        } else {
-          const statIO = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                animateStat(entry.target);
-                statIO.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.5 });
-          statEls.forEach((el) => statIO.observe(el));
-        }
-      }
-
       /* ---------- CARD TILT ---------- */
       if (!reduceMotion && isFinePointer) {
         document.querySelectorAll('.rx-tilt').forEach((card) => {
@@ -1799,22 +1468,12 @@
           gx = e.clientX; gy = e.clientY;
           if (!glowActive) { glow.classList.add('rx-active'); glowActive = true; }
         });
-        let glowRafId = null;
-        function loop() {
+        (function loop() {
           cx += (gx - cx) * 0.12;
           cy += (gy - cy) * 0.12;
           glow.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
-          glowRafId = requestAnimationFrame(loop);
-        }
-        glowRafId = requestAnimationFrame(loop);
-        // Don't keep this rAF loop spinning in a background tab.
-        document.addEventListener('visibilitychange', () => {
-          if (document.hidden) {
-            if (glowRafId !== null) { cancelAnimationFrame(glowRafId); glowRafId = null; }
-          } else if (glowRafId === null) {
-            glowRafId = requestAnimationFrame(loop);
-          }
-        });
+          requestAnimationFrame(loop);
+        })();
       }
 
       /* ---------- MAGNETIC BUTTONS ---------- */
@@ -1881,36 +1540,18 @@
       const heroImg = document.getElementById('rxHeroImg');
       const heroSection = heroImg ? heroImg.closest('section') : null;
       if (heroImg && !reduceMotion) {
-        // PERF: this rAF loop used to run forever, on every single frame, for
-        // the entire lifetime of the page — even after scrolling far past the
-        // hero, where it has no visible effect. On long pages / lower-end
-        // phones that's wasted CPU stacking up with all the other motion
-        // effects and is a real source of scroll jank. Now it only runs while
-        // the hero section is actually near the viewport.
-        let heroActive = true;
-        let heroRafId = null;
-        function heroLoop() {
+        let startTime = performance.now();
+        function heroLoop(now) {
           const sectionHeight = heroSection ? heroSection.offsetHeight : 600;
           const zoomProgress = Math.min(Math.max(window.scrollY / sectionHeight, 0), 1);
           const scrollOffset = window.scrollY * -0.06;
-          const scale = 1.06 + zoomProgress * 0.12;
+          const scale = 1 + zoomProgress * 0.12;
           const opacity = 1 - zoomProgress * 0.7;
-          heroImg.style.transform = `translateX(-4%) translateY(${scrollOffset.toFixed(2)}px) scale(${scale.toFixed(3)})`;
+          heroImg.style.transform = `translateY(${scrollOffset.toFixed(2)}px) scale(${scale.toFixed(3)})`;
           heroImg.style.opacity = opacity.toFixed(2);
-          heroRafId = heroActive ? requestAnimationFrame(heroLoop) : null;
+          requestAnimationFrame(heroLoop);
         }
-        if (heroSection && 'IntersectionObserver' in window) {
-          const heroIO = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              heroActive = entry.isIntersecting;
-              if (heroActive && heroRafId === null) {
-                heroRafId = requestAnimationFrame(heroLoop);
-              }
-            });
-          }, { rootMargin: '200px 0px 200px 0px' });
-          heroIO.observe(heroSection);
-        }
-        heroRafId = requestAnimationFrame(heroLoop);
+        requestAnimationFrame(heroLoop);
       }
 
       /* ---------- MAGNETIC NAV UNDERLINE ---------- */
@@ -1936,46 +1577,16 @@
       const pinSticky = document.getElementById('processSticky');
       const pinTrack = document.getElementById('processTrack');
       if (pinWrap && pinSticky && pinTrack) {
-        // BUG FIX: this used to check `matchMedia('(min-width: 1024px)').matches`
-        // a single time, right here at page load, and only attached the scroll
-        // listener if that was true. That meant: load the page at any width
-        // under 1024px (a phone/tablet in portrait) and then rotate to
-        // landscape or resize past 1024px — the CSS switches to showing this
-        // desktop track, but the JS that drives it was never attached, so the
-        // track just sits at translateX(0). With 5 cards at 320px + gaps that
-        // overflow the sticky viewport, only the first ~3.5 cards are visible
-        // and card 5 is permanently off-screen. Fix: always attach the
-        // listeners, and check the breakpoint live, every time, inside
-        // updateTrack — plus listen for the breakpoint changing.
         const desktopMQ = window.matchMedia('(min-width: 1024px)');
         let ticking = false;
-
-        // BUG FIX: the wrapper used to be a fixed 300vh no matter how far the
-        // track actually had to slide. maxTranslate (the real horizontal
-        // distance) depends on viewport width — on a wide desktop screen more
-        // cards already fit on-screen, so maxTranslate can be small (a few
-        // hundred px) while the pin still demanded ~300vh (often 2000px+) of
-        // scrolling to complete. That mismatch is exactly what read as "barely
-        // any card movement for a huge amount of scroll." Fix: measure
-        // maxTranslate and size the pin wrapper's height around that distance
-        // (plus a small buffer so the pin doesn't grab/release instantly), so
-        // scroll input and visible movement stay roughly 1:1.
-        function setPinHeight() {
-          if (!desktopMQ.matches) {
-            pinWrap.style.height = '';
-            return;
-          }
-          const maxTranslate = Math.max(pinTrack.scrollWidth - pinSticky.clientWidth, 0);
-          const buffer = pinSticky.offsetHeight * 0.35;
-          pinWrap.style.height = (pinSticky.offsetHeight + maxTranslate + buffer) + 'px';
-        }
-
         function updateTrack() {
           ticking = false;
+          // Re-check the breakpoint live on every call — if this ran once at
+          // load and the viewport later crossed 1024px (device rotation,
+          // window resize), a cached check here would leave the track
+          // permanently frozen at translateX(0), which is why the desktop
+          // sequence used to look "stuck" and card 05 was never reachable.
           if (!desktopMQ.matches) {
-            // Below 1024px the mobile stack is shown instead — clear any
-            // leftover transform so nothing is stuck off-screen if the
-            // viewport shrinks back down.
             pinTrack.style.transform = '';
             return;
           }
@@ -1986,29 +1597,20 @@
           const translateX = reduceMotion ? 0 : -progress * maxTranslate;
           pinTrack.style.transform = `translateX(${translateX}px)`;
         }
-
-        window.addEventListener('scroll', () => {
+        function requestTrackUpdate() {
           if (!ticking) {
-            ticking = true;
             requestAnimationFrame(updateTrack);
+            ticking = true;
           }
-        }, { passive: true });
-        window.addEventListener('resize', () => {
-          setPinHeight();
-          updateTrack();
-        });
-        // Rotation on a tablet/phone (or a manual window resize past 1024px)
-        // doesn't reliably fire a plain 'resize' in every browser — listen
-        // for the breakpoint itself changing too.
-        if (typeof desktopMQ.addEventListener === 'function') {
-          desktopMQ.addEventListener('change', () => { setPinHeight(); updateTrack(); });
-        } else if (typeof desktopMQ.addListener === 'function') {
-          desktopMQ.addListener(() => { setPinHeight(); updateTrack(); }); // Safari < 14 fallback
         }
-        // Fonts/images loading after initial layout can shift card widths
-        // (and therefore scrollWidth) — re-measure once everything's settled.
-        window.addEventListener('load', () => { setPinHeight(); updateTrack(); });
-        setPinHeight();
+        window.addEventListener('scroll', requestTrackUpdate, { passive: true });
+        window.addEventListener('resize', requestTrackUpdate);
+        window.addEventListener('orientationchange', requestTrackUpdate);
+        if (desktopMQ.addEventListener) {
+          desktopMQ.addEventListener('change', requestTrackUpdate);
+        } else if (desktopMQ.addListener) {
+          desktopMQ.addListener(requestTrackUpdate);
+        }
         updateTrack();
       }
     })();
