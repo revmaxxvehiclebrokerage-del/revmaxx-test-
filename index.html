@@ -265,9 +265,11 @@
 
         /* ============ PARALLAX ============ */
         .rx-parallax { will-change: transform; }
-        @media (min-width: 640px) {
-            #rxHeroImg { width: 100% !important; }
-        }
+        /* Recenters the REVMAXX wordmark, which sits slightly right-of-center
+           in the source PNG: zoom in a touch and shift left so the crop
+           reads dead-center to the eye. Uses width/margin (not transform)
+           so it never fights the scroll-driven transform set in JS. */
+        #rxHeroImg { width: 106% !important; margin-left: -7.3% !important; }
 
         /* ============ MOBILE NAV ============ */
         .rx-burger, .rx-burger::before, .rx-burger::after {
@@ -438,13 +440,17 @@
 
     <!-- NAVIGATION BAR -->
     <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-xl border-b border-zinc-900/40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-24 md:h-28 flex items-center justify-between">
 
             <a href="#" class="flex items-center">
                 <img src="revmaxx group main logo.png" alt="REVMAXX Logo" style="height: 78px; width: auto; object-fit: contain;">
             </a>
 
             <div class="flex items-center gap-4 md:flex-col md:items-end md:justify-center md:gap-2">
+                <p id="rxGreeting" class="hidden md:block font-mono text-[10px] tracking-widest uppercase text-zinc-500">
+                    <span id="rxGreetingCity">Colombo</span> — <span id="rxGreetingTime">--:--</span> · <span id="rxGreetingText">Good evening</span>
+                </p>
+
                 <div id="rxNavLinks" class="hidden md:flex items-center gap-6 text-zinc-400 font-mono font-medium tracking-widest uppercase text-[11px]">
                     <a href="#subdivisions" class="rx-nav-link hover:text-white transition-colors">Divisions</a>
                     <a href="#sourcing" class="rx-nav-link hover:text-white transition-colors">Sourcing Engine</a>
@@ -471,6 +477,9 @@
                 <a href="#corporate" class="rx-mobile-link">Corporate HQ</a>
                 <a href="#location" class="rx-mobile-link" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;">Find Us</a>
                 <a href="#socials-matrix" class="rx-mobile-link">Socials</a>
+                <p id="rxGreetingMobile" class="font-mono text-[11px] tracking-widest uppercase text-zinc-500 pt-3">
+                    <span id="rxGreetingCityM">Colombo</span> — <span id="rxGreetingTimeM">--:--</span> · <span id="rxGreetingTextM">Good evening</span>
+                </p>
             </div>
         </div>
     </nav>
@@ -478,11 +487,6 @@
     <!-- HERO SECTION -->
     <section class="relative flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden bg-black">
         <div class="relative z-10 w-full max-w-5xl px-6">
-
-            <p id="rxGreeting" class="text-center font-mono text-[11px] tracking-widest uppercase text-zinc-500 mb-4">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block mr-1.5 align-middle animate-pulse"></span>
-                <span id="rxGreetingText">Good evening</span> — <span id="rxGreetingTime">--:--</span>, Colombo
-            </p>
 
             <div class="rx-carbon-wrap relative mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
                 <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain">
@@ -1580,6 +1584,8 @@
       /* ---------- LIVE COLOMBO GREETING ---------- */
       const greetingText = document.getElementById('rxGreetingText');
       const greetingTime = document.getElementById('rxGreetingTime');
+      const greetingTextM = document.getElementById('rxGreetingTextM');
+      const greetingTimeM = document.getElementById('rxGreetingTimeM');
       if (greetingText && greetingTime) {
         function updateGreeting() {
           const now = new Date();
@@ -1590,8 +1596,11 @@
           else if (colomboHour < 17) label = 'Good afternoon';
           else if (colomboHour < 21) label = 'Good evening';
           else label = 'Good night';
+          const timeStr = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Colombo', hour: 'numeric', minute: '2-digit', hour12: true }).format(now);
           greetingText.textContent = label;
-          greetingTime.textContent = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Colombo', hour: 'numeric', minute: '2-digit', hour12: true }).format(now);
+          greetingTime.textContent = timeStr;
+          if (greetingTextM) greetingTextM.textContent = label;
+          if (greetingTimeM) greetingTimeM.textContent = timeStr;
         }
         updateGreeting();
         setInterval(updateGreeting, 30000);
