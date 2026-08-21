@@ -265,11 +265,6 @@
 
         /* ============ PARALLAX ============ */
         .rx-parallax { will-change: transform; }
-        /* Recenters the REVMAXX wordmark, which sits slightly right-of-center
-           in the source PNG: zoom in a touch and shift left so the crop
-           reads dead-center to the eye. Uses width/margin (not transform)
-           so it never fights the scroll-driven transform set in JS. */
-        #rxHeroImg { width: 106% !important; margin-left: -7.3% !important; }
 
         /* ============ MOBILE NAV ============ */
         .rx-burger, .rx-burger::before, .rx-burger::after {
@@ -470,6 +465,10 @@
             </div>
         </div>
 
+        <p id="rxGreetingBar" class="md:hidden text-center font-mono text-[10px] tracking-widest uppercase text-zinc-500 pb-2 -mt-1">
+            <span id="rxGreetingCityB">Colombo</span> — <span id="rxGreetingTimeB">--:--</span> · <span id="rxGreetingTextB">Good evening</span>
+        </p>
+
         <div id="rxMobileMenu" class="md:hidden">
             <div class="flex flex-col px-6 py-6 gap-1 text-zinc-300 font-mono font-medium tracking-widest uppercase text-[13px]">
                 <a href="#subdivisions" class="rx-mobile-link">Divisions</a>
@@ -477,9 +476,6 @@
                 <a href="#corporate" class="rx-mobile-link">Corporate HQ</a>
                 <a href="#location" class="rx-mobile-link" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;">Find Us</a>
                 <a href="#socials-matrix" class="rx-mobile-link">Socials</a>
-                <p id="rxGreetingMobile" class="font-mono text-[11px] tracking-widest uppercase text-zinc-500 pt-3">
-                    <span id="rxGreetingCityM">Colombo</span> — <span id="rxGreetingTimeM">--:--</span> · <span id="rxGreetingTextM">Good evening</span>
-                </p>
             </div>
         </div>
     </nav>
@@ -489,7 +485,7 @@
         <div class="relative z-10 w-full max-w-5xl px-6">
 
             <div class="rx-carbon-wrap relative mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
-                <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain">
+                <img id="rxHeroImg" src="revmaxx group carbon fiber template-centered.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain">
                 <div class="rx-carbon-sheen"></div>
             </div>
 
@@ -1584,8 +1580,8 @@
       /* ---------- LIVE COLOMBO GREETING ---------- */
       const greetingText = document.getElementById('rxGreetingText');
       const greetingTime = document.getElementById('rxGreetingTime');
-      const greetingTextM = document.getElementById('rxGreetingTextM');
-      const greetingTimeM = document.getElementById('rxGreetingTimeM');
+      const greetingTextB = document.getElementById('rxGreetingTextB');
+      const greetingTimeB = document.getElementById('rxGreetingTimeB');
       if (greetingText && greetingTime) {
         function updateGreeting() {
           const now = new Date();
@@ -1599,8 +1595,8 @@
           const timeStr = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Colombo', hour: 'numeric', minute: '2-digit', hour12: true }).format(now);
           greetingText.textContent = label;
           greetingTime.textContent = timeStr;
-          if (greetingTextM) greetingTextM.textContent = label;
-          if (greetingTimeM) greetingTimeM.textContent = timeStr;
+          if (greetingTextB) greetingTextB.textContent = label;
+          if (greetingTimeB) greetingTimeB.textContent = timeStr;
         }
         updateGreeting();
         setInterval(updateGreeting, 30000);
