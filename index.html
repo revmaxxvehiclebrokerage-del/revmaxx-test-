@@ -479,6 +479,11 @@
     <section class="relative flex flex-col items-center justify-center pt-24 pb-12 overflow-hidden bg-black">
         <div class="relative z-10 w-full max-w-5xl px-6">
 
+            <p id="rxGreeting" class="text-center font-mono text-[11px] tracking-widest uppercase text-zinc-500 mb-4">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block mr-1.5 align-middle animate-pulse"></span>
+                <span id="rxGreetingText">Good evening</span> — <span id="rxGreetingTime">--:--</span>, Colombo
+            </p>
+
             <div class="rx-carbon-wrap relative mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
                 <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain">
                 <div class="rx-carbon-sheen"></div>
@@ -1203,8 +1208,8 @@
     </section>
 
     <!-- FOOTER / CONTACT & LEADERSHIP BOARD -->
-    <footer id="contact" class="bg-black text-zinc-500 text-xs py-10 sm:py-16 border-t border-zinc-950">
-      <div class="max-w-7xl mx-auto px-6 space-y-8 sm:space-y-16">
+    <footer id="contact" class="bg-black text-zinc-500 text-xs py-8 sm:py-12 border-t border-zinc-950">
+      <div class="max-w-7xl mx-auto px-6 space-y-6 sm:space-y-12">
 
         <!-- FOUNDERS GRID -->
         <div class="space-y-4 sm:space-y-6">
@@ -1570,6 +1575,26 @@
         navLinksWrap.addEventListener('mouseleave', () => {
           navUnderline.style.opacity = '0';
         });
+      }
+
+      /* ---------- LIVE COLOMBO GREETING ---------- */
+      const greetingText = document.getElementById('rxGreetingText');
+      const greetingTime = document.getElementById('rxGreetingTime');
+      if (greetingText && greetingTime) {
+        function updateGreeting() {
+          const now = new Date();
+          const colomboHour = Number(new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Colombo', hour: 'numeric', hour12: false }).format(now));
+          let label = 'Good evening';
+          if (colomboHour < 5) label = 'Good night';
+          else if (colomboHour < 12) label = 'Good morning';
+          else if (colomboHour < 17) label = 'Good afternoon';
+          else if (colomboHour < 21) label = 'Good evening';
+          else label = 'Good night';
+          greetingText.textContent = label;
+          greetingTime.textContent = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Colombo', hour: 'numeric', minute: '2-digit', hour12: true }).format(now);
+        }
+        updateGreeting();
+        setInterval(updateGreeting, 30000);
       }
 
       /* ---------- PINNED HORIZONTAL PROCESS SCROLL ---------- */
