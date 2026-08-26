@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://revmaxxgroup.online/sitemap.xml
