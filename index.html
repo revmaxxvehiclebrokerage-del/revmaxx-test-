@@ -538,6 +538,123 @@
             box-shadow: 0 20px 50px -12px rgba(0,0,0,0.6);
             padding: 1.25rem 1.5rem;
         }
+        .rx-cookie-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .rx-cookie-icon {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .rx-cookie-copy { flex: 1 1 auto; min-width: 0; }
+        .rx-cookie-title {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-size: 0.875rem;
+            color: #fff;
+            margin: 0 0 0.25rem 0;
+        }
+        .rx-cookie-desc {
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: #a1a1aa;
+            margin: 0;
+        }
+        .rx-cookie-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+        .rx-cookie-btn {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 0.6rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .rx-cookie-btn-primary {
+            background: var(--rx-red);
+            color: #fff;
+        }
+        .rx-cookie-btn-primary:hover { background: #b91c1c; }
+        .rx-cookie-btn-secondary {
+            background: var(--rx-panel);
+            border-color: var(--rx-hairline);
+            color: #e4e4e7;
+        }
+        .rx-cookie-btn-secondary:hover { border-color: rgba(255,255,255,0.3); }
+        .rx-cookie-btn-link {
+            background: transparent;
+            color: #a1a1aa;
+            padding: 0.6rem 0.25rem;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: #52525b;
+        }
+        .rx-cookie-btn-link:hover { color: #fff; }
+        .rx-cookie-actions-modal { margin-top: 1.35rem; }
+
+        .rx-cookie-modal-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 0.35rem;
+        }
+        .rx-cookie-modal-title {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            font-size: 1.125rem;
+            color: #fff;
+            margin: 0;
+        }
+        .rx-cookie-close {
+            background: transparent;
+            border: none;
+            padding: 0;
+            margin-top: 2px;
+            color: #71717a;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: color 0.2s ease;
+        }
+        .rx-cookie-close:hover { color: #fff; }
+        .rx-cookie-close svg { width: 20px; height: 20px; display: block; }
+        .rx-cookie-modal-desc {
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: #a1a1aa;
+            margin: 0 0 0.5rem 0;
+        }
+        .rx-cookie-row-copy { min-width: 0; }
+        .rx-cookie-row-title {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #fff;
+            margin: 0 0 0.15rem 0;
+        }
+        .rx-cookie-row-desc {
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: #71717a;
+            margin: 0;
+        }
+        .rx-cookie-reopen-icon { width: 20px; height: 20px; display: block; }
+
         @media (min-width: 640px) {
             #rxCookieConsent { justify-content: flex-start; padding: 1.5rem; }
         }
@@ -674,25 +791,25 @@
     <!-- COOKIE CONSENT BANNER -->
     <div id="rxCookieConsent" role="dialog" aria-live="polite" aria-label="Cookie consent" aria-describedby="rxCookieDesc">
         <div class="rx-cookie-card">
-            <div class="flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" class="w-6 h-6 flex-shrink-0 mt-0.5">
+            <div class="rx-cookie-top">
+                <svg class="rx-cookie-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5">
                     <path d="M21 12.5c0 4.7-3.8 8.5-8.5 8.5S4 17.2 4 12.5 7.8 4 12.5 4 21 7.8 21 12.5Z"/>
                     <circle cx="9" cy="10" r="1" fill="#dc2626" stroke="none"/>
                     <circle cx="14" cy="9" r="1" fill="#dc2626" stroke="none"/>
                     <circle cx="15" cy="14" r="1" fill="#dc2626" stroke="none"/>
                     <circle cx="10" cy="15" r="1" fill="#dc2626" stroke="none"/>
                 </svg>
-                <div class="flex-1 min-w-0">
-                    <p class="font-display uppercase tracking-wide text-sm text-white mb-1">We use cookies</p>
-                    <p id="rxCookieDesc" class="text-xs text-zinc-400 leading-relaxed">
+                <div class="rx-cookie-copy">
+                    <p class="rx-cookie-title">We use cookies</p>
+                    <p id="rxCookieDesc" class="rx-cookie-desc">
                         REVMAXX GROUP uses cookies to keep the site running smoothly, understand how it's used, and improve your experience. Choose what you're comfortable with — you can change this anytime.
                     </p>
                 </div>
             </div>
-            <div class="flex flex-wrap items-center gap-2.5 mt-4">
-                <button type="button" id="rxCookieAcceptAll" class="rx-magnetic bg-red-600 hover:bg-red-700 text-white text-[11px] font-mono font-bold tracking-wider uppercase px-4 py-2.5 rounded-lg transition-colors">Accept All</button>
-                <button type="button" id="rxCookieRejectAll" class="rx-panel hover:border-white/25 text-zinc-200 text-[11px] font-mono font-semibold tracking-wider uppercase px-4 py-2.5 rounded-lg transition-colors">Reject Non-Essential</button>
-                <button type="button" id="rxCookieManage" class="text-zinc-400 hover:text-white text-[11px] font-mono font-semibold tracking-wider uppercase px-2 py-2.5 transition-colors underline underline-offset-4 decoration-zinc-700">Manage Preferences</button>
+            <div class="rx-cookie-actions">
+                <button type="button" id="rxCookieAcceptAll" class="rx-cookie-btn rx-cookie-btn-primary">Accept All</button>
+                <button type="button" id="rxCookieRejectAll" class="rx-cookie-btn rx-cookie-btn-secondary">Reject Non-Essential</button>
+                <button type="button" id="rxCookieManage" class="rx-cookie-btn rx-cookie-btn-link">Manage Preferences</button>
             </div>
         </div>
     </div>
@@ -700,46 +817,46 @@
     <!-- COOKIE PREFERENCES MODAL -->
     <div id="rxCookieModal" role="dialog" aria-modal="true" aria-labelledby="rxCookieModalTitle">
         <div class="rx-cookie-modal-panel">
-            <div class="flex items-start justify-between gap-4 mb-1">
-                <h2 id="rxCookieModalTitle" class="font-display uppercase tracking-wide text-lg text-white">Cookie Preferences</h2>
-                <button type="button" id="rxCookieModalClose" aria-label="Close" class="text-zinc-500 hover:text-white transition-colors flex-shrink-0 mt-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+            <div class="rx-cookie-modal-head">
+                <h2 id="rxCookieModalTitle" class="rx-cookie-modal-title">Cookie Preferences</h2>
+                <button type="button" id="rxCookieModalClose" aria-label="Close" class="rx-cookie-close">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
                 </button>
             </div>
-            <p class="text-xs text-zinc-400 leading-relaxed mb-2">Control which categories of cookies REVMAXX GROUP can use on this site. Essential cookies keep core functionality working and can't be switched off.</p>
+            <p class="rx-cookie-modal-desc">Control which categories of cookies REVMAXX GROUP can use on this site. Essential cookies keep core functionality working and can't be switched off.</p>
 
             <div class="rx-cookie-row">
-                <div class="min-w-0">
-                    <p class="text-sm font-medium text-white mb-0.5">Essential</p>
-                    <p class="text-xs text-zinc-500 leading-relaxed">Required for the site to function — navigation, security, and form submissions. Always on.</p>
+                <div class="rx-cookie-row-copy">
+                    <p class="rx-cookie-row-title">Essential</p>
+                    <p class="rx-cookie-row-desc">Required for the site to function — navigation, security, and form submissions. Always on.</p>
                 </div>
                 <div class="rx-switch" data-on="true" data-disabled="true" role="switch" aria-checked="true" aria-label="Essential cookies (always on)" aria-disabled="true"></div>
             </div>
             <div class="rx-cookie-row">
-                <div class="min-w-0">
-                    <p class="text-sm font-medium text-white mb-0.5">Analytics</p>
-                    <p class="text-xs text-zinc-500 leading-relaxed">Helps us understand how visitors use the site so we can improve it.</p>
+                <div class="rx-cookie-row-copy">
+                    <p class="rx-cookie-row-title">Analytics</p>
+                    <p class="rx-cookie-row-desc">Helps us understand how visitors use the site so we can improve it.</p>
                 </div>
                 <div class="rx-switch" data-on="false" data-category="analytics" role="switch" aria-checked="false" tabindex="0" aria-label="Analytics cookies"></div>
             </div>
             <div class="rx-cookie-row">
-                <div class="min-w-0">
-                    <p class="text-sm font-medium text-white mb-0.5">Marketing</p>
-                    <p class="text-xs text-zinc-500 leading-relaxed">Used to tailor outreach and measure the performance of our campaigns.</p>
+                <div class="rx-cookie-row-copy">
+                    <p class="rx-cookie-row-title">Marketing</p>
+                    <p class="rx-cookie-row-desc">Used to tailor outreach and measure the performance of our campaigns.</p>
                 </div>
                 <div class="rx-switch" data-on="false" data-category="marketing" role="switch" aria-checked="false" tabindex="0" aria-label="Marketing cookies"></div>
             </div>
 
-            <div class="flex flex-wrap items-center gap-2.5 mt-5">
-                <button type="button" id="rxCookieSavePrefs" class="rx-magnetic bg-red-600 hover:bg-red-700 text-white text-[11px] font-mono font-bold tracking-wider uppercase px-4 py-2.5 rounded-lg transition-colors">Save Preferences</button>
-                <button type="button" id="rxCookieModalAcceptAll" class="rx-panel hover:border-white/25 text-zinc-200 text-[11px] font-mono font-semibold tracking-wider uppercase px-4 py-2.5 rounded-lg transition-colors">Accept All</button>
+            <div class="rx-cookie-actions rx-cookie-actions-modal">
+                <button type="button" id="rxCookieSavePrefs" class="rx-cookie-btn rx-cookie-btn-primary">Save Preferences</button>
+                <button type="button" id="rxCookieModalAcceptAll" class="rx-cookie-btn rx-cookie-btn-secondary">Accept All</button>
             </div>
         </div>
     </div>
 
     <!-- COOKIE SETTINGS REOPEN TAB -->
     <button type="button" id="rxCookieReopen" aria-label="Cookie settings">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5">
+        <svg class="rx-cookie-reopen-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M21 12.5c0 4.7-3.8 8.5-8.5 8.5S4 17.2 4 12.5 7.8 4 12.5 4 21 7.8 21 12.5Z"/>
             <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/>
             <circle cx="14" cy="9" r="1" fill="currentColor" stroke="none"/>
@@ -2261,10 +2378,14 @@
 
       function hideBanner() {
         banner.classList.remove('rx-cookie-visible');
+        showReopenTab();
       }
 
       function showBanner() {
         banner.classList.add('rx-cookie-visible');
+        // Duck the floating tab out of the way while the banner itself is
+        // open — both sit bottom-left, so showing both at once would overlap.
+        reopenTab.classList.remove('rx-cookie-reopen-visible');
       }
 
       function showReopenTab() {
@@ -2342,14 +2463,17 @@
         openModal();
       });
 
-      // Init: if a prior decision exists, apply it silently and show the
-      // reopen tab; otherwise reveal the banner shortly after load so it
-      // doesn't compete with the intro overlay animation.
+      // Init: the floating cookie tab is always visible from the moment the
+      // page loads, on every visit, so people can manage their preferences
+      // whenever they like. If a prior decision exists, apply it silently.
+      // Otherwise reveal the banner shortly after load so it doesn't compete
+      // with the intro overlay animation (this will duck the tab out of the
+      // way until the banner is dismissed).
+      showReopenTab();
       const existingConsent = readConsent();
       if (existingConsent) {
         setSwitchesFrom(existingConsent.categories);
         applyConsent(existingConsent.categories);
-        showReopenTab();
       } else {
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         window.setTimeout(showBanner, reduceMotion ? 300 : 1600);
