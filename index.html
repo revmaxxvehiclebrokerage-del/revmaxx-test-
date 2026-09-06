@@ -510,6 +510,113 @@
             }
             .rx-grain { display: none; }
         }
+
+        /* ============ COOKIE CONSENT ============ */
+        #rxCookieConsent {
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+            z-index: 70;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.5s ease;
+        }
+        #rxCookieConsent.rx-cookie-visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #rxCookieConsent .rx-cookie-card {
+            width: 100%;
+            max-width: 640px;
+            background: var(--rx-panel);
+            border: 1px solid var(--rx-hairline);
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 50px -12px rgba(0,0,0,0.6);
+            padding: 1.25rem 1.5rem;
+        }
+        @media (min-width: 640px) {
+            #rxCookieConsent { justify-content: flex-start; padding: 1.5rem; }
+        }
+
+        #rxCookieModal, #rxCookieReopen { pointer-events: auto; }
+        #rxCookieModal {
+            position: fixed; inset: 0; z-index: 80;
+            display: flex; align-items: center; justify-content: center;
+            padding: 1.25rem;
+            background: rgba(5,5,6,0.75);
+            backdrop-filter: blur(4px);
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+        #rxCookieModal.rx-cookie-modal-open { opacity: 1; visibility: visible; }
+        #rxCookieModal .rx-cookie-modal-panel {
+            width: 100%; max-width: 480px;
+            max-height: 85vh;
+            overflow-y: auto;
+            background: var(--rx-panel);
+            border: 1px solid var(--rx-hairline);
+            border-radius: 0.9rem;
+            padding: 1.5rem;
+            transform: translateY(16px) scale(0.98);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease;
+        }
+        #rxCookieModal.rx-cookie-modal-open .rx-cookie-modal-panel {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        .rx-cookie-row {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            gap: 1rem; padding: 0.9rem 0;
+            border-bottom: 1px solid var(--rx-hairline);
+        }
+        .rx-cookie-row:last-of-type { border-bottom: none; }
+
+        /* Toggle switch */
+        .rx-switch {
+            position: relative; flex-shrink: 0;
+            width: 40px; height: 22px;
+            border-radius: 9999px;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid var(--rx-hairline);
+            cursor: pointer;
+            transition: background 0.25s ease;
+        }
+        .rx-switch::after {
+            content: '';
+            position: absolute; top: 2px; left: 2px;
+            width: 16px; height: 16px;
+            border-radius: 9999px;
+            background: #e4e4e7;
+            transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), background 0.25s ease;
+        }
+        .rx-switch[data-on="true"] { background: var(--rx-red); }
+        .rx-switch[data-on="true"]::after { transform: translateX(18px); background: #fff; }
+        .rx-switch[data-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+
+        #rxCookieReopen {
+            position: fixed; left: 1rem; bottom: 1rem; z-index: 65;
+            width: 44px; height: 44px;
+            border-radius: 9999px;
+            background: var(--rx-panel);
+            border: 1px solid var(--rx-hairline);
+            display: none;
+            align-items: center; justify-content: center;
+            color: #a1a1aa;
+            transition: color 0.2s ease, border-color 0.2s ease, transform 0.25s cubic-bezier(0.16,1,0.3,1);
+        }
+        #rxCookieReopen:hover { color: #fff; border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
+        #rxCookieReopen.rx-cookie-reopen-visible { display: flex; }
+
+        @media (prefers-reduced-motion: reduce) {
+            #rxCookieConsent, #rxCookieModal, #rxCookieModal .rx-cookie-modal-panel, .rx-switch, .rx-switch::after, #rxCookieReopen {
+                transition: none !important;
+            }
+        }
     </style>
 	<script type="application/ld+json">
 {
@@ -563,6 +670,83 @@
 
     <!-- FILM GRAIN TEXTURE -->
     <div id="rxGrain"></div>
+
+    <!-- COOKIE CONSENT BANNER -->
+    <div id="rxCookieConsent" role="dialog" aria-live="polite" aria-label="Cookie consent" aria-describedby="rxCookieDesc">
+        <div class="rx-cookie-card">
+            <div class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="1.5" class="w-6 h-6 flex-shrink-0 mt-0.5">
+                    <path d="M21 12.5c0 4.7-3.8 8.5-8.5 8.5S4 17.2 4 12.5 7.8 4 12.5 4 21 7.8 21 12.5Z"/>
+                    <circle cx="9" cy="10" r="1" fill="#dc2626" stroke="none"/>
+                    <circle cx="14" cy="9" r="1" fill="#dc2626" stroke="none"/>
+                    <circle cx="15" cy="14" r="1" fill="#dc2626" stroke="none"/>
+                    <circle cx="10" cy="15" r="1" fill="#dc2626" stroke="none"/>
+                </svg>
+                <div class="flex-1 min-w-0">
+                    <p class="font-display uppercase tracking-wide text-sm text-white mb-1">We use cookies</p>
+                    <p id="rxCookieDesc" class="text-xs text-zinc-400 leading-relaxed">
+                        REVMAXX GROUP uses cookies to keep the site running smoothly, understand how it's used, and improve your experience. Choose what you're comfortable with — you can change this anytime.
+                    </p>
+                </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2.5 mt-4">
+                <button type="button" id="rxCookieAcceptAll" class="rx-magnetic bg-red-600 hover:bg-red-700 text-white text-[11px] font-mono font-bold tracking-wider uppercase px-4 py-2.5 rounded-lg transition-colors">Accept All</button>
+                <button type="button" id="rxCookieRejectAll" class="rx-panel hover:border-white/25 text-zinc-200 text-[11px] font-mono font-semibold tracking-wider uppercase px-4 py-2.5 rounded-lg transition-colors">Reject Non-Essential</button>
+                <button type="button" id="rxCookieManage" class="text-zinc-400 hover:text-white text-[11px] font-mono font-semibold tracking-wider uppercase px-2 py-2.5 transition-colors underline underline-offset-4 decoration-zinc-700">Manage Preferences</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COOKIE PREFERENCES MODAL -->
+    <div id="rxCookieModal" role="dialog" aria-modal="true" aria-labelledby="rxCookieModalTitle">
+        <div class="rx-cookie-modal-panel">
+            <div class="flex items-start justify-between gap-4 mb-1">
+                <h2 id="rxCookieModalTitle" class="font-display uppercase tracking-wide text-lg text-white">Cookie Preferences</h2>
+                <button type="button" id="rxCookieModalClose" aria-label="Close" class="text-zinc-500 hover:text-white transition-colors flex-shrink-0 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <p class="text-xs text-zinc-400 leading-relaxed mb-2">Control which categories of cookies REVMAXX GROUP can use on this site. Essential cookies keep core functionality working and can't be switched off.</p>
+
+            <div class="rx-cookie-row">
+                <div class="min-w-0">
+                    <p class="text-sm font-medium text-white mb-0.5">Essential</p>
+                    <p class="text-xs text-zinc-500 leading-relaxed">Required for the site to function — navigation, security, and form submissions. Always on.</p>
+                </div>
+                <div class="rx-switch" data-on="true" data-disabled="true" role="switch" aria-checked="true" aria-label="Essential cookies (always on)" aria-disabled="true"></div>
+            </div>
+            <div class="rx-cookie-row">
+                <div class="min-w-0">
+                    <p class="text-sm font-medium text-white mb-0.5">Analytics</p>
+                    <p class="text-xs text-zinc-500 leading-relaxed">Helps us understand how visitors use the site so we can improve it.</p>
+                </div>
+                <div class="rx-switch" data-on="false" data-category="analytics" role="switch" aria-checked="false" tabindex="0" aria-label="Analytics cookies"></div>
+            </div>
+            <div class="rx-cookie-row">
+                <div class="min-w-0">
+                    <p class="text-sm font-medium text-white mb-0.5">Marketing</p>
+                    <p class="text-xs text-zinc-500 leading-relaxed">Used to tailor outreach and measure the performance of our campaigns.</p>
+                </div>
+                <div class="rx-switch" data-on="false" data-category="marketing" role="switch" aria-checked="false" tabindex="0" aria-label="Marketing cookies"></div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5 mt-5">
+                <button type="button" id="rxCookieSavePrefs" class="rx-magnetic bg-red-600 hover:bg-red-700 text-white text-[11px] font-mono font-bold tracking-wider uppercase px-4 py-2.5 rounded-lg transition-colors">Save Preferences</button>
+                <button type="button" id="rxCookieModalAcceptAll" class="rx-panel hover:border-white/25 text-zinc-200 text-[11px] font-mono font-semibold tracking-wider uppercase px-4 py-2.5 rounded-lg transition-colors">Accept All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- COOKIE SETTINGS REOPEN TAB -->
+    <button type="button" id="rxCookieReopen" aria-label="Cookie settings">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-5 h-5">
+            <path d="M21 12.5c0 4.7-3.8 8.5-8.5 8.5S4 17.2 4 12.5 7.8 4 12.5 4 21 7.8 21 12.5Z"/>
+            <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/>
+            <circle cx="14" cy="9" r="1" fill="currentColor" stroke="none"/>
+            <circle cx="15" cy="14" r="1" fill="currentColor" stroke="none"/>
+            <circle cx="10" cy="15" r="1" fill="currentColor" stroke="none"/>
+        </svg>
+    </button>
 
     <!-- SCROLL PROGRESS BAR -->
     <div id="rxProgress"></div>
@@ -2012,6 +2196,163 @@
         window.addEventListener('load', () => { setPinHeight(); updateTrack(); });
         setPinHeight();
         updateTrack();
+      }
+    })();
+    </script>
+
+    <!-- COOKIE CONSENT LOGIC -->
+    <script>
+    (function () {
+      const STORAGE_KEY = 'rxCookieConsent';
+      const banner = document.getElementById('rxCookieConsent');
+      const modal = document.getElementById('rxCookieModal');
+      const reopenTab = document.getElementById('rxCookieReopen');
+      if (!banner || !modal || !reopenTab) return;
+
+      const switches = Array.from(modal.querySelectorAll('.rx-switch[data-category]'));
+
+      function readConsent() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object' && parsed.categories) return parsed;
+          return null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function saveConsent(categories) {
+        const payload = { categories: categories, timestamp: new Date().toISOString(), version: 1 };
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+        } catch (e) {
+          // localStorage unavailable (private mode / disabled) — consent still
+          // applies for this page view, it just won't persist across visits.
+        }
+        return payload;
+      }
+
+      function applyConsent(categories) {
+        // Hook point: fire analytics/marketing scripts here once the user has
+        // opted in, e.g.:
+        // if (categories.analytics) { /* load analytics */ }
+        // if (categories.marketing) { /* load marketing pixels */ }
+        document.dispatchEvent(new CustomEvent('rxCookieConsentChanged', { detail: categories }));
+      }
+
+      function setSwitchesFrom(categories) {
+        switches.forEach((sw) => {
+          const cat = sw.getAttribute('data-category');
+          const on = !!(categories && categories[cat]);
+          sw.setAttribute('data-on', String(on));
+          sw.setAttribute('aria-checked', String(on));
+        });
+      }
+
+      function readSwitches() {
+        const categories = {};
+        switches.forEach((sw) => {
+          categories[sw.getAttribute('data-category')] = sw.getAttribute('data-on') === 'true';
+        });
+        return categories;
+      }
+
+      function hideBanner() {
+        banner.classList.remove('rx-cookie-visible');
+      }
+
+      function showBanner() {
+        banner.classList.add('rx-cookie-visible');
+      }
+
+      function showReopenTab() {
+        reopenTab.classList.add('rx-cookie-reopen-visible');
+      }
+
+      let lastFocused = null;
+      function openModal() {
+        lastFocused = document.activeElement;
+        modal.classList.add('rx-cookie-modal-open');
+        const firstSwitch = modal.querySelector('.rx-switch[tabindex]');
+        if (firstSwitch) firstSwitch.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove('rx-cookie-modal-open');
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      }
+
+      function finalize(categories) {
+        const payload = saveConsent(categories);
+        setSwitchesFrom(categories);
+        applyConsent(payload.categories);
+        hideBanner();
+        closeModal();
+        showReopenTab();
+      }
+
+      // Toggle switches (click + keyboard)
+      switches.forEach((sw) => {
+        sw.addEventListener('click', () => {
+          const next = sw.getAttribute('data-on') !== 'true';
+          sw.setAttribute('data-on', String(next));
+          sw.setAttribute('aria-checked', String(next));
+        });
+        sw.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            sw.click();
+          }
+        });
+      });
+
+      // Banner actions
+      const acceptAllBtn = document.getElementById('rxCookieAcceptAll');
+      const rejectAllBtn = document.getElementById('rxCookieRejectAll');
+      const manageBtn = document.getElementById('rxCookieManage');
+      if (acceptAllBtn) acceptAllBtn.addEventListener('click', () => finalize({ analytics: true, marketing: true }));
+      if (rejectAllBtn) rejectAllBtn.addEventListener('click', () => finalize({ analytics: false, marketing: false }));
+      if (manageBtn) manageBtn.addEventListener('click', () => { setSwitchesFrom(readConsent() ? readConsent().categories : {}); openModal(); });
+
+      // Modal actions
+      const savePrefsBtn = document.getElementById('rxCookieSavePrefs');
+      const modalAcceptAllBtn = document.getElementById('rxCookieModalAcceptAll');
+      const modalCloseBtn = document.getElementById('rxCookieModalClose');
+      if (savePrefsBtn) savePrefsBtn.addEventListener('click', () => finalize(readSwitches()));
+      if (modalAcceptAllBtn) modalAcceptAllBtn.addEventListener('click', () => finalize({ analytics: true, marketing: true }));
+      if (modalCloseBtn) modalCloseBtn.addEventListener('click', () => {
+        closeModal();
+        // Reopen the banner if no decision has ever been saved, so the choice
+        // is never silently skipped just by closing the modal.
+        if (!readConsent()) showBanner();
+      });
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) modalCloseBtn.click();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('rx-cookie-modal-open')) modalCloseBtn.click();
+      });
+
+      // Reopen tab lets the user revisit their choice at any time
+      reopenTab.addEventListener('click', () => {
+        const existing = readConsent();
+        setSwitchesFrom(existing ? existing.categories : {});
+        openModal();
+      });
+
+      // Init: if a prior decision exists, apply it silently and show the
+      // reopen tab; otherwise reveal the banner shortly after load so it
+      // doesn't compete with the intro overlay animation.
+      const existingConsent = readConsent();
+      if (existingConsent) {
+        setSwitchesFrom(existingConsent.categories);
+        applyConsent(existingConsent.categories);
+        showReopenTab();
+      } else {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.setTimeout(showBanner, reduceMotion ? 300 : 1600);
       }
     })();
     </script>
