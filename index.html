@@ -816,37 +816,17 @@
     <!-- FILM GRAIN TEXTURE -->
     <div id="rxGrain"></div>
 
-    <!-- Shared gradients for the cookie icons (defined once, referenced by both) -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-        <defs>
-            <radialGradient id="rxCookieDoughGrad" cx="35%" cy="28%" r="80%">
-                <stop offset="0%" stop-color="#f0c891"/>
-                <stop offset="45%" stop-color="#d9a565"/>
-                <stop offset="80%" stop-color="#b97b3c"/>
-                <stop offset="100%" stop-color="#8f5a26"/>
-            </radialGradient>
-            <radialGradient id="rxCookieChipGrad" cx="35%" cy="30%" r="75%">
-                <stop offset="0%" stop-color="#5c3210"/>
-                <stop offset="60%" stop-color="#3a1f09"/>
-                <stop offset="100%" stop-color="#241205"/>
-            </radialGradient>
-        </defs>
-    </svg>
-
     <!-- COOKIE CONSENT BANNER -->
     <div id="rxCookieConsent" role="dialog" aria-live="polite" aria-label="Cookie consent" aria-describedby="rxCookieDesc">
         <div class="rx-cookie-card">
             <div class="rx-cookie-top">
-                <svg class="rx-cookie-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 2.2c1.7-0.1 3.4 0.5 4.9 1.4 1.5 0.9 2.9 2.1 3.7 3.7 0.8 1.6 0.9 3.5 0.6 5.2-0.3 1.7-1.1 3.3-2.3 4.6-1.2 1.3-2.8 2.3-4.5 2.7-1.7 0.4-3.6 0.3-5.2-0.4-1.6-0.6-3.1-1.7-4.1-3.1-1-1.4-1.6-3.2-1.6-4.9 0-1.8 0.6-3.5 1.6-4.9 1-1.5 2.5-2.6 4.1-3.2 0.9-0.4 1.8-0.7 2.8-1.1Z" fill="url(#rxCookieDoughGrad)" stroke="#6b3f1d" stroke-width="0.45"/>
-                    <ellipse cx="8.6" cy="7.9" rx="1.25" ry="1.0" fill="url(#rxCookieChipGrad)" transform="rotate(-18 8.6 7.9)"/>
-                    <ellipse cx="14.7" cy="7.3" rx="1.05" ry="1.25" fill="url(#rxCookieChipGrad)" transform="rotate(22 14.7 7.3)"/>
-                    <ellipse cx="16.6" cy="12.6" rx="1.15" ry="0.95" fill="url(#rxCookieChipGrad)" transform="rotate(-8 16.6 12.6)"/>
-                    <ellipse cx="12.1" cy="15.6" rx="1.25" ry="1.05" fill="url(#rxCookieChipGrad)" transform="rotate(14 12.1 15.6)"/>
-                    <ellipse cx="7.4" cy="14.1" rx="0.95" ry="1.15" fill="url(#rxCookieChipGrad)" transform="rotate(-22 7.4 14.1)"/>
-                    <ellipse cx="11.2" cy="10.9" rx="0.85" ry="0.75" fill="url(#rxCookieChipGrad)" transform="rotate(10 11.2 10.9)"/>
-                    <ellipse cx="8.3" cy="6.2" rx="3.1" ry="1.5" fill="#ffffff" opacity="0.14" transform="rotate(-22 8.3 6.2)"/>
-                    <circle cx="17.6" cy="4.4" r="3.7" fill="var(--rx-panel)" stroke="#6b3f1d" stroke-width="0.35" opacity="0.97"/>
+                <svg class="rx-cookie-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M14.33 3.31 Q13.77 10.23 20.69 9.67 A9 9 0 0 1 12 21 A9 9 0 0 1 3 12 A9 9 0 0 1 14.33 3.31 Z" stroke="#dc2626" stroke-width="1.6" stroke-linejoin="round"/>
+                    <circle cx="9" cy="8" r="0.9" fill="#dc2626"/>
+                    <circle cx="15.5" cy="13.5" r="0.85" fill="#dc2626"/>
+                    <circle cx="8.5" cy="14.5" r="0.8" fill="#dc2626"/>
+                    <circle cx="12" cy="17" r="0.85" fill="#dc2626"/>
+                    <circle cx="17" cy="17" r="0.75" fill="#dc2626"/>
                 </svg>
                 <div class="rx-cookie-copy">
                     <p class="rx-cookie-title">We use cookies</p>
@@ -905,16 +885,13 @@
 
     <!-- COOKIE SETTINGS REOPEN TAB -->
     <button type="button" id="rxCookieReopen" aria-label="Cookie settings">
-        <svg class="rx-cookie-reopen-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 2.2c1.7-0.1 3.4 0.5 4.9 1.4 1.5 0.9 2.9 2.1 3.7 3.7 0.8 1.6 0.9 3.5 0.6 5.2-0.3 1.7-1.1 3.3-2.3 4.6-1.2 1.3-2.8 2.3-4.5 2.7-1.7 0.4-3.6 0.3-5.2-0.4-1.6-0.6-3.1-1.7-4.1-3.1-1-1.4-1.6-3.2-1.6-4.9 0-1.8 0.6-3.5 1.6-4.9 1-1.5 2.5-2.6 4.1-3.2 0.9-0.4 1.8-0.7 2.8-1.1Z" fill="url(#rxCookieDoughGrad)" stroke="#6b3f1d" stroke-width="0.45"/>
-            <ellipse cx="8.6" cy="7.9" rx="1.25" ry="1.0" fill="url(#rxCookieChipGrad)" transform="rotate(-18 8.6 7.9)"/>
-            <ellipse cx="14.7" cy="7.3" rx="1.05" ry="1.25" fill="url(#rxCookieChipGrad)" transform="rotate(22 14.7 7.3)"/>
-            <ellipse cx="16.6" cy="12.6" rx="1.15" ry="0.95" fill="url(#rxCookieChipGrad)" transform="rotate(-8 16.6 12.6)"/>
-            <ellipse cx="12.1" cy="15.6" rx="1.25" ry="1.05" fill="url(#rxCookieChipGrad)" transform="rotate(14 12.1 15.6)"/>
-            <ellipse cx="7.4" cy="14.1" rx="0.95" ry="1.15" fill="url(#rxCookieChipGrad)" transform="rotate(-22 7.4 14.1)"/>
-            <ellipse cx="11.2" cy="10.9" rx="0.85" ry="0.75" fill="url(#rxCookieChipGrad)" transform="rotate(10 11.2 10.9)"/>
-            <ellipse cx="8.3" cy="6.2" rx="3.1" ry="1.5" fill="#ffffff" opacity="0.14" transform="rotate(-22 8.3 6.2)"/>
-            <circle cx="17.6" cy="4.4" r="3.7" fill="var(--rx-panel)" stroke="#6b3f1d" stroke-width="0.35" opacity="0.97"/>
+        <svg class="rx-cookie-reopen-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M14.33 3.31 Q13.77 10.23 20.69 9.67 A9 9 0 0 1 12 21 A9 9 0 0 1 3 12 A9 9 0 0 1 14.33 3.31 Z" stroke="#dc2626" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="9" cy="8" r="0.9" fill="#dc2626"/>
+            <circle cx="15.5" cy="13.5" r="0.85" fill="#dc2626"/>
+            <circle cx="8.5" cy="14.5" r="0.8" fill="#dc2626"/>
+            <circle cx="12" cy="17" r="0.85" fill="#dc2626"/>
+            <circle cx="17" cy="17" r="0.75" fill="#dc2626"/>
         </svg>
     </button>
 
