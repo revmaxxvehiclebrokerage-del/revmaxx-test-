@@ -186,9 +186,8 @@
 
         /* ============ HERO CARBON-FIBER SHEEN ============ */
         /* The weave "moves" via a diagonal light-glint sweeping across the
-           static image, instead of the whole image (logo included) bobbing. */
-        .rx-carbon-wrap { overflow: hidden; animation: rx-hero-breathe 8s ease-in-out infinite; }
-        #rxHeroImg { transform: translateX(-4%) scale(1.06); transform-origin: center; }
+           banner, instead of the whole banner (logo included) bobbing. */
+        .rx-carbon-wrap { overflow: hidden; animation: rx-hero-breathe 8s ease-in-out infinite; border-radius: 1.25rem; }
         @keyframes rx-hero-breathe {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.012); }
@@ -196,6 +195,72 @@
         @media (prefers-reduced-motion: reduce) {
             .rx-carbon-wrap { animation: none !important; }
         }
+
+        /* ============ HERO BANNER (live text/vector, not a raster image) ============ */
+        /* Built from real text + CSS/SVG so it is crisp on any pixel density and
+           its HEIGHT is derived from font-size clamps that react to both
+           viewport width AND viewport height. That's what stops it from ever
+           outgrowing a short/landscape screen the way a fixed-aspect-ratio
+           image does — there is no intrinsic aspect ratio to overflow. */
+        #rxHeroBanner {
+            position: relative;
+            background-color: #0a0a0b;
+            background-image:
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.045) 0px, rgba(255,255,255,0.045) 1px, transparent 1px, transparent 5px),
+                repeating-linear-gradient(-45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 5px),
+                radial-gradient(circle at 50% 30%, rgba(255,255,255,0.06), transparent 60%);
+            background-size: 7px 7px, 7px 7px, 100% 100%;
+        }
+        #rxHeroBanner::after {
+            content: '';
+            position: absolute; inset: 0;
+            box-shadow: inset 0 0 60px 10px rgba(0,0,0,0.65);
+            pointer-events: none;
+        }
+        .rx-hero-inner {
+            position: relative; z-index: 1;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center;
+            padding-block: clamp(1.75rem, 5vw + 6vh, 4.5rem);
+            padding-inline: 1.25rem;
+        }
+        .rx-hero-wordmark {
+            display: flex; align-items: baseline; justify-content: center;
+            font-family: 'Oswald', sans-serif; font-weight: 700; font-style: italic;
+            letter-spacing: -0.01em;
+            line-height: 0.9;
+            font-size: clamp(2.25rem, 6vw + 4vh, 5.5rem);
+        }
+        .rx-hero-wordmark .rx-r { color: var(--rx-red); }
+        .rx-hero-wordmark .rx-rest { color: #ffffff; }
+        .rx-hero-sub {
+            display: flex; align-items: center; justify-content: center; gap: 0.9em;
+            margin-top: clamp(0.35rem, 0.6vw + 0.8vh, 0.9rem);
+            font-family: 'Oswald', sans-serif; font-weight: 500;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #d4d4d8;
+            font-size: clamp(0.55rem, 0.7vw + 0.9vh, 1rem);
+        }
+        .rx-hero-sub .rx-rule { height: 1px; width: clamp(1.25rem, 3vw, 3rem); background: linear-gradient(90deg, transparent, var(--rx-red)); }
+        .rx-hero-sub .rx-rule.rx-rule-r { background: linear-gradient(90deg, var(--rx-red), transparent); }
+        .rx-hero-tagline {
+            font-family: 'Oswald', sans-serif; font-weight: 700;
+            text-transform: uppercase;
+            color: #ffffff;
+            letter-spacing: 0.01em;
+            margin-top: clamp(0.9rem, 1.6vw + 2.4vh, 2.75rem);
+            font-size: clamp(1rem, 2.4vw + 2vh, 2.25rem);
+        }
+        .rx-hero-divisions {
+            display: flex; align-items: center; justify-content: center; gap: 0.85em;
+            margin-top: clamp(0.5rem, 0.6vw + 1vh, 1.1rem);
+            font-family: 'IBM Plex Mono', monospace; font-weight: 500;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: #a1a1aa;
+            font-size: clamp(0.7rem, 0.8vw + 1vh, 1.1rem);
+        }
+        .rx-hero-divisions .rx-dot { width: 0.4em; height: 0.4em; border-radius: 9999px; background: var(--rx-red); flex-shrink: 0; }
         .rx-carbon-sheen {
             position: absolute;
             inset: 0;
@@ -313,9 +378,6 @@
 
         /* ============ PARALLAX ============ */
         .rx-parallax { will-change: transform; }
-        @media (min-width: 640px) {
-            #rxHeroImg { width: 100% !important; }
-        }
 
         /* ============ MOBILE NAV ============ */
         .rx-burger, .rx-burger::before, .rx-burger::after {
@@ -913,11 +975,11 @@
                     <a href="#corporate" class="rx-nav-link hover:text-white transition-colors">Corporate HQ</a>
                     <a href="#location" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;" class="rx-nav-link hover:text-white transition-colors">Find Us</a>
                     <a href="#socials-matrix" class="rx-nav-link hover:text-white transition-colors">Socials</a>
-                    <a href="REVMAXX-Brochure.pdf" target="_blank" class="rx-nav-link hover:text-white transition-colors">Brochure</a>
+                    <a href="REVMAXX-Brochure.pdf" target="_blank" rel="noopener noreferrer" class="rx-nav-link hover:text-white transition-colors">Brochure</a>
                     <span id="rxNavUnderline"></span>
                 </div>
 
-                <a href="https://wa.me/94722114115" target="_blank" class="rx-glow-btn rx-magnetic bg-red-600 hover:bg-red-700 text-white text-[10px] font-mono font-bold tracking-wider uppercase px-4 py-2 rounded flex items-center gap-1.5 transition-colors">
+                <a href="https://wa.me/94722114115" target="_blank" rel="noopener noreferrer" class="rx-glow-btn rx-magnetic bg-red-600 hover:bg-red-700 text-white text-[10px] font-mono font-bold tracking-wider uppercase px-4 py-2 rounded flex items-center gap-1.5 transition-colors">
                     <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Direct Broker Desk
                 </a>
 
@@ -934,7 +996,7 @@
                 <a href="#corporate" class="rx-mobile-link">Corporate HQ</a>
                 <a href="#location" class="rx-mobile-link" onclick="document.getElementById('location')?.scrollIntoView({ behavior: 'smooth' }); return false;">Find Us</a>
                 <a href="#socials-matrix" class="rx-mobile-link">Socials</a>
-                <a href="REVMAXX-Brochure.pdf" target="_blank" class="rx-mobile-link">Brochure</a>
+                <a href="REVMAXX-Brochure.pdf" target="_blank" rel="noopener noreferrer" class="rx-mobile-link">Brochure</a>
             </div>
         </div>
     </nav>
@@ -945,9 +1007,16 @@
 
             <h1 style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">REVMAXX GROUP PVT LTD | Elite Automotive Brokerage &amp; Vehicle Import Sri Lanka</h1>
 
-            <div class="rx-carbon-wrap relative mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
-                <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax w-full h-auto object-contain">
-                <div class="rx-carbon-sheen"></div>
+            <div class="rx-carbon-wrap relative mt-2">
+                <div id="rxHeroBanner" class="rx-parallax">
+                    <div class="rx-hero-inner">
+                        <div class="rx-hero-wordmark"><span class="rx-r">R</span><span class="rx-rest">EVMAXX</span></div>
+                        <div class="rx-hero-sub"><span class="rx-rule"></span><span>Group Pvt Ltd</span><span class="rx-rule rx-rule-r"></span></div>
+                        <p class="rx-hero-tagline">Your Elite Automotive Partner.</p>
+                        <div class="rx-hero-divisions"><span>Brokerage</span><span class="rx-dot"></span><span>Logistics</span></div>
+                    </div>
+                    <div class="rx-carbon-sheen"></div>
+                </div>
             </div>
 
             <div class="rx-reveal mt-6 sm:mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
@@ -1023,7 +1092,7 @@
                 <li class="rx-ledger"><span class="rx-label">04</span><span class="rx-fill"></span><span class="rx-value">Confidential Acquisition &amp; Anonymized Bidding</span></li>
               </ul>
             </div>
-            <a href="https://wa.me/94722114115" target="_blank" class="rx-magnetic inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
+            <a href="https://wa.me/94722114115" target="_blank" rel="noopener noreferrer" class="rx-magnetic inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
               Access Broker Desk <span class="text-base">→</span>
             </a>
           </div>
@@ -1043,7 +1112,7 @@
                 <li class="rx-ledger"><span class="rx-label">03</span><span class="rx-fill"></span><span class="rx-value">Intercontinental Air &amp; Sea Freight Protocols</span></li>
               </ul>
             </div>
-            <a href="https://wa.me/94722114115" target="_blank" class="rx-magnetic inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
+            <a href="https://wa.me/94722114115" target="_blank" rel="noopener noreferrer" class="rx-magnetic inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wider uppercase text-red-500 hover:text-white transition-colors">
               Review Logistics Pipelines <span class="text-base">→</span>
             </a>
           </div>
@@ -1277,6 +1346,7 @@
               <div>
                 <label class="block font-mono text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">Preferred Sourcing Region</label>
                 <select id="region" class="w-full bg-zinc-900/90 border border-zinc-800 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-red-600 transition-colors">
+                  <option>Globally (Any Country)</option>
                   <option>United Kingdom (UK)</option>
                   <option>Europe</option>
                   <option>Japan</option>
@@ -1284,6 +1354,7 @@
                   <option>South Korea</option>
                   <option>Sri Lanka</option>
                 </select>
+                <p class="text-zinc-600 text-xs mt-2 font-light">Select "Globally" if you have no fixed preference — we'll source from wherever the best match is found worldwide.</p>
               </div>
             </div>
 
@@ -1336,7 +1407,7 @@
             </div>
 
             <p class="text-center text-zinc-600 text-xs font-light mt-5">
-              Prefer to talk it through? <a href="https://wa.me/94722114115" target="_blank" class="text-red-500 hover:text-red-400 underline underline-offset-2">Message the broker desk on WhatsApp</a> instead.
+              Prefer to talk it through? <a href="https://wa.me/94722114115" target="_blank" rel="noopener noreferrer" class="text-red-500 hover:text-red-400 underline underline-offset-2">Message the broker desk on WhatsApp</a> instead.
             </p>
 
           </form>
@@ -1448,6 +1519,11 @@
         }
       };
 
+      window.rxWizardReset = function () {
+        current = 1;
+        showStep(current);
+      };
+
       showStep(current);
     })();
     </script>
@@ -1524,7 +1600,8 @@
             submitBtn.classList.remove('bg-emerald-600');
             submitBtn.classList.add('bg-red-600', 'hover:bg-red-700');
             submitBtn.disabled = false;
-            window.rxWizardBack && (window.location.hash = '#sourcing');
+            window.rxWizardReset && window.rxWizardReset();
+            document.getElementById('sourcing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 3000);
         } else {
           throw new Error(result.message || 'Form submission failed');
@@ -1665,7 +1742,7 @@
               </p>
             </div>
 
-            <a href="https://maps.app.goo.gl/NSxruB9AHjGevqpp6" target="_blank" class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-widest text-red-500 hover:text-red-400 uppercase transition-colors pt-4 group">
+            <a href="https://maps.app.goo.gl/NSxruB9AHjGevqpp6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-widest text-red-500 hover:text-red-400 uppercase transition-colors pt-4 group">
               Open Directly in Google Maps App
               <span class="transition-transform group-hover:translate-x-1">→</span>
             </a>
@@ -1870,27 +1947,27 @@
 
               <!-- Social Sockets -->
               <div class="flex gap-2 justify-start md:justify-end items-center mt-1">
-                <a href="https://www.instagram.com/revmaxx_group?igsh=ZzhqaHJrNmJtcHdj" target="_blank" aria-label="Instagram" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-radius: 4px; color: #ffffff; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                <a href="https://www.instagram.com/revmaxx_group?igsh=ZzhqaHJrNmJtcHdj" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-radius: 4px; color: #ffffff; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
                   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.174.01 2.446.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.446-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 8 0zm0 1.441c2.117 0 2.37.008 3.205.046.77.035 1.188.164 1.466.273.369.144.633.314.91.59.277.277.446.543.59.91.109.278.238.696.273 1.466.038.836.046 1.09.046 3.205s-.008 2.37-.046 3.205c-.035.77-.164 1.188-.273 1.466a2.473 2.473 0 0 1-.59.91c-.276.277-.543.446-.91.59-.278.109-.696.238-1.466.273-.836.038-1.09.046-3.205.046s-2.37-.008-3.205-.046c-.77-.035-1.188-.164-1.466-.273a2.48 2.48 0 0 1-.91-.59 2.477 2.477 0 0 1-.59-.91c-.109-.278-.238-.696-.273-1.466-.038-.836-.046-1.09-.046-3.205s.008-2.37.046-3.205c.035-.77.164-1.188.273-1.466.144-.369.314-.633.59-.91.277-.277.543-.446.91-.59.278-.109.696-.238 1.466-.273.836-.038 1.09-.046 3.205-.046zm0 2.443a4.116 4.116 0 1 0 0 8.232 4.116 4.116 0 0 0 0-8.232zm0 6.79a2.674 2.674 0 1 1 0-5.348 2.674 2.674 0 0 1 0 5.348zm4.118-6.79a.966.966 0 1 1-1.933 0 .966.966 0 0 1 1.933 0z"/></svg>
                 </a>
 
-                <a href="https://www.facebook.com/profile.php?id=61590320872247&mibextid=ZbWKwL" target="_blank" aria-label="Facebook" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #1877F2; border-radius: 4px; color: #ffffff; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                <a href="https://www.facebook.com/profile.php?id=61590320872247&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #1877F2; border-radius: 4px; color: #ffffff; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
                   <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>
                 </a>
 
-                <a href="https://x.com/REVMAXXGROUP" target="_blank" aria-label="X" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #000000; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; transition: transform 0.2s ease;">
+                <a href="https://x.com/REVMAXXGROUP" target="_blank" rel="noopener noreferrer" aria-label="X" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #000000; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; transition: transform 0.2s ease;">
                   <svg width="16" height="16" fill="#ffffff" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                   </svg>
                 </a>
 
-                <a href="https://www.linkedin.com/company/revmaxx-group-pvt-ltd" target="_blank" aria-label="LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #0077b5; border-radius: 8px; transition: transform 0.2s ease;">
+                <a href="https://www.linkedin.com/company/revmaxx-group-pvt-ltd" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background-color: #0077b5; border-radius: 8px; transition: transform 0.2s ease;">
                   <svg width="16" height="16" fill="#ffffff" viewBox="0 0 24 24">
                     <path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9h3.56v11.45zM5.34 7.43c-1.14 0-2.06-.92-2.06-2.06 0-1.14.92-2.06 2.06-2.06 2.06 0 2.06.92 2.06 2.06 0 1.14-.92 2.06-2.06 2.06zm15.11 13.02h-3.56v-5.6c0-1.34-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.7H9.33V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29z"/>
                   </svg>
                 </a>
 
-                <a href="https://www.crunchbase.com/organization/revmaxx-group-pvt-ltd" target="_blank" aria-label="Crunchbase" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #146aff; border-radius: 6px; color: #ffffff; transition: opacity 0.2s; text-decoration: none;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                <a href="https://www.crunchbase.com/organization/revmaxx-group-pvt-ltd" target="_blank" rel="noopener noreferrer" aria-label="Crunchbase" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #146aff; border-radius: 6px; color: #ffffff; transition: opacity 0.2s; text-decoration: none;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
                   <span style="font-family: 'Arial', sans-serif; font-weight: 700; font-size: 16px; color: #ffffff; line-height: 1; letter-spacing: -0.5px; transform: translateY(-0.5px);">cb</span>
                 </a>
               </div>
@@ -2211,7 +2288,7 @@
       }
 
       /* ---------- HERO PARALLAX + FLOAT + CINEMATIC ZOOM (combined) ---------- */
-      const heroImg = document.getElementById('rxHeroImg');
+      const heroImg = document.getElementById('rxHeroBanner');
       const heroSection = heroImg ? heroImg.closest('section') : null;
       if (heroImg && !reduceMotion) {
         // PERF: this rAF loop used to run forever, on every single frame, for
@@ -2226,9 +2303,9 @@
           const sectionHeight = heroSection ? heroSection.offsetHeight : 600;
           const zoomProgress = Math.min(Math.max(window.scrollY / sectionHeight, 0), 1);
           const scrollOffset = window.scrollY * -0.06;
-          const scale = 1.06 + zoomProgress * 0.12;
+          const scale = 1 + zoomProgress * 0.1;
           const opacity = 1 - zoomProgress * 0.7;
-          heroImg.style.transform = `translateX(-4%) translateY(${scrollOffset.toFixed(2)}px) scale(${scale.toFixed(3)})`;
+          heroImg.style.transform = `translateY(${scrollOffset.toFixed(2)}px) scale(${scale.toFixed(3)})`;
           heroImg.style.opacity = opacity.toFixed(2);
           heroRafId = heroActive ? requestAnimationFrame(heroLoop) : null;
         }
