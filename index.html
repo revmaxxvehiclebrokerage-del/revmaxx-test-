@@ -229,24 +229,6 @@
                limited height since there's little else on screen anyway */
             #rxHeroImg { max-height: 88vh; max-height: 88dvh; }
         }
-        .rx-carbon-sheen {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            mix-blend-mode: overlay;
-            background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.22) 48%, rgba(255,255,255,0.05) 54%, transparent 65%);
-            background-size: 260% 260%;
-            background-position: 200% 200%;
-            animation: rx-carbon-sheen-move 7s ease-in-out infinite;
-        }
-        @keyframes rx-carbon-sheen-move {
-            0%   { background-position: 200% 200%; }
-            50%  { background-position: 0% 0%; }
-            100% { background-position: 200% 200%; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .rx-carbon-sheen { animation: none !important; opacity: 0.4; }
-        }
 
         /* ============ FILM GRAIN OVERLAY ============ */
         /* Barely-visible noise layer over the whole page, sits above everything
@@ -977,7 +959,6 @@
 
             <div class="rx-carbon-wrap relative mt-2 -mx-6 sm:mx-0" style="width: calc(100% + 3rem);">
                 <img id="rxHeroImg" src="revmaxx group carbon fiber template.png" alt="REVMAXX Elite Partner" class="rx-parallax">
-                <div class="rx-carbon-sheen"></div>
             </div>
 
             <div class="rx-reveal mt-6 sm:mt-12 rx-panel rounded-2xl p-8 md:p-10 max-w-3xl mx-auto text-center shadow-2xl">
