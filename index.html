@@ -204,17 +204,22 @@
            image does — there is no intrinsic aspect ratio to overflow. */
         #rxHeroBanner {
             position: relative;
-            background-color: #0a0a0b;
+            background-color: #0b0b0c;
             background-image:
-                repeating-linear-gradient(45deg, rgba(255,255,255,0.045) 0px, rgba(255,255,255,0.045) 1px, transparent 1px, transparent 5px),
-                repeating-linear-gradient(-45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 5px),
-                radial-gradient(circle at 50% 30%, rgba(255,255,255,0.06), transparent 60%);
-            background-size: 7px 7px, 7px 7px, 100% 100%;
+                linear-gradient(27deg, #020202 5px, transparent 5px),
+                linear-gradient(207deg, #020202 5px, transparent 5px),
+                linear-gradient(27deg, #1f1f22 5px, transparent 5px),
+                linear-gradient(207deg, #1f1f22 5px, transparent 5px),
+                linear-gradient(90deg, #101012 10px, #18181b 10px, #18181b 20px, #101012 20px),
+                linear-gradient(115deg, rgba(255,255,255,0.05) 0%, transparent 25%, transparent 75%, rgba(255,255,255,0.035) 100%),
+                radial-gradient(circle at 50% 18%, rgba(255,255,255,0.07), transparent 62%);
+            background-position: 0 5px, 10px 0, 0 10px, 10px 5px, 0 0, 0 0, 0 0;
+            background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px, 20px 20px, 100% 100%, 100% 100%;
         }
         #rxHeroBanner::after {
             content: '';
             position: absolute; inset: 0;
-            box-shadow: inset 0 0 60px 10px rgba(0,0,0,0.65);
+            box-shadow: inset 0 0 70px 14px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
             pointer-events: none;
         }
         .rx-hero-inner {
@@ -225,13 +230,13 @@
             padding-inline: 1.25rem;
         }
         .rx-hero-wordmark {
-            display: flex; align-items: baseline; justify-content: center;
+            display: flex; align-items: flex-end; justify-content: center;
             font-family: 'Oswald', sans-serif; font-weight: 700; font-style: italic;
             letter-spacing: -0.01em;
             line-height: 0.9;
             font-size: clamp(2.25rem, 6vw + 4vh, 5.5rem);
         }
-        .rx-hero-wordmark .rx-r { color: var(--rx-red); }
+        .rx-hero-wordmark .rx-r-mark { height: 1.06em; width: auto; display: block; flex-shrink: 0; margin-right: -0.05em; overflow: visible; }
         .rx-hero-wordmark .rx-rest { color: #ffffff; }
         .rx-hero-sub {
             display: flex; align-items: center; justify-content: center; gap: 0.9em;
@@ -243,7 +248,7 @@
             font-size: clamp(0.55rem, 0.7vw + 0.9vh, 1rem);
         }
         .rx-hero-sub .rx-rule { height: 1px; width: clamp(1.25rem, 3vw, 3rem); background: linear-gradient(90deg, transparent, var(--rx-red)); }
-        .rx-hero-sub .rx-rule.rx-rule-r { background: linear-gradient(90deg, var(--rx-red), transparent); }
+        .rx-hero-sub .rx-rule-curl { width: clamp(2.25rem, 5vw, 5rem); height: 0.7em; flex-shrink: 0; overflow: visible; }
         .rx-hero-tagline {
             font-family: 'Oswald', sans-serif; font-weight: 700;
             text-transform: uppercase;
@@ -1010,8 +1015,28 @@
             <div class="rx-carbon-wrap relative mt-2">
                 <div id="rxHeroBanner" class="rx-parallax">
                     <div class="rx-hero-inner">
-                        <div class="rx-hero-wordmark"><span class="rx-r">R</span><span class="rx-rest">EVMAXX</span></div>
-                        <div class="rx-hero-sub"><span class="rx-rule"></span><span>Group Pvt Ltd</span><span class="rx-rule rx-rule-r"></span></div>
+                        <div class="rx-hero-wordmark">
+                            <svg class="rx-r-mark" viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="rxStreakFade" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#dc2626" stop-opacity="0"/>
+                                        <stop offset="55%" stop-color="#dc2626" stop-opacity="0.85"/>
+                                        <stop offset="100%" stop-color="#dc2626" stop-opacity="1"/>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M0,120 C85,101 150,93 210,88 L212,105 C150,110 88,118 5,135 Z" fill="url(#rxStreakFade)"/>
+                                <path d="M38,83 C108,68 150,62 200,58 L201,71 C150,75 109,81 44,96 Z" fill="url(#rxStreakFade)"/>
+                                <path d="M84,50 C128,40 155,36 190,33 L191,44 C156,47 129,51 90,61 Z" fill="url(#rxStreakFade)"/>
+                                <text x="95" y="248" font-family="Oswald, sans-serif" font-weight="800" font-style="italic" font-size="232" fill="#dc2626">R</text>
+                            </svg>
+                            <span class="rx-rest">EVMAXX</span>
+                        </div>
+                        <div class="rx-hero-sub">
+                            <span class="rx-rule"></span><span>Group Pvt Ltd</span>
+                            <svg class="rx-rule-curl" viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
+                                <path d="M0,10 L44,10 C50,10 50,2 58,2" fill="none" stroke="#dc2626" stroke-width="1.6" stroke-linecap="round"/>
+                            </svg>
+                        </div>
                         <p class="rx-hero-tagline">Your Elite Automotive Partner.</p>
                         <div class="rx-hero-divisions"><span>Brokerage</span><span class="rx-dot"></span><span>Logistics</span></div>
                     </div>
